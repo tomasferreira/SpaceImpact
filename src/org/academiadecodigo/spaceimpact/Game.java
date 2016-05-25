@@ -5,4 +5,6 @@ package org.academiadecodigo.spaceimpact;
  */
 public class Game {
 
+    public final int SIZE_WIDTH = 100;
+    public final int SIZE_HEIGHT = 100;
 }
