@@ -7,6 +7,11 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
  */
 public class Projectile extends GameObject implements Destroyable{
 
+    @Override
+    public void move() {
+        //fazer as representaçoes mexerem-se de acordo com a lógica deste objecto;
+    }
+
     public Projectile(Representable representation) {
         super(representation);
     }

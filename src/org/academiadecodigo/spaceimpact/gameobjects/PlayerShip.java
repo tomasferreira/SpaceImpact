@@ -7,6 +7,11 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
  */
 public class PlayerShip extends Spaceship{
 
+    @Override
+    public void move() {
+        //fazer as representaçoes mexerem-se de acordo com a lógica deste objecto;
+    }
+
     public PlayerShip(Representable representation) {
         super(representation);
     }
