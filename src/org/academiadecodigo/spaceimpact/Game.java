@@ -55,6 +55,7 @@ public class Game {
         enemyShips = new LinkedList<>();
         for (int i = 0; i < STARTING_ENEMY_SHIPS; i++) {
             enemyShips.add((EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY));
+            enemyShips.get(i).setCollisionDetector(collisionDetector);
         }
     }
 
