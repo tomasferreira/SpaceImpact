@@ -16,10 +16,10 @@ public class SimpleGfxRepresentableFactory implements RepresentableFactory {
 
         switch (type){
             case ENEMYSHIP:
-                //new simplegfx enemyship
+                representable = new EnemyShipRepresentation(posX, posY); //add position as argument
                 break;
             case PLAYERSHIP:
-                //new simplegfx playership
+                representable = new PlayerShipRepresentation(posX, posY);
                 break;
         }
 
@@ -28,6 +28,6 @@ public class SimpleGfxRepresentableFactory implements RepresentableFactory {
 
     @Override
     public Representable createRepresentation(GameObjectType type, int posX, int posY, Direction direction) {
-        return null; //projectile
+        return new ProjectileRepresentation(posX, posY);
     }
 }

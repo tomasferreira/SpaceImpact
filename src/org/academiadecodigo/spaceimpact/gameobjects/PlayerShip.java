@@ -11,7 +11,7 @@ public class PlayerShip extends Spaceship{
     @Override
     public void move() {
         //fazer as representaçoes mexerem-se de acordo com a lógica deste objecto;
-        //checar colisoes com metodo
+        //checar colisoes com método
         //getCollisionDetector().isUnSafe(this);
     }
 
