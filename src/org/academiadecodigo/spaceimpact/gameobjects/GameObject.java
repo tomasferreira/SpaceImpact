@@ -17,7 +17,6 @@ public abstract class GameObject {
         return representation;
     }
 
-    public void move(int dx, int dy){
-        getRepresentation().move(dx, dy);
-    }
+    public abstract void move();
+
 }
