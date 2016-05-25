@@ -11,8 +11,15 @@ public abstract class GameObject {
     private Representable representation;
     private CollisionDetector collisionDetector;
 
-    public GameObject(CollisionDetector collisionDetector, Representable representation) {
+    public CollisionDetector getCollisionDetector() {
+        return collisionDetector;
+    }
+
+    public void setCollisionDetector(CollisionDetector collisionDetector) {
         this.collisionDetector = collisionDetector;
+    }
+
+    public GameObject(Representable representation) {
         this.representation = representation;
     }
 

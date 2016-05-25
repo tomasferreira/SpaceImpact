@@ -19,8 +19,8 @@ public abstract class Spaceship extends GameObject implements Destroyable{
         isDestroyed = destroyed;
     }
 
-    public Spaceship(CollisionDetector collisionDetector, Representable representation) {
-        super(collisionDetector, representation);
+    public Spaceship(Representable representation) {
+        super(representation);
     }
 
     public void shoot(Direction direction){
