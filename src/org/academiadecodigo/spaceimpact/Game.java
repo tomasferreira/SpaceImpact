@@ -32,7 +32,7 @@ public class Game {
     private Spaceship playerShip;
     private LinkedList<EnemyShip> enemyShips;
     private LinkedList<Projectile> projectiles;
-    //COLISION DETECTOR
+    private CollisionDetector collisionDetector = new CollisionDetector();
 
 
     public Game() {
@@ -48,6 +48,7 @@ public class Game {
         projectileFactory = new ProjectileFactory(representableFactory);
 
         playerShip = (PlayerShip) spaceShipFactory.createObject(GameObjectType.PLAYERSHIP, playerStartingPosX, playerStartingPosY);
+        playerShip.setCollisionDetector(collisionDetector);
 
         projectiles = new LinkedList<>();
 
