@@ -1,5 +1,6 @@
 package org.academiadecodigo.spaceimpact.gameobjects;
 
+import org.academiadecodigo.spaceimpact.CollisionDetector;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -12,8 +13,8 @@ public class Projectile extends GameObject implements Destroyable{
         //fazer as representaçoes mexerem-se de acordo com a lógica deste objecto;
     }
 
-    public Projectile(Representable representation) {
-        super(representation);
+    public Projectile(CollisionDetector collisionDetector, Representable representation) {
+        super(collisionDetector, representation);
     }
 
     @Override

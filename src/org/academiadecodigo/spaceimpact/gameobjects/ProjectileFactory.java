@@ -7,13 +7,13 @@ import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
  */
 public class ProjectileFactory {
 
-    private static RepresentableFactory factory;
+    private RepresentableFactory factory;
 
     public ProjectileFactory(RepresentableFactory factory) {
         this.factory = factory;
     }
 
-    public static GameObject createProjectile(Direction direction, int posX, int posY){
+    public GameObject createProjectile(Direction direction, int posX, int posY){
 
         return new Projectile(factory.createRepresentation(GameObjectType.PROJECTILE, posX, posY, direction));
     }

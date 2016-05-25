@@ -2,6 +2,7 @@ package org.academiadecodigo.spaceimpact;
 
 import org.academiadecodigo.spaceimpact.gameobjects.*;
 import org.academiadecodigo.spaceimpact.representable.Background;
+import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
 import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxBackground;
 import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxRepresentableFactory;
 
@@ -23,10 +24,16 @@ public class Game {
     private int playerStartingPosX;
     private int playerStartingPosY;
 
+    private RepresentableFactory representableFactory = new SimpleGfxRepresentableFactory();
+
     private Background background;
     private SpaceShipFactory spaceShipFactory;
+    private ProjectileFactory projectileFactory;
     private Spaceship playerShip;
     private LinkedList<EnemyShip> enemyShips;
+    private LinkedList<Projectile> projectiles;
+    //COLISION DETECTOR
+
 
     public Game() {
     }
@@ -37,9 +44,12 @@ public class Game {
 
         background.init(SIZE_WIDTH, SIZE_HEIGHT);
         
-        spaceShipFactory = new SpaceShipFactory(new SimpleGfxRepresentableFactory());
+        spaceShipFactory = new SpaceShipFactory(representableFactory);
+        projectileFactory = new ProjectileFactory(representableFactory);
 
         playerShip = (PlayerShip) spaceShipFactory.createObject(GameObjectType.PLAYERSHIP, playerStartingPosX, playerStartingPosY);
+
+        projectiles = new LinkedList<>();
 
         enemyShips = new LinkedList<>();
         for (int i = 0; i < STARTING_ENEMY_SHIPS; i++) {
@@ -61,8 +71,12 @@ public class Game {
     public void move(){
         for (int i = 0; i < enemyShips.size(); i++) {
             enemyShips.get(i).move();
-            playerShip.move();
 
         }
+        for (int i = 0; i < projectiles.size(); i++) {
+            projectiles.get(i).move();
+        }
+        playerShip.move();
+
     }
 }

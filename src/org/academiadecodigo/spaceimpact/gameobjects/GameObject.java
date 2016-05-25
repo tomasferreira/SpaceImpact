@@ -1,5 +1,6 @@
 package org.academiadecodigo.spaceimpact.gameobjects;
 
+import org.academiadecodigo.spaceimpact.CollisionDetector;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -8,8 +9,10 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
 public abstract class GameObject {
 
     private Representable representation;
+    private CollisionDetector collisionDetector;
 
-    public GameObject(Representable representation) {
+    public GameObject(CollisionDetector collisionDetector, Representable representation) {
+        this.collisionDetector = collisionDetector;
         this.representation = representation;
     }
 
