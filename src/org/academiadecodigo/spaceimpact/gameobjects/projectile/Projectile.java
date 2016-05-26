@@ -25,7 +25,7 @@ public class Projectile extends GameObject implements Destroyable {
     public void move() {
         //fazer as representaçoes mexerem-se de acordo com a lógica deste objecto;
         //checar colisoes com metodo
-        //getCollisionDetector().isUnSafe(this);
+        //getCollisionDetector().isProjectileSafe(this);
     }
 
     public Projectile(Representable representation) {

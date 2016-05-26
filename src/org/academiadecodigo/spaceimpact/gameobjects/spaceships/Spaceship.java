@@ -68,7 +68,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         this.currentDirection = newDirection;
         for (int i = 0; i < speed; i++) {
             //  getPos().moveInDirection(newDirection, 1);
-            //  if (collisionDetector.isUnSafe(getPos())) {
+            //  if (collisionDetector.isProjectileSafe(getPos())) {
             //      crash();
             //      break;
         }
