@@ -50,7 +50,7 @@ public class CollisionDetector {
                 if (gameObject instanceof EnemyShip && iterator instanceof Projectile && ((Projectile) iterator).isEnemy()) {
                     return;
                 }
-
+                /* compare object representations to see if they overlap, if yes, destroy the objects involved*/
                 if ((gameObject.getRepresentation().getX() < (iterator.getRepresentation().getX() +
                         iterator.getRepresentation().getWidth()) && (gameObject.getRepresentation().getX() +
                         gameObject.getRepresentation().getWidth()) > iterator.getRepresentation().getX()) ||
