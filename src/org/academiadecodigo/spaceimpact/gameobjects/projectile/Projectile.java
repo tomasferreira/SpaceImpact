@@ -1,12 +1,14 @@
-package org.academiadecodigo.spaceimpact.gameobjects;
+package org.academiadecodigo.spaceimpact.gameobjects.projectile;
 
 import org.academiadecodigo.spaceimpact.CollisionDetector;
+import org.academiadecodigo.spaceimpact.gameobjects.Destroyable;
+import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
  * Created by codecadet on 23/05/16.
  */
-public class Projectile extends GameObject implements Destroyable{
+public class Projectile extends GameObject implements Destroyable {
 
     @Override
     public void move() {
