@@ -33,7 +33,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         switch (getCurrentDirection()) {
 
             case UP:
-
+                accelerate();
 
                 break;
 
