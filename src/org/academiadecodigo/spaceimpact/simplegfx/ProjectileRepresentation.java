@@ -7,43 +7,14 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
 /**
  * Created by codecadet on 25/05/16.
  */
-public class ProjectileRepresentation implements Representable {
-    private Rectangle rectangle;
-    private int x;
-    private int y;
-    private int width = 10;
-    private int height = 5;
+public class ProjectileRepresentation extends SimpleGfxGameObject {
 
     public ProjectileRepresentation(int x, int y) {
-        this.x = x;
-        this.y = y;
-        rectangle = new Rectangle(x+ SimpleGfxBackground.PADDING, y+ SimpleGfxBackground.PADDING, width, height);
-        show();
-    }
-
-
-    @Override
-    public int getX() {
-        return x;
-    }
-
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    @Override
-    public void move(int dx, int dy) {
-        rectangle.translate(dx, dy);
-    }
-
-
-    public void show(){
-        rectangle.setColor(Color.RED);
-        rectangle.fill();
-    }
-
-    public void hide(){
-        rectangle.delete();
+        super(x, y);
+        setWidth(10);
+        setHeight(5);
+        setRectangle(new Rectangle(x + SimpleGfxBackground.PADDING, y + SimpleGfxBackground.PADDING, getWidth(),
+                getHeight()));
+        show(Color.RED);
     }
 }
