@@ -1,6 +1,9 @@
-package org.academiadecodigo.spaceimpact.gameobjects;
+package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
-import org.academiadecodigo.spaceimpact.representable.Representable;
+import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
+import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.PlayerShip;
 import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
 
 /**

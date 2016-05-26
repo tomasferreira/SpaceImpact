@@ -1,6 +1,12 @@
 package org.academiadecodigo.spaceimpact;
 
 import org.academiadecodigo.spaceimpact.gameobjects.*;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.PlayerShip;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.SpaceShipFactory;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Spaceship;
 import org.academiadecodigo.spaceimpact.representable.Background;
 import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
 import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxBackground;

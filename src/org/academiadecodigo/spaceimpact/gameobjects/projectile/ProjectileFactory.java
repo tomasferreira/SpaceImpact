@@ -1,5 +1,8 @@
-package org.academiadecodigo.spaceimpact.gameobjects;
+package org.academiadecodigo.spaceimpact.gameobjects.projectile;
 
+import org.academiadecodigo.spaceimpact.gameobjects.Direction;
+import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
+import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
 import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
 
 /**

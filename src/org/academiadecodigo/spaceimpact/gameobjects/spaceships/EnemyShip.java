@@ -1,6 +1,5 @@
-package org.academiadecodigo.spaceimpact.gameobjects;
+package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
-import org.academiadecodigo.spaceimpact.CollisionDetector;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -14,7 +13,12 @@ public class EnemyShip extends Spaceship {
 
     @Override
     public void move() {
+
+
+
         //fazer as representaçoes mexerem-se de acordo com a lógica deste objecto;
+
+
         //checar colisoes com metodo
         //getCollisionDetector().isUnSafe(this);
     }
