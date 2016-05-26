@@ -2,6 +2,7 @@ package org.academiadecodigo.spaceimpact.simplegfx;
 
 import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
 
@@ -27,7 +28,7 @@ public class SimpleGfxRepresentableFactory implements RepresentableFactory {
     }
 
     @Override
-    public Representable createRepresentation(GameObjectType type, int posX, int posY, Direction direction) {
+    public Representable createRepresentation(GameObjectType type, int posX, int posY, ShootingDirection direction) {
         return new ProjectileRepresentation(posX, posY);
     }
 }

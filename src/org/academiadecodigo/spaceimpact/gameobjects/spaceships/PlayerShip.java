@@ -5,6 +5,9 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.spaceimpact.gameobjects.Direction;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -22,11 +25,18 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     }
 
     @Override
+    public void shoot() {
+        Projectile p = (Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX() + getRepresentation().getWidth(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
+        p.setEnemy(true);
+
+    }
+
+    @Override
     public void move() {
 
 
         accelerate(getCurrentDirection(), getSpeed());
- //       getCollisionDetector().isUnSafe(this);
+        //       getCollisionDetector().isUnSafe(this);
 
     }
 
@@ -41,9 +51,9 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent e) {
 
-       setSpeed(getMaxSpeed());
+        setSpeed(getMaxSpeed());
 
-        switch (e.getKey()){
+        switch (e.getKey()) {
             case KeyboardEvent.KEY_DOWN:
                 System.out.println("down");
                 setCurrentDirection(Direction.DOWN);

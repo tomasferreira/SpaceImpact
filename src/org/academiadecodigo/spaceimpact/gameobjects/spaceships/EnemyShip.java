@@ -1,5 +1,9 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
+import org.academiadecodigo.spaceimpact.gameobjects.Direction;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -11,6 +15,13 @@ public class EnemyShip extends Spaceship {
 
     public EnemyShip(Representable representation) {
         super(representation);
+    }
+
+    @Override
+    public void shoot() {
+        System.out.println("asd");
+        Projectile p = (Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
+        p.setEnemy(true);
     }
 
     @Override

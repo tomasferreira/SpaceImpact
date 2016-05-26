@@ -16,7 +16,7 @@ public class ProjectileFactory {
         this.factory = factory;
     }
 
-    public GameObject createProjectile(Direction direction, int posX, int posY){
+    public GameObject createProjectile(ShootingDirection direction, int posX, int posY){
 
         return new Projectile(factory.createRepresentation(GameObjectType.PROJECTILE, posX, posY, direction));
     }

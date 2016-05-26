@@ -13,13 +13,9 @@ public class Test {
     public static void main(String[] args) throws InterruptedException {
         //TEST STUFF HERE
 
-        Background b = new SimpleGfxBackground();
-        b.init(500, 500);
+        Game g = new Game();
 
-        Projectile projectile = new Projectile(new ProjectileRepresentation(100, 100));
-
-        projectile.move();
-        projectile.move();
-        projectile.move();
+        g.init();
+        g.start();
     }
 }
