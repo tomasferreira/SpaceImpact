@@ -11,7 +11,11 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
 public abstract class Spaceship extends GameObject implements Destroyable {
 
     private Direction currentDirection;
+
+
+
     private int speed;
+    private int maxSpeed = 5;
     private boolean isDestroyed;
 
     private int directionChangelevel = 5;
@@ -108,4 +112,8 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         this.currentDirection = currentDirection;
     }
 
+
+    public int getMaxSpeed() {
+        return maxSpeed;
+    }
 }

@@ -33,10 +33,15 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent e) {
 
+        setSpeed(0);
+
+
     }
 
     @Override
     public void keyPressed(KeyboardEvent e) {
+
+       setSpeed(getMaxSpeed());
 
         switch (e.getKey()){
             case KeyboardEvent.KEY_DOWN:
@@ -69,6 +74,8 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         k = new Keyboard(this);
 
+        //KEY PRESSED EVENTS
+
         KeyboardEvent keyUp = new KeyboardEvent();
         keyUp.setKey(KeyboardEvent.KEY_UP);
         keyUp.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
@@ -93,6 +100,33 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         keyRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         k.addEventListener(keyRight);
+
+        //KEY RELEASED EVENT
+
+        KeyboardEvent keyUpR = new KeyboardEvent();
+        keyUpR.setKey(KeyboardEvent.KEY_UP);
+        keyUpR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        k.addEventListener(keyUpR);
+
+
+        KeyboardEvent keyDownR = new KeyboardEvent();
+        keyDownR.setKey(KeyboardEvent.KEY_DOWN);
+        keyDownR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        k.addEventListener(keyDownR);
+
+        KeyboardEvent keyLeftR = new KeyboardEvent();
+        keyLeftR.setKey(KeyboardEvent.KEY_LEFT);
+        keyLeftR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        k.addEventListener(keyLeftR);
+
+        KeyboardEvent keyRightR = new KeyboardEvent();
+        keyRightR.setKey(KeyboardEvent.KEY_RIGHT);
+        keyRightR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        k.addEventListener(keyRightR);
 
     }
 }

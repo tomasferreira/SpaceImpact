@@ -7,6 +7,8 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
  */
 public class EnemyShip extends Spaceship {
 
+    private int counter;
+
     public EnemyShip(Representable representation) {
         super(representation);
     }
@@ -16,6 +18,7 @@ public class EnemyShip extends Spaceship {
 
 
 
+        accelerate(getCurrentDirection(), getMaxSpeed());
         //fazer as representaçoes mexerem-se de acordo com a lógica deste objecto;
 
 
