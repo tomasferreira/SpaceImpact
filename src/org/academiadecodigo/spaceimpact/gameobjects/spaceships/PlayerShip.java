@@ -4,6 +4,7 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -17,29 +18,63 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     public PlayerShip(Representable representation) {
         super(representation);
+        keyEvents();
     }
 
     @Override
     public void move() {
 
 
-
+        accelerate(getCurrentDirection(), getSpeed());
+ //       getCollisionDetector().isUnSafe(this);
 
     }
 
     @Override
     public void keyReleased(KeyboardEvent e) {
 
+        setSpeed(0);
+
+
     }
 
     @Override
     public void keyPressed(KeyboardEvent e) {
+
+       setSpeed(getMaxSpeed());
+
+        switch (e.getKey()){
+            case KeyboardEvent.KEY_DOWN:
+                System.out.println("down");
+                setCurrentDirection(Direction.DOWN);
+                break;
+
+            case KeyboardEvent.KEY_UP:
+                System.out.println("up");
+                setCurrentDirection(Direction.UP);
+                break;
+
+
+            case KeyboardEvent.KEY_LEFT:
+                System.out.println("left");
+                setCurrentDirection(Direction.LEFT);
+                break;
+
+            case KeyboardEvent.KEY_RIGHT:
+                System.out.println("rigth");
+                setCurrentDirection(Direction.RIGHT);
+                break;
+
+        }
+
 
     }
 
     public void keyEvents() {
 
         k = new Keyboard(this);
+
+        //KEY PRESSED EVENTS
 
         KeyboardEvent keyUp = new KeyboardEvent();
         keyUp.setKey(KeyboardEvent.KEY_UP);
@@ -65,6 +100,33 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         keyRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         k.addEventListener(keyRight);
+
+        //KEY RELEASED EVENT
+
+        KeyboardEvent keyUpR = new KeyboardEvent();
+        keyUpR.setKey(KeyboardEvent.KEY_UP);
+        keyUpR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        k.addEventListener(keyUpR);
+
+
+        KeyboardEvent keyDownR = new KeyboardEvent();
+        keyDownR.setKey(KeyboardEvent.KEY_DOWN);
+        keyDownR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        k.addEventListener(keyDownR);
+
+        KeyboardEvent keyLeftR = new KeyboardEvent();
+        keyLeftR.setKey(KeyboardEvent.KEY_LEFT);
+        keyLeftR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        k.addEventListener(keyLeftR);
+
+        KeyboardEvent keyRightR = new KeyboardEvent();
+        keyRightR.setKey(KeyboardEvent.KEY_RIGHT);
+        keyRightR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        k.addEventListener(keyRightR);
 
     }
 }
