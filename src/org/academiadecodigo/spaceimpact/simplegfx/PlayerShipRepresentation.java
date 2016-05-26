@@ -2,7 +2,6 @@ package org.academiadecodigo.spaceimpact.simplegfx;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.spaceimpact.gameobjects.PlayerShip;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -11,13 +10,15 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
 public class PlayerShipRepresentation implements Representable {
 
     private Rectangle rectangle;
-    int x;
-    int y;
+    private int x;
+    private int y;
+    private int width = 20;
+    private int height = width;
 
     public PlayerShipRepresentation(int x, int y) {
         this.x = x;
         this.y = y;
-        rectangle = new Rectangle(x + SimpleGfxBackground.PADDING, y + SimpleGfxBackground.PADDING, 20, 20);
+        rectangle = new Rectangle(x + SimpleGfxBackground.PADDING, y + SimpleGfxBackground.PADDING, width, height);
         show();
     }
 

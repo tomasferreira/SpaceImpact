@@ -9,13 +9,15 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
  */
 public class ProjectileRepresentation implements Representable {
     private Rectangle rectangle;
-    int x;
-    int y;
+    private int x;
+    private int y;
+    private int width = 10;
+    private int height = 5;
 
     public ProjectileRepresentation(int x, int y) {
         this.x = x;
         this.y = y;
-        rectangle = new Rectangle(x+ SimpleGfxBackground.PADDING, y+ SimpleGfxBackground.PADDING, 10, 5);
+        rectangle = new Rectangle(x+ SimpleGfxBackground.PADDING, y+ SimpleGfxBackground.PADDING, width, height);
         show();
     }
 
