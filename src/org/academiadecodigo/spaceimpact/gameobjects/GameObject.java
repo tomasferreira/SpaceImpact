@@ -11,13 +11,6 @@ public abstract class GameObject {
     private Representable representation;
     private CollisionDetector collisionDetector;
 
-    public CollisionDetector getCollisionDetector() {
-        return collisionDetector;
-    }
-
-    public void setCollisionDetector(CollisionDetector collisionDetector) {
-        this.collisionDetector = collisionDetector;
-    }
 
     public GameObject(Representable representation) {
         this.representation = representation;
@@ -29,4 +22,11 @@ public abstract class GameObject {
 
     public abstract void move();
 
+    public CollisionDetector getCollisionDetector() {
+        return collisionDetector;
+    }
+
+    public void setCollisionDetector(CollisionDetector collisionDetector) {
+        this.collisionDetector = collisionDetector;
+    }
 }
