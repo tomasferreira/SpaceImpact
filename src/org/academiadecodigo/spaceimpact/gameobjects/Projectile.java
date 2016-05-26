@@ -8,6 +8,17 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
  */
 public class Projectile extends GameObject implements Destroyable{
 
+    private boolean isEnemy;
+
+    public void setEnemy(boolean enemy) {
+        isEnemy = enemy;
+    }
+
+    public boolean isEnemy() {
+
+        return isEnemy;
+    }
+
     @Override
     public void move() {
         //fazer as representaçoes mexerem-se de acordo com a lógica deste objecto;

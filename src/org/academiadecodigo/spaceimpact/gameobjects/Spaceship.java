@@ -23,7 +23,7 @@ public abstract class Spaceship extends GameObject implements Destroyable{
         super(representation);
     }
 
-    public void shoot(Direction direction){
+    public void shoot(){
         //ProjectileFactory.createProjectile(direction, getRepresentation().getX(), getRepresentation().getY());
     }
 

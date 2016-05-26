@@ -13,8 +13,8 @@ import java.util.LinkedList;
  */
 public class Game {
 
-    public final int SIZE_WIDTH = 100;
-    public final int SIZE_HEIGHT = 100;
+    public final int SIZE_WIDTH = 500;
+    public final int SIZE_HEIGHT = 500;
     private final int STARTING_ENEMY_SHIPS = 10;
     private final int DELAY = 50;
 
@@ -73,6 +73,7 @@ public class Game {
     public void move(){
         for (int i = 0; i < enemyShips.size(); i++) {
             enemyShips.get(i).move();
+            enemyShips.get(i).shoot();
 
         }
         for (int i = 0; i < projectiles.size(); i++) {
