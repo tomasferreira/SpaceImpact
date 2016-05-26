@@ -26,6 +26,12 @@ public class Projectile extends GameObject implements Destroyable {
         //fazer as representaçoes mexerem-se de acordo com a lógica deste objecto;
         //checar colisoes com metodo
         //getCollisionDetector().isUnSafe(this);
+
+        if (isEnemy){
+            getRepresentation().move(0, 5);
+            return;
+        }
+        getRepresentation().move(0, -5);
     }
 
     public Projectile(Representable representation) {
