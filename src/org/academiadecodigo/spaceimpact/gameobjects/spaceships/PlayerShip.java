@@ -4,6 +4,7 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -17,13 +18,15 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     public PlayerShip(Representable representation) {
         super(representation);
+        keyEvents();
     }
 
     @Override
     public void move() {
 
 
-
+        accelerate(getCurrentDirection(), getSpeed());
+ //       getCollisionDetector().isUnSafe(this);
 
     }
 
@@ -34,6 +37,31 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     @Override
     public void keyPressed(KeyboardEvent e) {
+
+        switch (e.getKey()){
+            case KeyboardEvent.KEY_DOWN:
+                System.out.println("down");
+                setCurrentDirection(Direction.DOWN);
+                break;
+
+            case KeyboardEvent.KEY_UP:
+                System.out.println("up");
+                setCurrentDirection(Direction.UP);
+                break;
+
+
+            case KeyboardEvent.KEY_LEFT:
+                System.out.println("left");
+                setCurrentDirection(Direction.LEFT);
+                break;
+
+            case KeyboardEvent.KEY_RIGHT:
+                System.out.println("rigth");
+                setCurrentDirection(Direction.RIGHT);
+                break;
+
+        }
+
 
     }
 

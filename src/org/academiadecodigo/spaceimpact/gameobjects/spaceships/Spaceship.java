@@ -14,8 +14,11 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     private int speed;
     private boolean isDestroyed;
 
+    private int directionChangelevel = 5;
+
     public Spaceship(Representable representation) {
         super(representation);
+                currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
     }
 
     public void shoot(Direction direction) {
@@ -28,29 +31,22 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
 
     @Override
-    public void move() {
-
-        switch (getCurrentDirection()) {
-
-            case UP:
-                accelerate();
-
-                break;
-
-            case DOWN:
-
-                break;
-
-            case LEFT:
-
-                break;
+    public abstract void move();
 
 
-            case RIGHT:
+    public Direction chooseDirection() {
 
-                break;
+        Direction newDirection = currentDirection;
+
+
+        // Sometimes, we want to change direction...
+        if (Math.random() > ((double) directionChangelevel / 10)) {
+            newDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
 
         }
+
+        return newDirection;
+
     }
 
 
@@ -66,12 +62,25 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
         // Accelerate in the choosen direction
         this.currentDirection = newDirection;
-        for (int i = 0; i < speed; i++) {
-            //  getPos().moveInDirection(newDirection, 1);
-            //  if (collisionDetector.isUnSafe(getPos())) {
-            //      crash();
-            //      break;
+
+        switch (currentDirection) {
+            case UP:
+                getRepresentation().move(0, -getSpeed());
+                break;
+
+            case DOWN:
+                getRepresentation().move(0, getSpeed());
+                break;
+
+            case LEFT:
+                getRepresentation().move(-getSpeed(), 0);
+                break;
+
+            case RIGHT:
+                getRepresentation().move(getSpeed(), 0);
+                break;
         }
+
     }
 
     public int getSpeed() {
@@ -91,7 +100,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         isDestroyed = destroyed;
     }
 
-     public Direction getCurrentDirection() {
+    public Direction getCurrentDirection() {
         return currentDirection;
     }
 

@@ -11,5 +11,13 @@ public class Test {
         Game g = new Game();
         g.init();
 
+        try {
+
+            g.start();
+
+        } catch (InterruptedException ex){
+
+            System.out.println("vai po caralho");
+        }
     }
 }
