@@ -19,8 +19,8 @@ import java.util.LinkedList;
  */
 public class Game {
 
-    public final int SIZE_WIDTH = 500;
-    public final int SIZE_HEIGHT = 500;
+    public static final int SIZE_WIDTH = 500;
+    public static final int SIZE_HEIGHT = 500;
     private final int STARTING_ENEMY_SHIPS = 10;
     private final int DELAY = 50;
 

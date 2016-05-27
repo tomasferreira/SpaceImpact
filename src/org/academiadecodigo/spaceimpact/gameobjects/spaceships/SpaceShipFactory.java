@@ -1,5 +1,7 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
+import org.academiadecodigo.spaceimpact.Game;
+import org.academiadecodigo.spaceimpact.RandomNumberGen;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
@@ -22,7 +24,7 @@ public class SpaceShipFactory {
 
         switch (type) {
             case ENEMYSHIP:
-                gameObject = new EnemyShip(factory.createRepresentation(type, posX, posY));
+                gameObject = new EnemyShip(factory.createRepresentation(type, Game.SIZE_WIDTH, RandomNumberGen.generate(Game.SIZE_HEIGHT)));
                 break;
             case PLAYERSHIP:
                 gameObject = new PlayerShip(factory.createRepresentation(type, posX, posY));

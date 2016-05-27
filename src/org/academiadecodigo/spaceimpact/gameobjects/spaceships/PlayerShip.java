@@ -35,8 +35,8 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     public void move() {
 
 
-        accelerate(getCurrentDirection(), getSpeed());
-        //       getCollisionDetector().isUnSafe(this);
+        accelerate(getCurrentDirection());
+        getCollisionDetector().isUnSafe(this);
 
     }
 
