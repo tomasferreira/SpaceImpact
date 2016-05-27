@@ -1,5 +1,6 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
+import apple.laf.JRSUIConstants;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -9,6 +10,8 @@ import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
 import org.academiadecodigo.spaceimpact.representable.Representable;
+
+import java.awt.event.KeyEvent;
 
 /**
  * Created by codecadet on 23/05/16.
@@ -48,8 +51,6 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     public void keyReleased(KeyboardEvent e) {
 
         setSpeed(0);
-
-
     }
 
     @Override
@@ -57,25 +58,6 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         setSpeed(getMaxSpeed());
 
-        switch (e.getKey()) {
-            case KeyboardEvent.KEY_DOWN:
-                setCurrentDirection(Direction.DOWN);
-                break;
-
-            case KeyboardEvent.KEY_UP:
-                setCurrentDirection(Direction.UP);
-                break;
-
-
-            case KeyboardEvent.KEY_LEFT:
-                setCurrentDirection(Direction.LEFT);
-                break;
-
-            case KeyboardEvent.KEY_RIGHT:
-                setCurrentDirection(Direction.RIGHT);
-                break;
-
-        }
 
 
     }

@@ -9,6 +9,7 @@ import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * Created by codecadet on 23/05/16.
@@ -58,15 +59,16 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
 
     public Direction chooseDirection() {
-        int directionChangelevel = 5;
 
-        Direction newDirection = currentDirection;
+        Direction newDirection;
 
+        if(RandomNumberGen.generate(2) == 0){
 
-        // Sometimes, we want to change direction...
-        if (Math.random() > ((double) directionChangelevel / 10)) {
+            newDirection = Direction.UP;
 
-            newDirection = Direction.values()[RandomNumberGen.generate(2, 4)];
+        } else {
+
+            newDirection = Direction.DOWN;
         }
 
         return newDirection;
