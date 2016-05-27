@@ -2,6 +2,7 @@ package org.academiadecodigo.spaceimpact.simplegfx;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -9,7 +10,7 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
  */
 public abstract class SimpleGfxGameObject implements Representable {
 
-    private Rectangle rectangle;
+    private Picture picture;
     private int x;
     private int y;
     private int width;
@@ -21,13 +22,12 @@ public abstract class SimpleGfxGameObject implements Representable {
 
     }
 
-    public void show(Color color) {
-        rectangle.setColor(color);
-        rectangle.fill();
+    public void show() {
+        picture.draw();
     }
 
     public void hide() {
-        rectangle.delete();
+       picture.delete();
     }
 
     @Override
@@ -42,11 +42,11 @@ public abstract class SimpleGfxGameObject implements Representable {
 
     @Override
     public void move(int dx, int dy) {
-        rectangle.translate(dx, dy);
+        picture.translate(dx, dy);
     }
 
-    public Rectangle getRectangle() {
-        return rectangle;
+    public Picture getPicture() {
+        return picture;
     }
 
     public int getWidth() {
@@ -57,8 +57,8 @@ public abstract class SimpleGfxGameObject implements Representable {
         return height;
     }
 
-    public void setRectangle(Rectangle rectangle) {
-        this.rectangle = rectangle;
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 
     public void setX(int x) {
