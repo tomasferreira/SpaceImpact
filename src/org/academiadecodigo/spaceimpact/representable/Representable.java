@@ -10,6 +10,9 @@ public interface Representable {
     int getWidth();
     int getHeight();
 
+    void setX(int newPosX);
+    void setY(int newPosY);
+
     void move(int dx, int dy);
 
 }

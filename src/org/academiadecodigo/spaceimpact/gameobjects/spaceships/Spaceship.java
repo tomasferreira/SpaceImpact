@@ -3,8 +3,11 @@ package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 import org.academiadecodigo.spaceimpact.gameobjects.Destroyable;
 import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
 import org.academiadecodigo.spaceimpact.representable.Representable;
+
+import java.util.LinkedList;
 
 /**
  * Created by codecadet on 23/05/16.
@@ -18,22 +21,26 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     private int maxSpeed = 5;
     private boolean isDestroyed;
     private ProjectileFactory factory;
-
+    private LinkedList<Projectile> projectilelist = new LinkedList<>();
     private int directionChangelevel = 5;
-
-    public void setFactory(ProjectileFactory factory) {
-        this.factory = factory;
-    }
 
     public Spaceship(Representable representation) {
         super(representation);
         currentDirection = Direction.LEFT;
     }
 
+    public LinkedList<Projectile> getProjectilelist() {
+        return projectilelist;
+    }
+
     public abstract void shoot();
 
     public ProjectileFactory getFactory() {
         return factory;
+    }
+
+    public void setFactory(ProjectileFactory factory) {
+        this.factory = factory;
     }
 
     public void destroy() {
