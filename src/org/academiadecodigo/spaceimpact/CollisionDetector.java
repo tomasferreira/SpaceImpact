@@ -26,14 +26,14 @@ public class CollisionDetector {
 
     public void checkCollision(GameObject gameObject) {
 
-        objects.addAll(enemyList);
+       /* objects.addAll(enemyList);
         objects.addAll(projectiles);
         objects.add(player);
 
-        /* recebe o objecto que o chama e compara-o com todos os objectos da lista de acordo com objecto recebido
+        * recebe o objecto que o chama e compara-o com todos os objectos da lista de acordo com objecto recebido
         * set is destroyed dos objectos envolvidos na colisão
         * verificar a área da representação do objecto a partir da sua largura e altura
-        * se for uma bala "is enemy" a detectar colisão com um enemy não há colisão */
+        * se for uma bala "is enemy" a detectar colisão com um enemy não há colisão *
 
 
         //TODO comparar posição do player com a do projectile
@@ -50,7 +50,7 @@ public class CollisionDetector {
                 if (gameObject instanceof EnemyShip && iterator instanceof Projectile && ((Projectile) iterator).isEnemy()) {
                     return;
                 }
-                /* compare object representations to see if they overlap, if yes, destroy the objects involved*/
+                // compare object representations to see if they overlap, if yes, destroy the objects involved
                 if ((gameObject.getRepresentation().getX() < (iterator.getRepresentation().getX() +
                         iterator.getRepresentation().getWidth()) && (gameObject.getRepresentation().getX() +
                         gameObject.getRepresentation().getWidth()) > iterator.getRepresentation().getX()) ||
@@ -75,5 +75,6 @@ public class CollisionDetector {
 
     public void setPlayer(PlayerShip player) {
         this.player = player;
+    }*/
     }
 }
