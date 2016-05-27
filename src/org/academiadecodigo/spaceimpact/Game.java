@@ -55,6 +55,7 @@ public class Game {
 
         playerShip = (PlayerShip) spaceShipFactory.createObject(GameObjectType.PLAYERSHIP, playerStartingPosX, playerStartingPosY);
         playerShip.setCollisionDetector(collisionDetector);
+        playerShip.setFactory(projectileFactory);
 
         projectiles = new LinkedList<>();
 
@@ -62,6 +63,7 @@ public class Game {
         for (int i = 0; i < STARTING_ENEMY_SHIPS; i++) {
             enemyShips.add((EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY));
             enemyShips.get(i).setCollisionDetector(collisionDetector);
+            enemyShips.get(i).setFactory(projectileFactory);
         }
     }
 
@@ -82,9 +84,9 @@ public class Game {
             enemyShips.get(i).shoot();
 
         }
-        for (int i = 0; i < projectiles.size(); i++) {
-            projectiles.get(i).move();
-        }
+        //for (int i = 0; i < projectiles.size(); i++) {
+        //    projectiles.get(i).move();
+        //}
         playerShip.move();
         playerShip.shoot();
 
