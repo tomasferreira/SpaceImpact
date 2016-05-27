@@ -23,7 +23,7 @@ public class EnemyShip extends Spaceship {
     public void shoot() {
         if (shootCounter == 49){
             getProjectilelist().add((Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2)));
-            getProjectilelist().getLast().isEnemy();
+            getProjectilelist().getLast().setEnemy(true);
             shootCounter = 0;
         }
         else {
