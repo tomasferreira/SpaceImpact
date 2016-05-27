@@ -17,7 +17,6 @@ public class EnemyShip extends Spaceship {
 
     @Override
     public void shoot() {
-        System.out.println("asd");
         Projectile p = (Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
         p.setEnemy(true);
     }

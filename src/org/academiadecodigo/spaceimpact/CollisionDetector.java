@@ -26,43 +26,43 @@ public class CollisionDetector {
 
     public void checkCollision(GameObject gameObject) {
 
-        objects.addAll(enemyList);
-        objects.addAll(projectiles);
-        objects.add(player);
-
-        /* recebe o objecto que o chama e compara-o com todos os objectos da lista de acordo com objecto recebido
-        * set is destroyed dos objectos envolvidos na colisão
-        * verificar a área da representação do objecto a partir da sua largura e altura
-        * se for uma bala "is enemy" a detectar colisão com um enemy não há colisão */
-
-
-        //TODO comparar posição do player com a do projectile
-        if (gameObject instanceof Destroyable) {
-
-            GameObject iterator = objects.get(0);
-
-            for (int i = 0; i < objects.size(); i++) {
-
-                if (gameObject instanceof Projectile && iterator instanceof EnemyShip && ((Projectile) gameObject).isEnemy()) {
-                    return;
-                }
-
-                if (gameObject instanceof EnemyShip && iterator instanceof Projectile && ((Projectile) iterator).isEnemy()) {
-                    return;
-                }
-                /* compare object representations to see if they overlap, if yes, destroy the objects involved*/
-                if ((gameObject.getRepresentation().getX() < (iterator.getRepresentation().getX() +
-                        iterator.getRepresentation().getWidth()) && (gameObject.getRepresentation().getX() +
-                        gameObject.getRepresentation().getWidth()) > iterator.getRepresentation().getX()) ||
-                        (gameObject.getRepresentation().getY() < (iterator.getRepresentation().getY() +
-                                iterator.getRepresentation().getHeight()) && (gameObject.getRepresentation().getY() +
-                                gameObject.getRepresentation().getHeight()) > iterator.getRepresentation().getY())) {
-
-                    ((Destroyable) iterator).destroy();
-                    ((Destroyable) gameObject).destroy();
-                }
-            }
-        }
+//        objects.addAll(enemyList);
+//        objects.addAll(projectiles);
+//        objects.add(player);
+//
+//        /* recebe o objecto que o chama e compara-o com todos os objectos da lista de acordo com objecto recebido
+//        * set is destroyed dos objectos envolvidos na colisão
+//        * verificar a área da representação do objecto a partir da sua largura e altura
+//        * se for uma bala "is enemy" a detectar colisão com um enemy não há colisão */
+//
+//
+//        //TODO comparar posição do player com a do projectile
+//        if (gameObject instanceof Destroyable) {
+//
+//            GameObject iterator = objects.get(0);
+//
+//            for (int i = 0; i < objects.size(); i++) {
+//
+//                if (gameObject instanceof Projectile && iterator instanceof EnemyShip && ((Projectile) gameObject).isEnemy()) {
+//                    return;
+//                }
+//
+//                if (gameObject instanceof EnemyShip && iterator instanceof Projectile && ((Projectile) iterator).isEnemy()) {
+//                    return;
+//                }
+//                /* compare object representations to see if they overlap, if yes, destroy the objects involved*/
+//                if ((gameObject.getRepresentation().getX() < (iterator.getRepresentation().getX() +
+//                        iterator.getRepresentation().getWidth()) && (gameObject.getRepresentation().getX() +
+//                        gameObject.getRepresentation().getWidth()) > iterator.getRepresentation().getX()) ||
+//                        (gameObject.getRepresentation().getY() < (iterator.getRepresentation().getY() +
+//                                iterator.getRepresentation().getHeight()) && (gameObject.getRepresentation().getY() +
+//                                gameObject.getRepresentation().getHeight()) > iterator.getRepresentation().getY())) {
+//
+//                    ((Destroyable) iterator).destroy();
+//                    ((Destroyable) gameObject).destroy();
+//                }
+//            }
+//        }
     }
 
     public void setEnemyList(LinkedList<EnemyShip> enemyList) {
