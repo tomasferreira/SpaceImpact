@@ -43,6 +43,8 @@ public abstract class SimpleGfxGameObject implements Representable {
     @Override
     public void move(int dx, int dy) {
         picture.translate(dx, dy);
+        setX(getX() + dx);
+        setY(getY() + dy);
     }
 
     public Picture getPicture() {
