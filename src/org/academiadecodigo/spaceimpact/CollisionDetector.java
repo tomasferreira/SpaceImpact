@@ -5,6 +5,7 @@ import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.PlayerShip;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Spaceship;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxGameObject;
 
@@ -26,7 +27,7 @@ public class CollisionDetector {
 
     public void checkCollision(GameObject gameObject) {
 
-        objects.addAll(enemyList);
+/**        objects.addAll(enemyList);
         objects.addAll(projectiles);
         objects.add(player);
 
@@ -34,6 +35,8 @@ public class CollisionDetector {
         * set is destroyed dos objectos envolvidos na colisão
         * verificar a área da representação do objecto a partir da sua largura e altura
         * se for uma bala "is enemy" a detectar colisão com um enemy não há colisão */
+
+        /**
 
 
         //TODO comparar posição do player com a do projectile
@@ -51,6 +54,8 @@ public class CollisionDetector {
                     return;
                 }
                 /* compare object representations to see if they overlap, if yes, destroy the objects involved*/
+
+        /**
                 if ((gameObject.getRepresentation().getX() < (iterator.getRepresentation().getX() +
                         iterator.getRepresentation().getWidth()) && (gameObject.getRepresentation().getX() +
                         gameObject.getRepresentation().getWidth()) > iterator.getRepresentation().getX()) ||
@@ -63,6 +68,25 @@ public class CollisionDetector {
                 }
             }
         }
+         */
+
+
+    }
+
+    public boolean canMoveUp (Spaceship spaceship){
+        return spaceship.getRepresentation().getY() > 0;
+    }
+
+    public boolean canMoveDown (Spaceship spaceship){
+        return spaceship.getRepresentation().getY() < Game.SIZE_HEIGHT;
+    }
+
+    public boolean canMoveLeft (){
+        return this.getRepresentation().getX() > 0;
+    }
+
+    public boolean canMoveRight (){
+        return this.getRepresentation().getY < Game.SIZE_WIDTH;
     }
 
     public void setEnemyList(LinkedList<EnemyShip> enemyList) {

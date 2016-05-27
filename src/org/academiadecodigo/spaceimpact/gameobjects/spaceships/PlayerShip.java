@@ -20,8 +20,9 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     private Projectile p;
 
 
-    public PlayerShip(Representable representation) {
-        super(representation);
+    public PlayerShip(Representable representation, int maxSpeed) {
+        super(representation, maxSpeed);
+        setSpeed(0);
         keyEvents();
     }
 
@@ -35,7 +36,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
 
         accelerate(getCurrentDirection());
-        getCollisionDetector().isUnSafe(this);
+        getCollisionDetector().checkCollision(this);
 
     }
 
@@ -54,23 +55,19 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         switch (e.getKey()) {
             case KeyboardEvent.KEY_DOWN:
-                System.out.println("down");
                 setCurrentDirection(Direction.DOWN);
                 break;
 
             case KeyboardEvent.KEY_UP:
-                System.out.println("up");
                 setCurrentDirection(Direction.UP);
                 break;
 
 
             case KeyboardEvent.KEY_LEFT:
-                System.out.println("left");
                 setCurrentDirection(Direction.LEFT);
                 break;
 
             case KeyboardEvent.KEY_RIGHT:
-                System.out.println("rigth");
                 setCurrentDirection(Direction.RIGHT);
                 break;
 

@@ -11,13 +11,14 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
  */
 public class EnemyShip extends Spaceship {
 
-    public EnemyShip(Representable representation) {
-        super(representation);
+    private int counter;
+
+    public EnemyShip(Representable representation, int maxSpeed) {
+        super(representation, maxSpeed);
     }
 
     @Override
     public void shoot() {
-        System.out.println("asd");
         Projectile p = (Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
         p.setEnemy(true);
     }
@@ -25,12 +26,20 @@ public class EnemyShip extends Spaceship {
     @Override
     public void move() {
 
-        accelerate(chooseDirection());
-        //fazer as representaçoes mexerem-se de acordo com a lógica deste objecto;
+        Direction newDirection = chooseDirection();
 
+        while (counter < 10) {
 
-        //checar colisoes com metodo
-        //getCollisionDetector().isProjectileSafe(this);
+            accelerate(newDirection);
+            getCollisionDetector().checkCollision(this);
+            counter++;
+
+        }
+
+        accelerate(Direction.LEFT);
+        counter = 0;
+
+        getCollisionDetector().checkCollision(this);
     }
 
 }

@@ -24,10 +24,10 @@ public class SpaceShipFactory {
 
         switch (type) {
             case ENEMYSHIP:
-                gameObject = new EnemyShip(factory.createRepresentation(type, Game.SIZE_WIDTH, RandomNumberGen.generate(Game.SIZE_HEIGHT)));
+                gameObject = new EnemyShip(factory.createRepresentation(type, Game.SIZE_WIDTH, RandomNumberGen.generate(Game.SIZE_HEIGHT )), 1);
                 break;
             case PLAYERSHIP:
-                gameObject = new PlayerShip(factory.createRepresentation(type, posX, posY));
+                gameObject = new PlayerShip(factory.createRepresentation(type, posX, posY), 5);
                 break;
         }
         return gameObject;

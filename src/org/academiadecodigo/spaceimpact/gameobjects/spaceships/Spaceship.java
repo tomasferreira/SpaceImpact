@@ -1,5 +1,6 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
+import org.academiadecodigo.spaceimpact.RandomNumberGen;
 import org.academiadecodigo.spaceimpact.gameobjects.Destroyable;
 import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
@@ -15,19 +16,21 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
 
     private int speed;
-    private int maxSpeed = 5;
+    private int maxSpeed;
     private boolean isDestroyed;
     private ProjectileFactory factory;
 
-    private int directionChangelevel = 5;
+
 
     public void setFactory(ProjectileFactory factory) {
         this.factory = factory;
     }
 
-    public Spaceship(Representable representation) {
+    public Spaceship(Representable representation, int maxSpeed) {
         super(representation);
-        currentDirection = Direction.LEFT;
+        this.maxSpeed = maxSpeed;
+        this.speed = maxSpeed;
+        currentDirection = Direction.DOWN;
     }
 
     public abstract void shoot();
@@ -46,14 +49,15 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
 
     public Direction chooseDirection() {
+        int directionChangelevel = 5;
 
         Direction newDirection = currentDirection;
 
 
         // Sometimes, we want to change direction...
         if (Math.random() > ((double) directionChangelevel / 10)) {
-            newDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
 
+            newDirection = Direction.values()[RandomNumberGen.generate(2, 4)];
         }
 
         return newDirection;
