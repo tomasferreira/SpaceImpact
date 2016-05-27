@@ -28,7 +28,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     @Override
     public void shoot() {
-        p = (Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX() + getRepresentation().getWidth(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
+        getProjectilelist().add((Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX() + getRepresentation().getWidth(), getRepresentation().getY() + (getRepresentation().getHeight() / 2)));
     }
 
     @Override
@@ -37,7 +37,11 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         accelerate(getCurrentDirection());
         getCollisionDetector().checkCollision(this);
+        getCollisionDetector().checkCollision(this);
+        for (int i = 0; i < getProjectilelist().size(); i++) {
+            getProjectilelist().get(i).move();
 
+        }
     }
 
     @Override

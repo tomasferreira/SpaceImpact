@@ -4,8 +4,11 @@ import org.academiadecodigo.spaceimpact.RandomNumberGen;
 import org.academiadecodigo.spaceimpact.gameobjects.Destroyable;
 import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
 import org.academiadecodigo.spaceimpact.representable.Representable;
+
+import java.util.LinkedList;
 
 /**
  * Created by codecadet on 23/05/16.
@@ -21,10 +24,8 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     private ProjectileFactory factory;
 
 
+    private LinkedList<Projectile> projectilelist = new LinkedList<>();
 
-    public void setFactory(ProjectileFactory factory) {
-        this.factory = factory;
-    }
 
     public Spaceship(Representable representation, int maxSpeed) {
         super(representation);
@@ -33,10 +34,18 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         currentDirection = Direction.DOWN;
     }
 
+    public LinkedList<Projectile> getProjectilelist() {
+        return projectilelist;
+    }
+
     public abstract void shoot();
 
     public ProjectileFactory getFactory() {
         return factory;
+    }
+
+    public void setFactory(ProjectileFactory factory) {
+        this.factory = factory;
     }
 
     public void destroy() {

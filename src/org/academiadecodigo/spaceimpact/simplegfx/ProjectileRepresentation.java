@@ -2,6 +2,7 @@ package org.academiadecodigo.spaceimpact.simplegfx;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -11,10 +12,10 @@ public class ProjectileRepresentation extends SimpleGfxGameObject {
 
     public ProjectileRepresentation(int x, int y) {
         super(x, y);
-        setWidth(10);
-        setHeight(5);
-        setRectangle(new Rectangle(x + SimpleGfxBackground.PADDING, y + SimpleGfxBackground.PADDING, getWidth(),
-                getHeight()));
-        show(Color.RED);
+        setWidth(20);
+        setHeight(10);
+        setPicture(new Picture(x + SimpleGfxBackground.PADDING, y + SimpleGfxBackground.PADDING,
+                "resources/images/projectile_01.png"));
+        show();
     }
 }
