@@ -30,7 +30,7 @@ public class EnemyShip extends Spaceship {
 
 
         //checar colisoes com metodo
-        //getCollisionDetector().isUnSafe(this);
+        //getCollisionDetector().isProjectileSafe(this);
     }
 
 }
