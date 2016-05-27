@@ -40,6 +40,16 @@ public abstract class SimpleGfxGameObject implements Representable {
     }
 
     @Override
+    public int getMaxX() {
+        return picture.getMaxX();
+    }
+
+    @Override
+    public int getMaxY() {
+        return picture.getMaxY();
+    }
+
+    @Override
     public void move(int dx, int dy) {
         if (isOutOfBounds(dx, dy)){
             return;
@@ -51,6 +61,9 @@ public abstract class SimpleGfxGameObject implements Representable {
 
     @Override
     public boolean samePosition(Representable representable) {
+        if ((representable.getX() > x || representable.getMaxX() < picture.getMaxX()) && (representable.getY() > y || representable.getMaxY() < picture.getMaxY())){
+            return true;
+        }
         return false;
     }
 

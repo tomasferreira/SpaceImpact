@@ -7,6 +7,8 @@ public interface Representable {
 
     int getX();
     int getY();
+    int getMaxX();
+    int getMaxY();
     int getWidth();
     int getHeight();
 
