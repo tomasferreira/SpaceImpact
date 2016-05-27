@@ -19,6 +19,11 @@ public class SimpleGfxRepresentableFactory implements RepresentableFactory {
     }
 
     @Override
+    public Background getBackground() {
+        return background;
+    }
+
+    @Override
     public Representable createRepresentation(GameObjectType type, int posX, int posY) {
         Representable representable = null;
 

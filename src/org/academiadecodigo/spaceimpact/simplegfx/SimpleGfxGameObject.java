@@ -1,7 +1,5 @@
 package org.academiadecodigo.spaceimpact.simplegfx;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.spaceimpact.representable.Background;
 import org.academiadecodigo.spaceimpact.representable.Representable;
@@ -14,8 +12,6 @@ public abstract class SimpleGfxGameObject implements Representable {
     private Picture picture;
     private int x;
     private int y;
-    private int width;
-    private int height;
     private Background background;
 
     public SimpleGfxGameObject(int x, int y, Background background) {
@@ -45,9 +41,12 @@ public abstract class SimpleGfxGameObject implements Representable {
 
     @Override
     public void move(int dx, int dy) {
-        picture.translate(dx, dy);
-        setX(getX() + dx);
-        setY(getY() + dy);
+        if (isOutOfBounds(dx, dy)){
+            return;
+        }
+            picture.translate(dx, dy);
+            setX(getX() + dx);
+            setY(getY() + dy);
     }
 
     @Override
@@ -57,6 +56,19 @@ public abstract class SimpleGfxGameObject implements Representable {
 
     @Override
     public boolean isOutOfBounds(int dx, int dy) {
+
+        int padding = SimpleGfxBackground.PADDING;
+
+        //if x is out of bounds
+        if (x + dx < padding || dx + picture.getMaxX() > padding + background.getWidth()){
+            return true;
+        }
+
+        //if y is out of bounds
+        if (y + dy < padding || dy + picture.getMaxY() > padding + background.getHeight()){
+            return true;
+        }
+
         return false;
     }
 
@@ -65,11 +77,11 @@ public abstract class SimpleGfxGameObject implements Representable {
     }
 
     public int getWidth() {
-        return width;
+        return picture.getWidth();
     }
 
     public int getHeight() {
-        return height;
+        return picture.getHeight();
     }
 
     public void setPicture(Picture picture) {
@@ -84,11 +96,5 @@ public abstract class SimpleGfxGameObject implements Representable {
         this.y = y;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
 }

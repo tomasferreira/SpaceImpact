@@ -19,16 +19,14 @@ import java.util.LinkedList;
  */
 public class Game {
 
-    public static final int SIZE_WIDTH = 1280;
-    public static final int SIZE_HEIGHT = 500;
-    private final int STARTING_ENEMY_SHIPS = 5;
+    private final int STARTING_ENEMY_SHIPS = 25;
     private final int DELAY = 50;
 
     private int enemyStartingPosX; //por todos na mesma posiçao X mas variar a posiçao Y
     private int enemyStartingPosY;
 
-    private int playerStartingPosX;
-    private int playerStartingPosY;
+    private int playerStartingPosX = 10;
+    private int playerStartingPosY = 250;
 
     private Background background;
 
@@ -50,7 +48,7 @@ public class Game {
         background = new SimpleGfxBackground();
         representableFactory.setBackground(background);
 
-        background.init(SIZE_WIDTH, SIZE_HEIGHT);
+        background.init();
         
         spaceShipFactory = new SpaceShipFactory(representableFactory);
         projectileFactory = new ProjectileFactory(representableFactory);

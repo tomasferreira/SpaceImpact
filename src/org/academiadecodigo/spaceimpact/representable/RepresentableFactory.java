@@ -11,6 +11,7 @@ public interface RepresentableFactory {
 
     void setBackground(Background background);
 
+    Background getBackground();
     Representable createRepresentation(GameObjectType type, int posX, int posY);
 
     Representable createRepresentation(GameObjectType type, int posX, int posY, ShootingDirection direction);

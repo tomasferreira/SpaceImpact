@@ -14,6 +14,7 @@ import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
 public class SpaceShipFactory {
 
     private RepresentableFactory factory;
+    private final int SHIP_SIZE = 100;
 
     public SpaceShipFactory(RepresentableFactory factory) {
         this.factory = factory;
@@ -24,7 +25,8 @@ public class SpaceShipFactory {
 
         switch (type) {
             case ENEMYSHIP:
-                gameObject = new EnemyShip(factory.createRepresentation(type, Game.SIZE_WIDTH, RandomNumberGen.generate(Game.SIZE_HEIGHT )), 1);
+                gameObject = new EnemyShip(factory.createRepresentation(type, factory.getBackground().getWidth() - SHIP_SIZE,
+                        RandomNumberGen.generate(factory.getBackground().getHeight() - SHIP_SIZE)), 1);
                 break;
             case PLAYERSHIP:
                 gameObject = new PlayerShip(factory.createRepresentation(type, posX, posY), 5);

@@ -11,10 +11,22 @@ import java.awt.*;
 public class SimpleGfxBackground implements Background {
 
     public static final int PADDING = 10;
+    private Picture background;
+    private int width;
+    private int height;
+
 
     @Override
-    public void init(int width, int height) {
-        Picture background = new Picture(PADDING,PADDING,"resources/images/background_01.jpg");
+    public void init() {
+        background = new Picture(PADDING,PADDING,"resources/images/background_01.jpg");
         background.draw();
+    }
+
+    public int getWidth() {
+        return background.getWidth();
+    }
+
+    public int getHeight() {
+        return background.getHeight();
     }
 }
