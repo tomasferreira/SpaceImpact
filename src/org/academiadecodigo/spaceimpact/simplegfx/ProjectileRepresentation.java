@@ -12,10 +12,10 @@ public class ProjectileRepresentation extends SimpleGfxGameObject {
 
     public ProjectileRepresentation(int x, int y) {
         super(x, y);
-        setWidth(10);
-        setHeight(5);
+        setWidth(20);
+        setHeight(10);
         setPicture(new Picture(x + SimpleGfxBackground.PADDING, y + SimpleGfxBackground.PADDING,
-                "resources/images/playerShip_01_50.png"));
+                "resources/images/projectile_01.png"));
         show();
     }
 }

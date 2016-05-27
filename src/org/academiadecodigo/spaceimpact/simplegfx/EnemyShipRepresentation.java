@@ -12,10 +12,11 @@ public class EnemyShipRepresentation extends SimpleGfxGameObject {
 
     public EnemyShipRepresentation(int x, int y) {
         super(x, y);
-        setWidth(20);
-        setHeight(20);
+        //TODO automatic width and height
+        setWidth(100);
+        setHeight(46);
         setPicture(new Picture(x + SimpleGfxBackground.PADDING, y + SimpleGfxBackground.PADDING,
-                "resources/images/playerShip_01_50.png"));
+                "resources/images/enemy_02_30.png"));
         show();
     }
 }
