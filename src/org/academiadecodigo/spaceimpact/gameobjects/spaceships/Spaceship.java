@@ -32,7 +32,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         super(representation);
         this.maxSpeed = maxSpeed;
         this.speed = maxSpeed;
-        currentDirection = Direction.DOWN;
+        currentDirection = Direction.SOUTH;
     }
 
     public LinkedList<Projectile> getProjectilelist() {
