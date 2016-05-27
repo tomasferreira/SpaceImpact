@@ -9,6 +9,8 @@ import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection
  */
 public interface RepresentableFactory {
 
+    void setBackground(Background background);
+
     Representable createRepresentation(GameObjectType type, int posX, int posY);
 
     Representable createRepresentation(GameObjectType type, int posX, int posY, ShootingDirection direction);

@@ -3,6 +3,7 @@ package org.academiadecodigo.spaceimpact.simplegfx;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.spaceimpact.representable.Background;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -15,10 +16,12 @@ public abstract class SimpleGfxGameObject implements Representable {
     private int y;
     private int width;
     private int height;
+    private Background background;
 
-    public SimpleGfxGameObject(int x, int y) {
+    public SimpleGfxGameObject(int x, int y, Background background) {
         this.x = x;
         this.y = y;
+        this.background = background;
 
     }
 
@@ -45,6 +48,16 @@ public abstract class SimpleGfxGameObject implements Representable {
         picture.translate(dx, dy);
         setX(getX() + dx);
         setY(getY() + dy);
+    }
+
+    @Override
+    public boolean samePosition(Representable representable) {
+        return false;
+    }
+
+    @Override
+    public boolean isOutOfBounds(int dx, int dy) {
+        return false;
     }
 
     public Picture getPicture() {

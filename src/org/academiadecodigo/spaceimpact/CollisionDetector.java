@@ -10,6 +10,7 @@ import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxGameObject;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by codecadet on 25/05/16.
@@ -19,12 +20,29 @@ public class CollisionDetector {
     private LinkedList<EnemyShip> enemyList;
     private LinkedList<Projectile> projectiles;
     private PlayerShip player;
-    private LinkedList<GameObject> objects;
+    private List<GameObject> objects;
 
     public CollisionDetector() {
+
+//        objects = new LinkedList<>();
+//
+//        objects.addAll(enemyList);
+//        //objects.addAll(projectiles);
+//        //objects.add(player);
+//
+//
+//        for (Projectile p : projectiles) {
+//
+//            p.getRepresentation().samePosition()
+//
+//        }
+
     }
 
     public void checkCollision(GameObject gameObject) {
+
+
+        //gameObject.getRepresentation().samePosition(other rep);
 
 //        objects.addAll(enemyList);
 //        objects.addAll(projectiles);

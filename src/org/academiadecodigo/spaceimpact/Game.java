@@ -21,7 +21,7 @@ public class Game {
 
     public static final int SIZE_WIDTH = 1280;
     public static final int SIZE_HEIGHT = 500;
-    private final int STARTING_ENEMY_SHIPS = 10;
+    private final int STARTING_ENEMY_SHIPS = 5;
     private final int DELAY = 50;
 
     private int enemyStartingPosX; //por todos na mesma posiçao X mas variar a posiçao Y
@@ -30,9 +30,10 @@ public class Game {
     private int playerStartingPosX;
     private int playerStartingPosY;
 
+    private Background background;
+
     private RepresentableFactory representableFactory = new SimpleGfxRepresentableFactory();
 
-    private Background background;
     private SpaceShipFactory spaceShipFactory;
     private ProjectileFactory projectileFactory;
     private Spaceship playerShip;
@@ -47,6 +48,7 @@ public class Game {
     public void init() {
 
         background = new SimpleGfxBackground();
+        representableFactory.setBackground(background);
 
         background.init(SIZE_WIDTH, SIZE_HEIGHT);
         

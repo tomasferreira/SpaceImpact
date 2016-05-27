@@ -15,4 +15,7 @@ public interface Representable {
 
     void move(int dx, int dy);
 
+    boolean samePosition(Representable representable);
+
+    boolean isOutOfBounds(int dx, int dy);
 }
