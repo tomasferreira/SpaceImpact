@@ -1,6 +1,6 @@
 package org.academiadecodigo.spaceimpact;
 
-import org.academiadecodigo.spaceimpact.gameobjects.*;
+import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
@@ -19,8 +19,8 @@ import java.util.LinkedList;
  */
 public class Game {
 
-    private final int STARTING_ENEMY_SHIPS = 25;
-    private final int DELAY = 50;
+    private final int STARTING_ENEMY_SHIPS = 2;
+    private final int DELAY = 5;
 
     private int enemyStartingPosX; //por todos na mesma posiçao X mas variar a posiçao Y
     private int enemyStartingPosY;
@@ -49,7 +49,7 @@ public class Game {
         representableFactory.setBackground(background);
 
         background.init();
-        
+
         spaceShipFactory = new SpaceShipFactory(representableFactory);
         projectileFactory = new ProjectileFactory(representableFactory);
 
@@ -69,16 +69,26 @@ public class Game {
 
     public void start() throws InterruptedException {
 
-        while(!playerShip.isDestroyed()){
+        int roundCounter = 0;
+
+        while (!playerShip.isDestroyed()) {
 
             Thread.sleep(DELAY);
             move();
+            if (roundCounter == 500) {
+                enemyShips.add((EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY));
+                enemyShips.getLast().setCollisionDetector(collisionDetector);
+                enemyShips.getLast().setFactory(projectileFactory);
+                roundCounter = 0;
+
+            }
+            roundCounter++;
         }
 
 
     }
 
-    public void move(){
+    public void move() {
         for (int i = 0; i < enemyShips.size(); i++) {
             enemyShips.get(i).move();
             enemyShips.get(i).shoot();

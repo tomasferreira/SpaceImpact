@@ -25,18 +25,18 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     private ProjectileFactory factory;
 
 
-    private LinkedList<Projectile> projectilelist = new LinkedList<>();
+    private LinkedList<Projectile> projectileList = new LinkedList<>();
 
 
     public Spaceship(Representable representation, int maxSpeed) {
         super(representation);
         this.maxSpeed = maxSpeed;
         this.speed = maxSpeed;
-        currentDirection = Direction.SOUTH;
+        currentDirection = Direction.EAST;
     }
 
     public LinkedList<Projectile> getProjectilelist() {
-        return projectilelist;
+        return projectileList;
     }
 
     public abstract void shoot();
@@ -58,22 +58,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     public abstract void move();
 
 
-    public Direction chooseDirection() {
 
-        Direction newDirection;
-
-        if(RandomNumberGen.generate(2) == 0){
-
-            newDirection = Direction.UP;
-
-        } else {
-
-            newDirection = Direction.DOWN;
-        }
-
-        return newDirection;
-
-    }
 
 
     public void accelerate(Direction direction) {
@@ -88,20 +73,20 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         this.currentDirection = direction;
 
         switch (currentDirection) {
-            case UP:
-                getRepresentation().move(0, -getSpeed());
+            case NORTH:
+                getRepresentation().move(0, -1);
                 break;
 
-            case DOWN:
-                getRepresentation().move(0, getSpeed());
+            case SOUTH:
+                getRepresentation().move(0, 1);
                 break;
 
-            case LEFT:
-                getRepresentation().move(-getSpeed(), 0);
+            case EAST:
+                getRepresentation().move(-1, 0);
                 break;
 
-            case RIGHT:
-                getRepresentation().move(getSpeed(), 0);
+            case WEST:
+                getRepresentation().move(1, 0);
                 break;
         }
 
