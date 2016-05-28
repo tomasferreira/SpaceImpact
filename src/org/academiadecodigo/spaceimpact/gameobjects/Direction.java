@@ -12,5 +12,4 @@ public enum Direction {
     SOUTHEAST,
     NORTHWEST,
     SOUTHWEST
-
 }

@@ -19,6 +19,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     private Direction currentDirection;
 
 
+    private int counter;
     private int speed;
     private int maxSpeed;
     private boolean isDestroyed;
@@ -32,7 +33,6 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         super(representation);
         this.maxSpeed = maxSpeed;
         this.speed = maxSpeed;
-        currentDirection = Direction.EAST;
     }
 
     public LinkedList<Projectile> getProjectilelist() {
@@ -68,6 +68,9 @@ public abstract class Spaceship extends GameObject implements Destroyable {
             return;
         }
 
+        if(getSpeed() == 0){
+            return;
+        }
 
         // Accelerate in the choosen direction
         this.currentDirection = direction;
@@ -82,11 +85,27 @@ public abstract class Spaceship extends GameObject implements Destroyable {
                 break;
 
             case EAST:
-                getRepresentation().move(-1, 0);
+                getRepresentation().move(1, 0);
                 break;
 
             case WEST:
-                getRepresentation().move(1, 0);
+                getRepresentation().move(-1, 0);
+                break;
+
+            case SOUTHEAST:
+                getRepresentation().move(1, 1);
+                break;
+
+            case SOUTHWEST:
+                getRepresentation().move(-1 , 1);
+                break;
+
+            case NORTHEAST:
+                getRepresentation().move(1, -1);
+                break;
+
+            case NORTHWEST:
+                getRepresentation().move(-1 , -1);
                 break;
         }
 
@@ -120,5 +139,13 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
     public int getMaxSpeed() {
         return maxSpeed;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }
