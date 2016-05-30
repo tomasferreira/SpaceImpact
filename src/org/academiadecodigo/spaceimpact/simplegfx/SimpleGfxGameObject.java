@@ -61,7 +61,8 @@ public abstract class SimpleGfxGameObject implements Representable {
 
     @Override
     public boolean samePosition(Representable representable) {
-        if ((representable.getX() > x || representable.getMaxX() < picture.getMaxX()) && (representable.getY() > y || representable.getMaxY() < picture.getMaxY())){
+        if ((representable.getX() > x || representable.getMaxX() < picture.getMaxX()) && (representable.getY() > y ||
+                representable.getMaxY() < picture.getMaxY())){
             return true;
         }
         return false;
