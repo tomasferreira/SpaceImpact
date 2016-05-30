@@ -11,8 +11,11 @@ public class Main {
 }
 
 //TODO: playership shoot button
-//TODO: adjust overall speed
+
 //TODO: fine tuning at the end
+
 //TODO: update game logic with destroy methods (delete or hide representations)
+
 //TODO: delete objects that go out of bounds
+
 //TODO: do a scoreboard (with rectangle that hides enemyship spawning)
