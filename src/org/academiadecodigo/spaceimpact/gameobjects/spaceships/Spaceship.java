@@ -1,6 +1,5 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
-import org.academiadecodigo.spaceimpact.RandomNumberGen;
 import org.academiadecodigo.spaceimpact.gameobjects.Destroyable;
 import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
@@ -9,7 +8,6 @@ import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 import java.util.LinkedList;
-import java.util.Random;
 
 /**
  * Created by codecadet on 23/05/16.
@@ -20,17 +18,15 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
     private int counter;
     private int speed;
-    private int maxSpeed;
     private boolean isDestroyed;
     private ProjectileFactory factory;
 
     private LinkedList<Projectile> projectileList = new LinkedList<>();
 
 
-    public Spaceship(Representable representation, int maxSpeed) {
+    public Spaceship(Representable representation, int speed) {
         super(representation);
-        this.maxSpeed = maxSpeed;
-        this.speed = maxSpeed;
+        this.speed = speed;
     }
 
     public LinkedList<Projectile> getProjectilelist() {
@@ -122,10 +118,6 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         this.currentDirection = currentDirection;
     }
 
-
-    public int getMaxSpeed() {
-        return maxSpeed;
-    }
 
     public int getCounter() {
         return counter;

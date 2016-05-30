@@ -45,35 +45,46 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void move() {
 
-        if (getCounter() != getSpeed()) {
-
-            setCounter(getCounter() + 1);
-            return;
-        }
-
-        setSpeed(getMaxSpeed());
-
-        Direction direction;
-        for (KeyboardEvent keyboardEvent : eventQueue) {
-
-            if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE){
-                shoot();
-            } else {
-
-                direction = KeyToDirectionMapper.getDirection(keyboardEvent);
-                accelerate(direction);
-            }
-        }
+        accelerate(getCurrentDirection());
 
         getCollisionDetector().checkCollision(this);
 
         for (int i = 0; i < getProjectilelist().size(); i++) {
-            getProjectilelist().get(i).move();
 
+            getProjectilelist().get(i).move();
         }
 
         setCounter(0);
     }
+
+    public void queueHandler() {
+
+        for (KeyboardEvent keyboardEvent : eventQueue) {
+
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+
+                shoot();
+
+                shooting = false;
+
+            } else {
+
+                setCounter(getCounter() + 1);
+
+                setCurrentDirection(KeyToDirectionMapper.getDirection(keyboardEvent));
+
+                if (canMove()) {
+                    move();
+                }
+
+            }
+        }
+    }
+
+    public boolean canMove() {
+        return getCounter() == getSpeed();
+    }
+
 
     public boolean isShooting() {
         return shooting;
@@ -82,10 +93,6 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     @Override
     public void keyReleased(KeyboardEvent e) {
-
-        if (e.getKey() == KeyboardEvent.KEY_SPACE) {
-            shooting = false;
-        }
 
         for (KeyboardEvent keyboardEvent : eventQueue) {
             if (keyboardEvent.getKey() == e.getKey()) {
@@ -99,9 +106,6 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent e) {
 
-        if (e.getKey() == KeyboardEvent.KEY_SPACE && isShooting()) {
-            return;
-        }
 
         for (KeyboardEvent keyboardEvent : eventQueue) {
             if (keyboardEvent.getKey() == e.getKey()) {

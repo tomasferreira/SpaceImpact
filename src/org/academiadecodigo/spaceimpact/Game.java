@@ -34,7 +34,7 @@ public class Game {
 
     private SpaceShipFactory spaceShipFactory;
     private ProjectileFactory projectileFactory;
-    private Spaceship playerShip;
+    private PlayerShip playerShip;
     private LinkedList<EnemyShip> enemyShips;
     private LinkedList<Projectile> projectiles;
     private CollisionDetector collisionDetector = new CollisionDetector();
@@ -97,8 +97,7 @@ public class Game {
         //for (int i = 0; i < projectiles.size(); i++) {
         //    projectiles.get(i).move();
         //}
-        playerShip.move();
-        //playerShip.shoot();
+        playerShip.queueHandler();
 
     }
 
