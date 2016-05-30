@@ -21,6 +21,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     private Keyboard k;
     private Projectile p;
+    private int shootCounter;
 
 
     public PlayerShip(Representable representation, int maxSpeed) {
@@ -31,20 +32,28 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     @Override
     public void shoot() {
-    //    getProjectilelist().add((Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX() + getRepresentation().getWidth(), getRepresentation().getY() + (getRepresentation().getHeight() / 2)));
+        if (shootCounter == 50) {
+
+            Projectile p = (Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
+            getProjectilelist().add(p);
+            getCollisionDetector().addProjectileToList(p);
+            shootCounter = 0;
+        } else {
+            shootCounter++;
+        }
     }
 
     @Override
     public void move() {
-
-
-        accelerate(getCurrentDirection());
-        getCollisionDetector().checkCollision(this);
-        getCollisionDetector().checkCollision(this);
         for (int i = 0; i < getProjectilelist().size(); i++) {
             getProjectilelist().get(i).move();
 
         }
+
+        accelerate(getCurrentDirection());
+
+        getCollisionDetector().checkCollision(this);
+        getCollisionDetector().checkProjectilesCollision(this);
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.PlayerShip;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Spaceship;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxGameObject;
 
@@ -18,9 +19,9 @@ import java.util.List;
 public class CollisionDetector {
 
     private LinkedList<EnemyShip> enemyList;
-    private LinkedList<Projectile> projectiles;
+    private LinkedList<Projectile> projectiles = new LinkedList<>();
     private PlayerShip player;
-    private List<GameObject> objects;
+    private LinkedList<GameObject> objects;
 
     public CollisionDetector() {
 
@@ -39,48 +40,100 @@ public class CollisionDetector {
 
     }
 
+    public void addProjectileToList(Projectile p) {
+        projectiles.add(p);
+    }
+
     public void checkCollision(GameObject gameObject) {
 
 
-        //gameObject.getRepresentation().samePosition(other rep);
+        if (gameObject instanceof PlayerShip) {
+            checkPlayerCollision(gameObject);
+            if (!projectiles.isEmpty()) {
+                checkProjectilesCollision(gameObject);
+            }
+        }
 
-//        objects.addAll(enemyList);
-//        objects.addAll(projectiles);
-//        objects.add(player);
-//
-//        /* recebe o objecto que o chama e compara-o com todos os objectos da lista de acordo com objecto recebido
-//        * set is destroyed dos objectos envolvidos na colisão
-//        * verificar a área da representação do objecto a partir da sua largura e altura
-//        * se for uma bala "is enemy" a detectar colisão com um enemy não há colisão */
-//
-//
-//        //TODO comparar posição do player com a do projectile
-//        if (gameObject instanceof Destroyable) {
-//
-//            GameObject iterator = objects.get(0);
-//
-//            for (int i = 0; i < objects.size(); i++) {
-//
-//                if (gameObject instanceof Projectile && iterator instanceof EnemyShip && ((Projectile) gameObject).isEnemy()) {
-//                    return;
-//                }
-//
-//                if (gameObject instanceof EnemyShip && iterator instanceof Projectile && ((Projectile) iterator).isEnemy()) {
-//                    return;
-//                }
-//                /* compare object representations to see if they overlap, if yes, destroy the objects involved*/
-//                if ((gameObject.getRepresentation().getX() < (iterator.getRepresentation().getX() +
-//                        iterator.getRepresentation().getWidth()) && (gameObject.getRepresentation().getX() +
-//                        gameObject.getRepresentation().getWidth()) > iterator.getRepresentation().getX()) ||
-//                        (gameObject.getRepresentation().getY() < (iterator.getRepresentation().getY() +
-//                                iterator.getRepresentation().getHeight()) && (gameObject.getRepresentation().getY() +
-//                                gameObject.getRepresentation().getHeight()) > iterator.getRepresentation().getY())) {
-//
-//                    ((Destroyable) iterator).destroy();
-//                    ((Destroyable) gameObject).destroy();
-//                }
-//            }
-//        }
+        if (gameObject instanceof EnemyShip) {
+            checkEnemyCollision(gameObject);
+        }
+
+
+    }
+
+    public void checkProjectilesCollision(GameObject gameObject) {
+
+        if (player.getProjectilelist() == null) {
+            return;
+        }
+
+        Iterator<Projectile> playerProjectileIt = player.getProjectilelist().iterator();
+        Iterator<Projectile> projectileIterator = projectiles.iterator();
+
+        Projectile playerProjectile;
+        Projectile enemyProjectile;
+
+        while (playerProjectileIt.hasNext()) {
+            playerProjectile = playerProjectileIt.next();
+
+            while (projectileIterator.hasNext()) {
+                enemyProjectile = projectileIterator.next();
+                if (!enemyProjectile.isEnemy()) {
+                    continue;
+                }
+
+                if (playerProjectile.objectSamePosition(enemyProjectile)) {
+                    playerProjectile.destroy();
+                    enemyProjectile.destroy();
+                }
+            }
+        }
+    }
+
+    private void checkEnemyCollision(GameObject gameObject) {
+        if (player.getProjectilelist().isEmpty()) {
+            return;
+        }
+
+        Iterator<Projectile> playerProjectilesIt = player.getProjectilelist().iterator();
+
+        while (playerProjectilesIt.hasNext()) {
+
+            Projectile p = playerProjectilesIt.next();
+            if (gameObject.objectSamePosition(p)) {
+                ((EnemyShip) gameObject).destroy();
+                p.destroy();
+            }
+        }
+    }
+
+    private void checkPlayerCollision(GameObject gameObject) {
+
+        Iterator<EnemyShip> enemyIterator = enemyList.iterator();
+        Iterator<Projectile> projectilesIterator;
+
+        while (enemyIterator.hasNext()) {
+
+            EnemyShip e = enemyIterator.next();
+
+            if (gameObject.objectSamePosition(e)) {
+                ((PlayerShip) gameObject).destroy();
+                e.destroy();
+            }
+
+            projectilesIterator = e.getProjectilelist().iterator();
+
+
+            while (projectilesIterator.hasNext()) {
+                Projectile p = projectilesIterator.next();
+
+                if (gameObject.objectSamePosition(p)) {
+
+                    ((PlayerShip) gameObject).destroy();
+                    p.destroy();
+                }
+            }
+        }
     }
 
     public void setEnemyList(LinkedList<EnemyShip> enemyList) {

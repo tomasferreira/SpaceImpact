@@ -19,7 +19,7 @@ import java.util.LinkedList;
  */
 public class Game {
 
-    private final int STARTING_ENEMY_SHIPS = 2;
+    private final int STARTING_ENEMY_SHIPS = 6;
     private final int DELAY = 5;
 
     private int enemyStartingPosX; //por todos na mesma posiçao X mas variar a posiçao Y
@@ -65,40 +65,49 @@ public class Game {
             enemyShips.get(i).setCollisionDetector(collisionDetector);
             enemyShips.get(i).setFactory(projectileFactory);
         }
+        collisionDetector.setEnemyList(enemyShips);
+        collisionDetector.setPlayer((PlayerShip) playerShip);
     }
 
     public void start() throws InterruptedException {
 
-        int roundCounter = 0;
+        int enemySpawnCounter = 0;
 
         while (!playerShip.isDestroyed()) {
 
             Thread.sleep(DELAY);
             move();
-            if (roundCounter == 500) {
+            if (enemySpawnCounter == 500) {
                 enemyShips.add((EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY));
                 enemyShips.getLast().setCollisionDetector(collisionDetector);
                 enemyShips.getLast().setFactory(projectileFactory);
-                roundCounter = 0;
+                enemySpawnCounter = 0;
 
             }
-            roundCounter++;
+            enemySpawnCounter++;
+            removeTrash();
+
         }
 
 
     }
 
-    public void move() {
+    private void move() {
         for (int i = 0; i < enemyShips.size(); i++) {
             enemyShips.get(i).move();
             enemyShips.get(i).shoot();
 
         }
+        collisionDetector.setEnemyList(enemyShips);
         //for (int i = 0; i < projectiles.size(); i++) {
         //    projectiles.get(i).move();
         //}
         playerShip.move();
         playerShip.shoot();
+
+    }
+
+    private void removeTrash(){
 
     }
 

@@ -29,4 +29,8 @@ public abstract class GameObject {
     public void setCollisionDetector(CollisionDetector collisionDetector) {
         this.collisionDetector = collisionDetector;
     }
+
+    public boolean objectSamePosition(GameObject object){
+        return representation.samePosition(object.getRepresentation());
+    }
 }

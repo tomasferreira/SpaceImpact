@@ -26,7 +26,7 @@ public abstract class SimpleGfxGameObject implements Representable {
     }
 
     public void hide() {
-       picture.delete();
+        picture.delete();
     }
 
     @Override
@@ -34,9 +34,17 @@ public abstract class SimpleGfxGameObject implements Representable {
         return x;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
     @Override
     public int getY() {
         return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     @Override
@@ -51,19 +59,23 @@ public abstract class SimpleGfxGameObject implements Representable {
 
     @Override
     public void move(int dx, int dy) {
-        if (isOutOfBounds(dx, dy)){
+        if (isOutOfBounds(dx, dy)) {
             return;
         }
-            picture.translate(dx, dy);
-            setX(getX() + dx);
-            setY(getY() + dy);
+        picture.translate(dx, dy);
+        setX(getX() + dx);
+        setY(getY() + dy);
     }
 
     @Override
     public boolean samePosition(Representable representable) {
-        if ((representable.getX() > x || representable.getMaxX() < picture.getMaxX()) && (representable.getY() > y ||
-                representable.getMaxY() < picture.getMaxY())){
-            return true;
+        if (representable.getX() > x && representable.getMaxX() < picture.getMaxX()) {
+
+            if (representable.getY() > y && representable.getMaxY() < picture.getMaxY()) {
+                System.out.println("asdasd");
+                return true;
+            }
+
         }
         return false;
     }
@@ -74,12 +86,12 @@ public abstract class SimpleGfxGameObject implements Representable {
         int padding = SimpleGfxBackground.PADDING;
 
         //if x is out of bounds
-        if (x + dx < padding || dx + picture.getMaxX() > padding + background.getWidth()){
+        if (x + dx < padding || dx + picture.getMaxX() > padding + background.getWidth()) {
             return true;
         }
 
         //if y is out of bounds
-        if (y + dy < padding || dy + picture.getMaxY() > padding + background.getHeight()){
+        if (y + dy < padding || dy + picture.getMaxY() > padding + background.getHeight()) {
             return true;
         }
 
@@ -90,24 +102,16 @@ public abstract class SimpleGfxGameObject implements Representable {
         return picture;
     }
 
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
+
     public int getWidth() {
         return picture.getWidth();
     }
 
     public int getHeight() {
         return picture.getHeight();
-    }
-
-    public void setPicture(Picture picture) {
-        this.picture = picture;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
 
