@@ -1,11 +1,14 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
+import org.academiadecodigo.spaceimpact.Game;
 import org.academiadecodigo.spaceimpact.RandomNumberGen;
 import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
+import org.academiadecodigo.spaceimpact.representable.Background;
 import org.academiadecodigo.spaceimpact.representable.Representable;
+import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxBackground;
 
 import java.util.Random;
 
@@ -19,13 +22,14 @@ public class EnemyShip extends Spaceship {
 
 
     public EnemyShip(Representable representation, int maxSpeed) {
-        super(representation, maxSpeed);
 
+        super(representation, maxSpeed);
         setCurrentDirection(Direction.WEST);
     }
 
     @Override
     public void shoot() {
+
         if (shootCounter == 250) {
 
             getProjectilelist().add((Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2)));
@@ -46,7 +50,6 @@ public class EnemyShip extends Spaceship {
             setCounter(getCounter() + 1);
             return;
         }
-
 
 
         for (int i = 0; i < getProjectilelist().size(); i++) {

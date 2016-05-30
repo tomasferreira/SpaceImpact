@@ -98,9 +98,8 @@ public class Game {
         //    projectiles.get(i).move();
         //}
         playerShip.move();
-        playerShip.shoot();
+        //playerShip.shoot();
 
     }
-
 
 }
