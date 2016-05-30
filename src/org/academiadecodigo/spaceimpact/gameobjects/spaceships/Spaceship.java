@@ -18,13 +18,11 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
     private Direction currentDirection;
 
-
     private int counter;
     private int speed;
     private int maxSpeed;
     private boolean isDestroyed;
     private ProjectileFactory factory;
-
 
     private LinkedList<Projectile> projectileList = new LinkedList<>();
 
@@ -56,9 +54,6 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
     @Override
     public abstract void move();
-
-
-
 
 
     public void accelerate(Direction direction) {

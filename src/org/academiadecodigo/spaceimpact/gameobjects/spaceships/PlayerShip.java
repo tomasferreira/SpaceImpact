@@ -5,10 +5,12 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.spaceimpact.gameobjects.Direction;
+import org.academiadecodigo.spaceimpact.gameobjects.KeyToDirectionMapper;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
-import java.util.PriorityQueue;
+import java.util.LinkedList;
+import java.util.Queue;
 
 
 /**
@@ -18,16 +20,16 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
 
     private Keyboard k;
-    private PriorityQueue<KeyboardEvent> eventQueue;
+    private Queue<KeyboardEvent> eventQueue;
     private Projectile p;
 
 
     public PlayerShip(Representable representation, int maxSpeed) {
         super(representation, maxSpeed);
-        setSpeed(0);
         keyEvents();
+        setSpeed(0);
         setCurrentDirection(Direction.WEST);
-        eventQueue = new PriorityQueue<KeyboardEvent>();
+        eventQueue = new LinkedList<>();
     }
 
     @Override
@@ -38,10 +40,14 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void move() {
 
-
         queueHandler();
+        setSpeed(getMaxSpeed());
 
-        if (getCounter() == getSpeed()) {
+        if (getCounter() != getSpeed()) {
+
+            setCounter(getCounter() + 1);
+            return;
+        }
 
             accelerate(getCurrentDirection());
 
@@ -53,46 +59,34 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
             }
 
             setCounter(0);
-        }
-
-        setCounter(getCounter() + 1);
     }
 
     public void queueHandler() {
 
-        //TODO: enviar os eventos para serem tratados e escolher a direcção a partir do keytodirectionammper
+        if (eventQueue.isEmpty()) {
+            return;
+        }
 
+        KeyboardEvent kbEvent = eventQueue.poll();
 
-        KeyboardEvent kbEvent = eventQueue.peek();
-
-
-
-        if (isShootingKey(kbEvent)) {
+        if (KeyToDirectionMapper.getDirection(kbEvent) == null) {
 
             shoot();
             eventQueue.remove(kbEvent);
 
             return;
-
         }
 
-
-
-
+        setCurrentDirection(KeyToDirectionMapper.getDirection(kbEvent));
 
         setSpeed(getMaxSpeed());
     }
 
 
-    public boolean isShootingKey(KeyboardEvent kbEvent) {
-        return kbEvent.getKey() == KeyboardEvent.KEY_SPACE;
-    }
-
     @Override
     public void keyReleased(KeyboardEvent e) {
 
         setSpeed(0);
-
     }
 
 

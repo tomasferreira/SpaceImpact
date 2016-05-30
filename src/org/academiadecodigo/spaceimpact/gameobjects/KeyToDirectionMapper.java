@@ -1,13 +1,15 @@
 package org.academiadecodigo.spaceimpact.gameobjects;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 
 public class KeyToDirectionMapper{
 
-    private static final Map<Integer, Direction> KeyToDirection = new EnumMap<Integer, Direction>(Direction.class);
+    private static final Map<Integer, Direction> KeyToDirection = new HashMap<>(4);
 
     static {
 
@@ -21,7 +23,7 @@ public class KeyToDirectionMapper{
     /**
      * Get a Lanterna Terminal getColor from a grid getColor
      *
-     * @param color the grid getColor
+     * @param
      * @return the lanterna terminal getColor
      */
     public static Direction getDirection(KeyboardEvent kbEvent) {
