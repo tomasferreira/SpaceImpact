@@ -42,10 +42,10 @@ public class EnemyShip extends Spaceship {
     @Override
     public void move() {
 
-        if (getSpeed() != getCounter()) {
+       /** if (getSpeed() != getCounter()) {
             setCounter(getCounter() + 1);
             return;
-        }
+        }*/
 
         if (moveCounter % changeDirEachMoves == 0) {
 

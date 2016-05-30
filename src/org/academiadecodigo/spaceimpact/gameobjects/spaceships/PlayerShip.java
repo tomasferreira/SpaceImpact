@@ -6,8 +6,9 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
-import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
 import org.academiadecodigo.spaceimpact.representable.Representable;
+
+import java.util.PriorityQueue;
 
 
 /**
@@ -17,8 +18,8 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
 
     private Keyboard k;
+    private PriorityQueue<KeyboardEvent> eventQueue;
     private Projectile p;
-    private KeyboardEvent previousEvent;
 
 
     public PlayerShip(Representable representation, int maxSpeed) {
@@ -26,17 +27,21 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         setSpeed(0);
         keyEvents();
         setCurrentDirection(Direction.WEST);
+        eventQueue = new PriorityQueue<KeyboardEvent>();
     }
 
     @Override
     public void shoot() {
-        getProjectilelist().add((Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX() + getRepresentation().getWidth(), getRepresentation().getY() + (getRepresentation().getHeight() / 2)));
+        //getProjectilelist().add((Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX() + getRepresentation().getWidth(), getRepresentation().getY() + (getRepresentation().getHeight() / 2)));
     }
 
     @Override
     public void move() {
 
-        if(getCounter() == getSpeed()) {
+
+        queueHandler();
+
+        if (getCounter() == getSpeed()) {
 
             accelerate(getCurrentDirection());
 
@@ -53,107 +58,48 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         setCounter(getCounter() + 1);
     }
 
+    public void queueHandler() {
+
+        //TODO: enviar os eventos para serem tratados e escolher a direcção a partir do keytodirectionammper
+
+
+        KeyboardEvent kbEvent = eventQueue.peek();
+
+
+
+        if (isShootingKey(kbEvent)) {
+
+            shoot();
+            eventQueue.remove(kbEvent);
+
+            return;
+
+        }
+
+
+
+
+
+        setSpeed(getMaxSpeed());
+    }
+
+
+    public boolean isShootingKey(KeyboardEvent kbEvent) {
+        return kbEvent.getKey() == KeyboardEvent.KEY_SPACE;
+    }
+
     @Override
     public void keyReleased(KeyboardEvent e) {
-        previousEvent = null;
+
         setSpeed(0);
+
     }
+
 
     @Override
     public void keyPressed(KeyboardEvent e) {
 
-        if (previousEvent == null) {
-            previousEvent = e;
-        }
-
-        switch (e.getKey()) {
-
-            case KeyboardEvent.KEY_DOWN:
-
-                if (previousEvent.getKey() == KeyboardEvent.KEY_LEFT) {
-
-                    setCurrentDirection(Direction.SOUTHWEST);
-
-                } else if (previousEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
-
-                    setCurrentDirection(Direction.SOUTHEAST);
-
-                } else {
-
-                    setCurrentDirection(Direction.SOUTH);
-
-                }
-
-                break;
-
-            case KeyboardEvent.KEY_UP:
-
-                if (previousEvent.getKey() == KeyboardEvent.KEY_LEFT) {
-
-                    setCurrentDirection(Direction.NORTHWEST);
-
-                } else if (previousEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
-
-
-                    setCurrentDirection(Direction.NORTHEAST);
-
-                } else {
-
-
-                    setCurrentDirection(Direction.NORTH);
-
-                }
-
-
-                break;
-
-            case KeyboardEvent.KEY_LEFT:
-
-                if (previousEvent.getKey() == KeyboardEvent.KEY_UP) {
-
-                    setCurrentDirection(Direction.SOUTHWEST);
-
-
-                } else if (previousEvent.getKey() == KeyboardEvent.KEY_DOWN) {
-
-
-                    setCurrentDirection(Direction.NORTHWEST);
-
-                } else {
-
-                    setCurrentDirection(Direction.WEST);
-
-                }
-
-                break;
-
-            case KeyboardEvent.KEY_RIGHT:
-
-                if (previousEvent.getKey() == KeyboardEvent.KEY_UP) {
-
-                    setCurrentDirection(Direction.SOUTHEAST);
-
-                } else if (previousEvent.getKey() == KeyboardEvent.KEY_DOWN) {
-
-                    setCurrentDirection(Direction.NORTHEAST);
-
-                } else {
-
-                    setCurrentDirection(Direction.EAST);
-
-                }
-                break;
-
-            case KeyboardEvent.KEY_SPACE:
-
-                shoot();
-                return;
-
-        }
-
-        previousEvent = e;
-        setSpeed(getMaxSpeed());
-
+        eventQueue.add(e);
     }
 
     public void keyEvents() {

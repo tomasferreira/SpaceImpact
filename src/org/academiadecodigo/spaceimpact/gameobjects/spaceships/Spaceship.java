@@ -75,39 +75,30 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         // Accelerate in the choosen direction
         this.currentDirection = direction;
 
+        int dx = 0;
+        int dy = 0;
+
+
         switch (currentDirection) {
             case NORTH:
-                getRepresentation().move(0, -1);
+                dy--;
                 break;
 
             case SOUTH:
-                getRepresentation().move(0, 1);
-                break;
+                dy++;
+               break;
 
             case EAST:
-                getRepresentation().move(1, 0);
+                dx++;
                 break;
 
             case WEST:
-                getRepresentation().move(-1, 0);
+                dx--;
                 break;
 
-            case SOUTHEAST:
-                getRepresentation().move(1, 1);
-                break;
-
-            case SOUTHWEST:
-                getRepresentation().move(-1 , 1);
-                break;
-
-            case NORTHEAST:
-                getRepresentation().move(1, -1);
-                break;
-
-            case NORTHWEST:
-                getRepresentation().move(-1 , -1);
-                break;
         }
+
+        getRepresentation().move(dx, dy);
 
     }
 
