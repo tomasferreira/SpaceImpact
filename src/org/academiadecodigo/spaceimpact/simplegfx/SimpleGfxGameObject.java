@@ -72,7 +72,6 @@ public abstract class SimpleGfxGameObject implements Representable {
         if (representable.getX() > x && representable.getMaxX() < picture.getMaxX()) {
 
             if (representable.getY() > y && representable.getMaxY() < picture.getMaxY()) {
-                System.out.println("asdasd");
                 return true;
             }
 
