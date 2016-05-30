@@ -1,5 +1,6 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
+import com.sun.tools.javac.util.Context;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -9,6 +10,7 @@ import org.academiadecodigo.spaceimpact.gameobjects.KeyToDirectionMapper;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -27,9 +29,10 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     public PlayerShip(Representable representation, int maxSpeed) {
         super(representation, maxSpeed);
         keyEvents();
-        setSpeed(0);
         setCurrentDirection(Direction.WEST);
         eventQueue = new LinkedList<>();
+
+
     }
 
     @Override
@@ -40,60 +43,54 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void move() {
 
-        queueHandler();
-        setSpeed(getMaxSpeed());
-
         if (getCounter() != getSpeed()) {
 
             setCounter(getCounter() + 1);
             return;
         }
 
-            accelerate(getCurrentDirection());
-
-            getCollisionDetector().checkCollision(this);
-
-            for (int i = 0; i < getProjectilelist().size(); i++) {
-                getProjectilelist().get(i).move();
-
-            }
-
-            setCounter(0);
-    }
-
-    public void queueHandler() {
-
-        if (eventQueue.isEmpty()) {
-            return;
-        }
-
-        KeyboardEvent kbEvent = eventQueue.poll();
-
-        if (KeyToDirectionMapper.getDirection(kbEvent) == null) {
-
-            shoot();
-            eventQueue.remove(kbEvent);
-
-            return;
-        }
-
-        setCurrentDirection(KeyToDirectionMapper.getDirection(kbEvent));
-
         setSpeed(getMaxSpeed());
-    }
 
+        Direction direction;
+        for (KeyboardEvent keyboardEvent : eventQueue) {
+            direction = KeyToDirectionMapper.getDirection(keyboardEvent);
+
+            accelerate(direction);
+        }
+
+        getCollisionDetector().checkCollision(this);
+
+        for (int i = 0; i < getProjectilelist().size(); i++) {
+            getProjectilelist().get(i).move();
+
+        }
+
+        setCounter(0);
+    }
 
     @Override
     public void keyReleased(KeyboardEvent e) {
 
-        setSpeed(0);
+        for (KeyboardEvent keyboardEvent : eventQueue) {
+            if (keyboardEvent.getKey() == e.getKey()) {
+                eventQueue.remove(keyboardEvent);
+            }
+        }
+
     }
 
 
     @Override
     public void keyPressed(KeyboardEvent e) {
 
+        for (KeyboardEvent keyboardEvent : eventQueue) {
+            if (keyboardEvent.getKey() == e.getKey()) {
+                return;
+            }
+        }
+
         eventQueue.add(e);
+
     }
 
     public void keyEvents() {

@@ -14,10 +14,9 @@ import java.util.Random;
  */
 public class EnemyShip extends Spaceship {
 
-    private int moveCounter = RandomNumberGen.generate(0, 10);
     private Direction previousDirection = Direction.values()[RandomNumberGen.generate(2, 4)];
     private int shootCounter = RandomNumberGen.generate(0, 200);
-    private int changeDirEachMoves = 25;
+
 
     public EnemyShip(Representable representation, int maxSpeed) {
         super(representation, maxSpeed);
@@ -48,16 +47,7 @@ public class EnemyShip extends Spaceship {
             return;
         }
 
-        if (moveCounter % changeDirEachMoves == 0) {
 
-            accelerate(chooseDirection());
-
-
-        } else if (moveCounter % changeDirEachMoves == 1) {
-
-            accelerate(Direction.WEST);
-
-        }
 
         for (int i = 0; i < getProjectilelist().size(); i++) {
 
@@ -65,7 +55,6 @@ public class EnemyShip extends Spaceship {
         }
 
         getCollisionDetector().checkCollision(this);
-
         setCounter(0);
     }
 
