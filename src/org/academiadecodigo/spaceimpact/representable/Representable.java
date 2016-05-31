@@ -16,6 +16,7 @@ public interface Representable {
     void setY(int newPosY);
 
     void move(int dx, int dy);
+    void hide();
 
     boolean samePosition(Representable representable);
 

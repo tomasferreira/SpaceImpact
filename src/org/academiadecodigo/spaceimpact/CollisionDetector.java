@@ -1,16 +1,11 @@
 package org.academiadecodigo.spaceimpact;
 
-import org.academiadecodigo.spaceimpact.gameobjects.Destroyable;
-import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.PlayerShip;
-import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Spaceship;
-import org.academiadecodigo.spaceimpact.representable.Representable;
-import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxGameObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,57 +13,78 @@ import java.util.List;
  */
 public class CollisionDetector {
 
-    private LinkedList<EnemyShip> enemyList;
-    private LinkedList<Projectile> projectiles = new LinkedList<>();
+    private List<EnemyShip> enemyList;
+    private List<Projectile> enemyProjectiles = new ArrayList<>();
+    private List<Projectile> playerProjectiles = new ArrayList<>();
     private PlayerShip player;
-    private LinkedList<GameObject> objects;
 
-    public CollisionDetector() {
+    public void addProjectileToEnemyProjectileList(Projectile p) {
+        enemyProjectiles.add(p);
+    }
 
-//        objects = new LinkedList<>();
-//
-//        objects.addAll(enemyList);
-//        //objects.addAll(projectiles);
-//        //objects.add(player);
-//
-//
-//        for (Projectile p : projectiles) {
-//
-//            p.getRepresentation().samePosition()
-//
-//        }
+    public void addProjectileToPlayerProjectilesList(Projectile p){
+        playerProjectiles.add(p);
+    }
+
+    public void checkCollision() {
+
+        checkPlayerAndEnemyCollision();
+        checkPlayerAndProjectileCollision();
+        checkProjectileAndEnemyCollision();
+        checkProjectileAndProjectileCollision();
 
     }
 
-    public void addProjectileToList(Projectile p) {
-        projectiles.add(p);
-    }
-
-    public void checkCollision(GameObject gameObject) {
-
-
-        if (gameObject instanceof PlayerShip) {
-            checkPlayerCollision(gameObject);
-            if (!projectiles.isEmpty()) {
-                checkProjectilesCollision(gameObject);
+    private void checkProjectileAndProjectileCollision() {
+        for (Projectile playerProjectile : playerProjectiles){
+            for (Projectile enemyProjectile : enemyProjectiles){
+                if (playerProjectile.objectSamePosition(enemyProjectile)){
+                    System.out.println("asd");
+                    playerProjectile.destroy();
+                    enemyProjectile.destroy();
+                }
             }
         }
-
-        if (gameObject instanceof EnemyShip) {
-            checkEnemyCollision(gameObject);
-        }
-
-
     }
 
-    public void checkProjectilesCollision(GameObject gameObject) {
+    private void checkProjectileAndEnemyCollision() {
+        for (Projectile projectile : playerProjectiles){
+            for (EnemyShip enemy : enemyList){
+                if (projectile.objectSamePosition(enemy)){
+                    System.out.println("asfjsdfkjlsdfkjn");
+                    projectile.destroy();
+                    enemy.destroy();
+                }
+            }
+        }
+    }
+
+    private void checkPlayerAndProjectileCollision() {
+        for (Projectile projectile : enemyProjectiles){
+            if (player.objectSamePosition(projectile)){
+                player.destroy();
+                projectile.destroy();
+            }
+        }
+    }
+
+    private void checkPlayerAndEnemyCollision() {
+        for (EnemyShip enemy : enemyList) {
+            if (player.objectSamePosition(enemy)){
+                player.destroy();
+                enemy.destroy();
+            }
+        }
+    }
+
+    public void checkProjectilesCollision() {
 
         if (player.getProjectilelist() == null) {
             return;
         }
 
         Iterator<Projectile> playerProjectileIt = player.getProjectilelist().iterator();
-        Iterator<Projectile> projectileIterator = projectiles.iterator();
+        Iterator<Projectile> projectileIterator = enemyProjectiles.iterator();
 
         Projectile playerProjectile;
         Projectile enemyProjectile;
@@ -90,58 +106,54 @@ public class CollisionDetector {
         }
     }
 
-    private void checkEnemyCollision(GameObject gameObject) {
-        if (player.getProjectilelist().isEmpty()) {
-            return;
-        }
+//    private void checkEnemyCollision() {
+//        if (player.getProjectilelist().isEmpty()) {
+//            return;
+//        }
+//
+//        Iterator<Projectile> playerProjectilesIt = player.getProjectilelist().iterator();
+//
+//        while (playerProjectilesIt.hasNext()) {
+//
+//            Projectile p = playerProjectilesIt.next();
+//            if (gameObject.objectSamePosition(p)) {
+//                ((EnemyShip) gameObject).destroy();
+//                p.destroy();
+//            }
+//        }
+//    }
+//
+//    private void checkPlayerCollision() {
+//
+//        Iterator<EnemyShip> enemyIterator = enemyList.iterator();
+//        Iterator<Projectile> projectilesIterator;
+//
+//        while (enemyIterator.hasNext()) {
+//
+//            EnemyShip e = enemyIterator.next();
+//
+//            if (gameObject.objectSamePosition(e)) {
+//                ((PlayerShip) gameObject).destroy();
+//                e.destroy();
+//            }
+//
+//            projectilesIterator = e.getProjectilelist().iterator();
+//
+//
+//            while (projectilesIterator.hasNext()) {
+//                Projectile p = projectilesIterator.next();
+//
+//                if (gameObject.objectSamePosition(p)) {
+//
+//                    ((PlayerShip) gameObject).destroy();
+//                    p.destroy();
+//                }
+//            }
+//        }
+//    }
 
-        Iterator<Projectile> playerProjectilesIt = player.getProjectilelist().iterator();
-
-        while (playerProjectilesIt.hasNext()) {
-
-            Projectile p = playerProjectilesIt.next();
-            if (gameObject.objectSamePosition(p)) {
-                ((EnemyShip) gameObject).destroy();
-                p.destroy();
-            }
-        }
-    }
-
-    private void checkPlayerCollision(GameObject gameObject) {
-
-        Iterator<EnemyShip> enemyIterator = enemyList.iterator();
-        Iterator<Projectile> projectilesIterator;
-
-        while (enemyIterator.hasNext()) {
-
-            EnemyShip e = enemyIterator.next();
-
-            if (gameObject.objectSamePosition(e)) {
-                ((PlayerShip) gameObject).destroy();
-                e.destroy();
-            }
-
-            projectilesIterator = e.getProjectilelist().iterator();
-
-
-            while (projectilesIterator.hasNext()) {
-                Projectile p = projectilesIterator.next();
-
-                if (gameObject.objectSamePosition(p)) {
-
-                    ((PlayerShip) gameObject).destroy();
-                    p.destroy();
-                }
-            }
-        }
-    }
-
-    public void setEnemyList(LinkedList<EnemyShip> enemyList) {
+    public void setEnemyList(List<EnemyShip> enemyList) {
         this.enemyList = enemyList;
-    }
-
-    public void setProjectiles(LinkedList<Projectile> projectiles) {
-        this.projectiles = projectiles;
     }
 
     public void setPlayer(PlayerShip player) {

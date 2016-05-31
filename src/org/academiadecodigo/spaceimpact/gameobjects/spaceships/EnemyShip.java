@@ -31,7 +31,7 @@ public class EnemyShip extends Spaceship {
             Projectile p = (Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
             p.setEnemy(true);
             getProjectilelist().add(p);
-            getCollisionDetector().addProjectileToList(p);
+            getCollisionDetector().addProjectileToEnemyProjectileList(p);
             shootCounter = 0;
         } else {
 
@@ -54,7 +54,7 @@ public class EnemyShip extends Spaceship {
             getProjectilelist().get(i).move();
         }
 
-        getCollisionDetector().checkCollision(this);
+        //getCollisionDetector().checkCollision(this);
         setCounter(0);
     }
 

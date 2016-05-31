@@ -7,7 +7,9 @@ import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by codecadet on 23/05/16.
@@ -21,7 +23,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     private boolean isDestroyed;
     private ProjectileFactory factory;
 
-    private LinkedList<Projectile> projectileList = new LinkedList<>();
+    private List<Projectile> projectileList = new ArrayList<>();
 
 
     public Spaceship(Representable representation, int speed) {
@@ -29,7 +31,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         this.speed = speed;
     }
 
-    public LinkedList<Projectile> getProjectilelist() {
+    public List<Projectile> getProjectilelist() {
         return projectileList;
     }
 
