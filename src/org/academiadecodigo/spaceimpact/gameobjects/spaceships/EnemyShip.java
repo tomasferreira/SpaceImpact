@@ -1,11 +1,14 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
+import org.academiadecodigo.spaceimpact.Game;
 import org.academiadecodigo.spaceimpact.RandomNumberGen;
 import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
+import org.academiadecodigo.spaceimpact.representable.Background;
 import org.academiadecodigo.spaceimpact.representable.Representable;
+import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxBackground;
 
 import java.util.Random;
 
@@ -14,25 +17,26 @@ import java.util.Random;
  */
 public class EnemyShip extends Spaceship {
 
-    private int counter;
-    private int moveCounter  = RandomNumberGen.generate(0, 10);
     private Direction previousDirection = Direction.values()[RandomNumberGen.generate(2, 4)];
-    private int shootCounter = RandomNumberGen.generate(0, 200) ;
+    private int shootCounter = RandomNumberGen.generate(0, 200);
+
 
     public EnemyShip(Representable representation, int maxSpeed) {
+
         super(representation, maxSpeed);
+        setCurrentDirection(Direction.WEST);
     }
 
     @Override
     public void shoot() {
-        if (shootCounter == 250){
+
+        if (shootCounter == 250) {
 
             getProjectilelist().add((Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2)));
             getProjectilelist().getLast().setEnemy(true);
             shootCounter = 0;
-        }
+        } else {
 
-        else {
             shootCounter++;
         }
         //p.setEnemy(true);
@@ -41,47 +45,37 @@ public class EnemyShip extends Spaceship {
     @Override
     public void move() {
 
+        if (getSpeed() != getCounter()) {
 
-        if(getSpeed() == counter){
-
-            if(moveCounter == 10){
-                accelerate(chooseDirection());
-
-            } else {
-                accelerate(Direction.EAST);
-            }
-
-
-            moveCounter++;
-            counter = 0;
-
+            setCounter(getCounter() + 1);
+            return;
         }
 
-        counter++;
 
         for (int i = 0; i < getProjectilelist().size(); i++) {
+
             getProjectilelist().get(i).move();
         }
 
-
         getCollisionDetector().checkCollision(this);
+        setCounter(0);
     }
 
 
     public Direction chooseDirection() {
 
-        Direction newDirection = Direction.NORTH;
+        Direction newDirection;
 
-        if(moveCounter == 10 && previousDirection == Direction.NORTH){
+        if (previousDirection == Direction.NORTH) {
 
-            moveCounter = 0;
             newDirection = Direction.SOUTH;
 
-        } else if (moveCounter == 10 && previousDirection == Direction.SOUTH){
+        } else {
 
-            moveCounter = 0;
             newDirection = Direction.NORTH;
         }
+
+        previousDirection = newDirection;
 
         return newDirection;
     }

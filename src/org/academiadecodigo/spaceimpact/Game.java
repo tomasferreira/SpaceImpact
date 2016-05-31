@@ -20,7 +20,7 @@ import java.util.LinkedList;
 public class Game {
 
     private final int STARTING_ENEMY_SHIPS = 2;
-    private final int DELAY = 5;
+    private final int DELAY = 1;
 
     private int enemyStartingPosX; //por todos na mesma posiçao X mas variar a posiçao Y
     private int enemyStartingPosY;
@@ -34,7 +34,7 @@ public class Game {
 
     private SpaceShipFactory spaceShipFactory;
     private ProjectileFactory projectileFactory;
-    private Spaceship playerShip;
+    private PlayerShip playerShip;
     private LinkedList<EnemyShip> enemyShips;
     private LinkedList<Projectile> projectiles;
     private CollisionDetector collisionDetector = new CollisionDetector();
@@ -97,10 +97,8 @@ public class Game {
         //for (int i = 0; i < projectiles.size(); i++) {
         //    projectiles.get(i).move();
         //}
-        playerShip.move();
-        playerShip.shoot();
+        playerShip.queueHandler();
 
     }
-
 
 }
