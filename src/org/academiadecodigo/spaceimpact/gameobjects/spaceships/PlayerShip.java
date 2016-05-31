@@ -28,9 +28,9 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     private boolean shooting;
 
 
-    public PlayerShip(Representable representation, int maxSpeed) {
+    public PlayerShip(Representable representation, int speed) {
 
-        super(representation, maxSpeed);
+        super(representation, speed);
         keyEvents();
         setCurrentDirection(Direction.WEST);
         eventQueue = new LinkedList<>();
@@ -40,6 +40,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     public void shoot() {
 
         getProjectilelist().add((Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX() + getRepresentation().getWidth(), getRepresentation().getY() + (getRepresentation().getHeight() / 2)));
+        setShooting(false);
     }
 
     @Override
@@ -49,15 +50,16 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         getCollisionDetector().checkCollision(this);
 
-
         setCounter(0);
     }
 
     public void queueHandler() {
+
         for (int i = 0; i < getProjectilelist().size(); i++) {
 
             getProjectilelist().get(i).move();
         }
+
         if (isShooting()) {
 
             shoot();
@@ -91,11 +93,6 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     @Override
     public void keyReleased(KeyboardEvent e) {
-
-        if (e.getKey() == KeyboardEvent.KEY_SPACE) {
-            setShooting(false);
-            return;
-        }
 
         for (KeyboardEvent keyboardEvent : eventQueue) {
             if (keyboardEvent.getKey() == e.getKey()) {

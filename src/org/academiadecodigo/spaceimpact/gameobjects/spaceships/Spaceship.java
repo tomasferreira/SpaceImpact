@@ -54,12 +54,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
     public void accelerate(Direction direction) {
 
-        // Crashed cars can not accelerate
         if (isDestroyed()) {
-            return;
-        }
-
-        if(getSpeed() == 0){
             return;
         }
 
