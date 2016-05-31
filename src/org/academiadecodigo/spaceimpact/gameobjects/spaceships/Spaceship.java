@@ -23,17 +23,12 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     private boolean isDestroyed;
     private ProjectileFactory factory;
 
-    private List<Projectile> projectileList = new ArrayList<>();
-
 
     public Spaceship(Representable representation, int speed) {
         super(representation);
         this.speed = speed;
     }
 
-    public List<Projectile> getProjectilelist() {
-        return projectileList;
-    }
 
     public abstract void shoot();
 

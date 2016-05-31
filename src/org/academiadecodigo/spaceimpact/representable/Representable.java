@@ -20,5 +20,7 @@ public interface Representable {
 
     boolean samePosition(Representable representable);
 
-    boolean isOutOfBounds(int dx, int dy);
+    boolean isMoveOutOfBounds(int dx, int dy);
+
+    boolean isOutOfBounds();
 }

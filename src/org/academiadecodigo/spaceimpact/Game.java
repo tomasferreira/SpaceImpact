@@ -3,6 +3,7 @@ package org.academiadecodigo.spaceimpact;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileHandler;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.PlayerShip;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.SpaceShipFactory;
@@ -39,8 +40,8 @@ public class Game {
     private ProjectileFactory projectileFactory;
     private PlayerShip playerShip;
     private List<EnemyShip> enemyShips;
-    private List<Projectile> projectiles;
     private CollisionDetector collisionDetector = new CollisionDetector();
+    private ProjectileHandler projectileHandler = new ProjectileHandler();
 
 
     public Game() {
@@ -59,18 +60,21 @@ public class Game {
         playerShip = (PlayerShip) spaceShipFactory.createObject(GameObjectType.PLAYERSHIP, playerStartingPosX, playerStartingPosY);
         playerShip.setCollisionDetector(collisionDetector);
         playerShip.setFactory(projectileFactory);
-
-        projectiles = new ArrayList<>();
+        playerShip.setProjectileHandler(projectileHandler);
 
         enemyShips = new ArrayList<>();
         for (int i = 0; i < STARTING_ENEMY_SHIPS; i++) {
-            enemyShips.add((EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY));
-            enemyShips.get(i).setCollisionDetector(collisionDetector);
-            enemyShips.get(i).setFactory(projectileFactory);
+
+            EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
+            enemyShip.setCollisionDetector(collisionDetector);
+            enemyShip.setFactory(projectileFactory);
+            enemyShip.setProjectileHandler(projectileHandler);
+            enemyShips.add(enemyShip);
         }
 
         collisionDetector.setPlayer(playerShip);
         collisionDetector.setEnemyList(enemyShips);
+        collisionDetector.setProjectileHandler(projectileHandler);
     }
 
     public void start() throws InterruptedException {
@@ -87,6 +91,7 @@ public class Game {
                 EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
                 enemyShip.setCollisionDetector(collisionDetector);
                 enemyShip.setFactory(projectileFactory);
+                enemyShip.setProjectileHandler(projectileHandler);
                 enemyShips.add(enemyShip);
                 enemySpawnCounter = 0;
                 collisionDetector.setEnemyList(enemyShips);
@@ -95,7 +100,6 @@ public class Game {
 
             enemySpawnCounter++;
             removeTrash();
-            collisionDetector.setEnemyList(enemyShips);
             collisionDetector.checkCollision();
 
         }
@@ -112,11 +116,11 @@ public class Game {
         }
 
         playerShip.queueHandler();
+        projectileHandler.moveProjectiles();
 
     }
 
     private void removeTrash() {
-
     }
 
 
