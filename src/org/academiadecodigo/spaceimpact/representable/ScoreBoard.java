@@ -5,4 +5,6 @@ package org.academiadecodigo.spaceimpact.representable;
  */
 public interface ScoreBoard {
 
+
+
 }

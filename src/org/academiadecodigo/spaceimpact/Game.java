@@ -9,8 +9,10 @@ import org.academiadecodigo.spaceimpact.gameobjects.spaceships.SpaceShipFactory;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Spaceship;
 import org.academiadecodigo.spaceimpact.representable.Background;
 import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
+import org.academiadecodigo.spaceimpact.representable.ScoreBoard;
 import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxBackground;
 import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxRepresentableFactory;
+import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxScoreBoard;
 
 import java.util.LinkedList;
 
@@ -29,6 +31,7 @@ public class Game {
     private int playerStartingPosY = 250;
 
     private Background background;
+    private ScoreBoard scoreBoard;
 
     private RepresentableFactory representableFactory = new SimpleGfxRepresentableFactory();
 
@@ -87,6 +90,7 @@ public class Game {
 
         }
 
+        scoreBoard = new SimpleGfxScoreBoard();
 
     }
 
