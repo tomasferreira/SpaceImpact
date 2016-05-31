@@ -1,4 +1,4 @@
-package org.academiadecodigo.spaceimpact;
+package org.academiadecodigo.spaceimpact.utilities;
 
 /**
  * Created by codecadet on 06/05/16.
