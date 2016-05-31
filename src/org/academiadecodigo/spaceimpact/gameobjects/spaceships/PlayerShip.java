@@ -56,6 +56,17 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent e) {
 
+
+
+        if(e.){
+
+        }
+
+
+
+
+
+
         setSpeed(getMaxSpeed());
 
 
