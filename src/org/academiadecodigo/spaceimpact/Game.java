@@ -101,6 +101,7 @@ public class Game {
 
         }
         collisionDetector.setEnemyList(enemyShips);
+        collisionDetector.setPlayer(playerShip);
         //for (int i = 0; i < projectiles.size(); i++) {
         //    projectiles.get(i).move();
         //}
