@@ -11,12 +11,12 @@ public class Main {
 }
 
 
-//TODO: fine tuning at the end
+//TODO: delete objects that go out of bounds ->simplegfx, game, gameObjects
+
+//TODO: update enemy movement ->
 
 //TODO: update game logic with destroy methods (delete or hide representations)
 
-//TODO: delete objects that go out of bounds
-
 //TODO: do a scoreboard (with rectangle that hides enemyship spawning)
 
-//TODO: update enemy movement
+//TODO: fine tuning at the end

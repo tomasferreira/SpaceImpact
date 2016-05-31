@@ -17,14 +17,12 @@ public class SimpleGfxScoreBoard implements ScoreBoard{
     private int height = 200;
    // private Background background;
 
-    public SimpleGfxScoreBoard() {
-        //this.background = background;
-        //height = background.getHeight();
-        //x = background.getWidth() - width;
-        board = new Rectangle();
+
+
+    @Override
+    public void show() {
+        board = new Rectangle(x, y, width, height);
         board.setColor(Color.BLACK);
         board.fill();
-
     }
-
 }

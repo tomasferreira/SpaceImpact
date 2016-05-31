@@ -78,19 +78,18 @@ public class Game {
 
             Thread.sleep(DELAY);
             move();
+        scoreBoard = new SimpleGfxScoreBoard();
             if (enemySpawnCounter == 500) {
                 enemyShips.add((EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY));
                 enemyShips.getLast().setCollisionDetector(collisionDetector);
                 enemyShips.getLast().setFactory(projectileFactory);
                 enemySpawnCounter = 0;
-
             }
             enemySpawnCounter++;
             removeTrash();
 
         }
 
-        scoreBoard = new SimpleGfxScoreBoard();
 
     }
 
