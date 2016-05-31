@@ -52,6 +52,7 @@ public class Game {
         representableFactory.setBackground(background);
 
         background.init();
+        scoreBoard = new SimpleGfxScoreBoard(background);
 
         spaceShipFactory = new SpaceShipFactory(representableFactory);
         projectileFactory = new ProjectileFactory(representableFactory);
@@ -78,7 +79,8 @@ public class Game {
 
             Thread.sleep(DELAY);
             move();
-        scoreBoard = new SimpleGfxScoreBoard();
+
+            scoreBoard.show();
             if (enemySpawnCounter == 500) {
                 enemyShips.add((EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY));
                 enemyShips.getLast().setCollisionDetector(collisionDetector);

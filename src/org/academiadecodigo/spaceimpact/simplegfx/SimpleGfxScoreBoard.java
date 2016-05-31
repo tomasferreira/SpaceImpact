@@ -11,13 +11,19 @@ import org.academiadecodigo.spaceimpact.representable.ScoreBoard;
 public class SimpleGfxScoreBoard implements ScoreBoard{
 
     private Rectangle board;
-    private int x= 40;
-    private int y = 70;
+    private int x;
+    private int y;
     private int width = 100;
-    private int height = 200;
-   // private Background background;
+    private int height;
+    private Background background;
+    private int padding = SimpleGfxBackground.PADDING;
 
-
+    public SimpleGfxScoreBoard(Background background) {
+        this.background = background;
+        x = (background.getWidth() - width) + padding;
+        y = padding;
+        height = background.getHeight();
+    }
 
     @Override
     public void show() {
