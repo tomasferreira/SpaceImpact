@@ -12,15 +12,20 @@ import org.academiadecodigo.spaceimpact.utilities.RandomNumberGen;
 public class EnemyShip extends Spaceship {
 
     private int shootCounter = RandomNumberGen.generate(0, 200);
-    private int xToChangeDirection = RandomNumberGen.generate(0, getRepresentation().getMaxX());
-    private int yToChangeDirection = RandomNumberGen.generate(0, getRepresentation().getMaxY());
-    private int moveCounter;
+    private int startXtoChangeDir;
+    private int endXtoChangDir;
+    private Direction newDirection = Direction.values()[RandomNumberGen.generate(2, 4)];
+    private boolean isGoingDiagonal;
 
 
     public EnemyShip(Representable representation, int speed) {
 
         super(representation, speed);
         setCurrentDirection(Direction.WEST);
+
+        endXtoChangDir = RandomNumberGen.generate(getRepresentation().getMaxX());
+
+        startXtoChangeDir = RandomNumberGen.generate(endXtoChangDir);
     }
 
     @Override
@@ -54,7 +59,14 @@ public class EnemyShip extends Spaceship {
         }
 
         setCurrentDirection(chooseDirection());
-        accelerate(getCurrentDirection());
+
+        if(isGoingDiagonal){
+            accelerate(getCurrentDirection());
+            accelerate(Direction.WEST);
+        } else {
+            accelerate(getCurrentDirection());
+        }
+
 
         getCollisionDetector().checkCollision(this);
 
@@ -64,25 +76,20 @@ public class EnemyShip extends Spaceship {
 
     public Direction chooseDirection() {
 
+        System.out.println(newDirection.toString());
 
-        while(getxToChangeDirection() <= getRepresentation().getX()
-                || getyToChangeDirection() <= getRepresentation().getY() || moveCounter <= 25){
+        if(getRepresentation().getX() > startXtoChangeDir &&
+            getRepresentation().getX() < endXtoChangDir){
 
-            moveCounter++;
+            isGoingDiagonal = true;
 
-            return Direction.values()[RandomNumberGen.generate(2, 4)];
+
+            return newDirection;
         }
 
+        isGoingDiagonal = false;
+
         return Direction.WEST;
-    }
-
-    public int getxToChangeDirection() {
-        return xToChangeDirection;
-    }
-
-
-    public int getyToChangeDirection() {
-        return yToChangeDirection;
     }
 
 
