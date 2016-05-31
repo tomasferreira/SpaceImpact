@@ -3,7 +3,7 @@ package org.academiadecodigo.spaceimpact.gameobjects;
 /**
  * Created by codecadet on 31/05/16.
  */
-public class Scores {
+public class Score {
 
 
     private int points = 0;

@@ -2,7 +2,7 @@ package org.academiadecodigo.spaceimpact;
 
 import org.academiadecodigo.spaceimpact.gameobjects.CollisionDetector;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
-import org.academiadecodigo.spaceimpact.gameobjects.Scores;
+import org.academiadecodigo.spaceimpact.gameobjects.Score;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
@@ -42,7 +42,7 @@ public class Game {
     private LinkedList<EnemyShip> enemyShips;
     private LinkedList<Projectile> projectiles;
     private CollisionDetector collisionDetector = new CollisionDetector();
-    private Scores scores = new Scores();
+    private Score score = new Score();
 
 
     public Game() {
@@ -50,11 +50,11 @@ public class Game {
 
     public void init() {
 
-        background = new SimpleGfxBackground();
+        background = new SimpleGfxBackground(score);
         representableFactory.setBackground(background);
 
         background.init();
-        scoreBoard = new SimpleGfxScoreBoard(background, scores);
+        scoreBoard = new SimpleGfxScoreBoard(background, score);
 
         spaceShipFactory = new SpaceShipFactory(representableFactory);
         projectileFactory = new ProjectileFactory(representableFactory);
@@ -93,8 +93,8 @@ public class Game {
             enemySpawnCounter++;
             removeTrash();
 
-            System.out.println(scores.getPoints());
-
+            System.out.println(score.getPoints());
+            background.showScore();
             scoreBoard.show();
 
         }
@@ -117,11 +117,11 @@ public class Game {
 
     }
 
-    private void updateScores(){
-        scores.updateScores(collisionDetector.getDestroyedEnemies());
+    private void updateScores() {
+        score.updateScores(collisionDetector.getDestroyedEnemies());
     }
 
-    private void removeTrash(){
+    private void removeTrash() {
 
     }
 

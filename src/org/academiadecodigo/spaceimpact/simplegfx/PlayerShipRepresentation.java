@@ -14,7 +14,7 @@ public class PlayerShipRepresentation extends SimpleGfxGameObject {
 
     public PlayerShipRepresentation(int x, int y, Background background) {
         super(x, y, background);
-        setPicture(new Picture(x + SimpleGfxBackground.PADDING, y + SimpleGfxBackground.PADDING,
+        setPicture(new Picture(x + background.getPadding(), y + background.getPadding(),
                 "resources/images/playerShip_01_50.png"));
         show();
     }

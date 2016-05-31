@@ -3,7 +3,7 @@ package org.academiadecodigo.spaceimpact.simplegfx;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
-import org.academiadecodigo.spaceimpact.gameobjects.Scores;
+import org.academiadecodigo.spaceimpact.gameobjects.Score;
 import org.academiadecodigo.spaceimpact.representable.Background;
 import org.academiadecodigo.spaceimpact.representable.ScoreBoard;
 
@@ -15,17 +15,16 @@ public class SimpleGfxScoreBoard implements ScoreBoard{
     private Rectangle board;
     private int x;
     private int y;
-    private int width = 100;
+    private int width = 80;
     private int height;
     private Background background;
-    private Scores scores;
-    private int padding = SimpleGfxBackground.PADDING;
+    private Score score;
 
-    public SimpleGfxScoreBoard(Background background, Scores scores) {
+    public SimpleGfxScoreBoard(Background background, Score score) {
         this.background = background;
-        this.scores = scores;
-        x = (background.getWidth() - width) + padding;
-        y = padding;
+        this.score = score;
+        x = (background.getWidth() - width) + background.getPadding();
+        y = background.getPadding();
         height = background.getHeight();
 
     }
@@ -36,7 +35,7 @@ public class SimpleGfxScoreBoard implements ScoreBoard{
         board.setColor(Color.WHITE);
         board.fill();
 
-        String points = " " + scores.getPoints();
+        String points = " " + score.getPoints();
 
         Text score = new Text(x, y, points);
         score.draw();

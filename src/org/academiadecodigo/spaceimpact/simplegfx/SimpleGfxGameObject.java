@@ -82,7 +82,7 @@ public abstract class SimpleGfxGameObject implements Representable {
     @Override
     public boolean isOutOfBounds(int dx, int dy) {
 
-        int padding = SimpleGfxBackground.PADDING;
+        int padding = background.getPadding();
 
         //if x is out of bounds
         if (x + dx < padding || dx + picture.getMaxX() > padding + background.getWidth()) {
