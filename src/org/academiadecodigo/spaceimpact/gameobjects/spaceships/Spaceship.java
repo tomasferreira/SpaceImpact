@@ -1,6 +1,5 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
-import org.academiadecodigo.spaceimpact.RandomNumberGen;
 import org.academiadecodigo.spaceimpact.gameobjects.Destroyable;
 import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
@@ -9,7 +8,6 @@ import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 import java.util.LinkedList;
-import java.util.Random;
 
 /**
  * Created by codecadet on 23/05/16.
@@ -18,21 +16,17 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
     private Direction currentDirection;
 
-
+    private int counter;
     private int speed;
-    private int maxSpeed;
     private boolean isDestroyed;
     private ProjectileFactory factory;
-
 
     private LinkedList<Projectile> projectileList = new LinkedList<>();
 
 
-    public Spaceship(Representable representation, int maxSpeed) {
+    public Spaceship(Representable representation, int speed) {
         super(representation);
-        this.maxSpeed = maxSpeed;
-        this.speed = maxSpeed;
-        currentDirection = Direction.EAST;
+        this.speed = speed;
     }
 
     public LinkedList<Projectile> getProjectilelist() {
@@ -58,9 +52,6 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     public abstract void move();
 
 
-
-
-
     public void accelerate(Direction direction) {
 
         // Crashed cars can not accelerate
@@ -68,27 +59,37 @@ public abstract class Spaceship extends GameObject implements Destroyable {
             return;
         }
 
+        if(getSpeed() == 0){
+            return;
+        }
 
         // Accelerate in the choosen direction
         this.currentDirection = direction;
 
+        int dx = 0;
+        int dy = 0;
+
+
         switch (currentDirection) {
             case NORTH:
-                getRepresentation().move(0, -1);
+                dy--;
                 break;
 
             case SOUTH:
-                getRepresentation().move(0, 1);
-                break;
+                dy++;
+               break;
 
             case EAST:
-                getRepresentation().move(-1, 0);
+                dx++;
                 break;
 
             case WEST:
-                getRepresentation().move(1, 0);
+                dx--;
                 break;
+
         }
+
+        getRepresentation().move(dx, dy);
 
     }
 
@@ -118,7 +119,11 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     }
 
 
-    public int getMaxSpeed() {
-        return maxSpeed;
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }
