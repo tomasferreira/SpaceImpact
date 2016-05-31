@@ -1,12 +1,13 @@
 package org.academiadecodigo.spaceimpact;
 
+import org.academiadecodigo.spaceimpact.gameobjects.CollisionDetector;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
+import org.academiadecodigo.spaceimpact.gameobjects.Scores;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.PlayerShip;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.SpaceShipFactory;
-import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Spaceship;
 import org.academiadecodigo.spaceimpact.representable.Background;
 import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
 import org.academiadecodigo.spaceimpact.representable.ScoreBoard;
@@ -41,6 +42,7 @@ public class Game {
     private LinkedList<EnemyShip> enemyShips;
     private LinkedList<Projectile> projectiles;
     private CollisionDetector collisionDetector = new CollisionDetector();
+    private Scores scores = new Scores();
 
 
     public Game() {
@@ -52,7 +54,7 @@ public class Game {
         representableFactory.setBackground(background);
 
         background.init();
-        scoreBoard = new SimpleGfxScoreBoard(background);
+        scoreBoard = new SimpleGfxScoreBoard(background, scores);
 
         spaceShipFactory = new SpaceShipFactory(representableFactory);
         projectileFactory = new ProjectileFactory(representableFactory);
@@ -68,10 +70,12 @@ public class Game {
             enemyShips.add((EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY));
             enemyShips.get(i).setCollisionDetector(collisionDetector);
             enemyShips.get(i).setFactory(projectileFactory);
+
         }
     }
 
     public void start() throws InterruptedException {
+
 
         int enemySpawnCounter = 0;
 
@@ -80,7 +84,6 @@ public class Game {
             Thread.sleep(DELAY);
             move();
 
-            scoreBoard.show();
             if (enemySpawnCounter == 500) {
                 enemyShips.add((EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY));
                 enemyShips.getLast().setCollisionDetector(collisionDetector);
@@ -89,6 +92,10 @@ public class Game {
             }
             enemySpawnCounter++;
             removeTrash();
+
+            System.out.println(scores.getPoints());
+
+            scoreBoard.show();
 
         }
 
@@ -108,6 +115,10 @@ public class Game {
         //}
         playerShip.queueHandler();
 
+    }
+
+    private void updateScores(){
+        scores.updateScores(collisionDetector.getDestroyedEnemies());
     }
 
     private void removeTrash(){
