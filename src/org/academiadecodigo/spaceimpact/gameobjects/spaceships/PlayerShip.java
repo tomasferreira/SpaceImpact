@@ -21,7 +21,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
 
     private Keyboard k;
-    //private Queue<KeyboardEvent> eventQueue;
+    private Queue<KeyboardEvent> eventQueue;
 
     private Projectile p;
 
@@ -35,7 +35,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         super(representation, maxSpeed);
         keyEvents();
         setCurrentDirection(Direction.WEST);
-      //  eventQueue = new LinkedList<>();
+        eventQueue = new LinkedList<>();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     public void queueHandler() {
 
-        LinkedList<Integer> pressedKeys = KeyToIsPressedMapper.getPressedKeys();
+        /*LinkedList<Integer> pressedKeys = KeyToIsPressedMapper.getPressedKeys();
 
         pressedKeys.iterator();
 
@@ -79,9 +79,9 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
             }
 
-        }
+        }*/
 
-        /*if (isShooting()) {
+        if (isShooting()) {
 
             shoot();
         }
@@ -96,7 +96,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
                 move();
             }
 
-        }*/
+        }
     }
 
     public boolean canMove() {
@@ -114,13 +114,13 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent e) {
 
-        for( : KeyToIsPressedMapper.getPressedKeys() ){
+        /*for( git: KeyToIsPressedMapper.getPressedKeys() ){
 
         }
 
             KeyToIsPressedMapper.setKeyReleased(e);
-
-        /*if (e.getKey() == KeyboardEvent.KEY_SPACE) {
+        */
+        if (e.getKey() == KeyboardEvent.KEY_SPACE) {
             setShooting(false);
             return;
         }
@@ -131,7 +131,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
             if (keyboardEvent.getKey() == e.getKey()) {
                 eventQueue.remove(keyboardEvent);
             }
-        }*/
+        }
 
     }
 
@@ -139,10 +139,10 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     public void keyPressed(KeyboardEvent e) {
 
 
-        KeyToIsPressedMapper.setKeyPressed(e);
+        //KeyToIsPressedMapper.setKeyPressed(e);
 
 
-        /*if (e.getKey() == KeyboardEvent.KEY_SPACE) {
+        if (e.getKey() == KeyboardEvent.KEY_SPACE) {
             setShooting(true);
             return;
         }
@@ -154,7 +154,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
             }
         }
 
-        eventQueue.add(e);*/
+        eventQueue.add(e);
 
     }
 
