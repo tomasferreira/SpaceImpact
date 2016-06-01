@@ -11,17 +11,22 @@ public class ProjectileHandler {
 
     private List<Projectile> enemyProjectiles;
     private List<Projectile> playerProjectiles;
+    private ProjectileFactory projectileFactory;
 
     public ProjectileHandler() {
         enemyProjectiles = new ArrayList<>();
         playerProjectiles = new ArrayList<>();
     }
 
+    public void setProjectileFactory(ProjectileFactory projectileFactory) {
+        this.projectileFactory = projectileFactory;
+    }
+
     public void addProjectileToEnemyProjectileList(Projectile p) {
         enemyProjectiles.add(p);
     }
 
-    public void addProjectileToPlayerProjectilesList(Projectile p) {
+    public void addProjectileToPlayerProjectileList(Projectile p) {
         playerProjectiles.add(p);
     }
 
@@ -43,20 +48,33 @@ public class ProjectileHandler {
         }
     }
 
-    public void deleteDestroyedBullets(){
+    public void deleteDestroyedBullets() {
         Iterator<Projectile> itE = enemyProjectiles.iterator();
         Iterator<Projectile> itP = playerProjectiles.iterator();
 
-        while (itE.hasNext()){
-            if (itE.next().isDestroyed()){
+        while (itE.hasNext()) {
+            if (itE.next().isDestroyed()) {
                 itE.remove();
             }
         }
 
-        while (itP.hasNext()){
-            if (itP.next().isDestroyed()){
+        while (itP.hasNext()) {
+            if (itP.next().isDestroyed()) {
                 itP.remove();
             }
         }
+    }
+
+    public void getNewEnemyProjectile(int posX, int posY) {
+        Projectile p = (Projectile) projectileFactory.createProjectile(ShootingDirection.WEST, posX, posY);
+        p.setEnemy(true);
+        addProjectileToEnemyProjectileList(p);
+
+    }
+
+    public void getNewPlayerProjectile(int posX, int posY) {
+        Projectile p = (Projectile) projectileFactory.createProjectile(ShootingDirection.WEST, posX, posY);
+        addProjectileToPlayerProjectileList(p);
+
     }
 }

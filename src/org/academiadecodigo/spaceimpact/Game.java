@@ -56,18 +56,15 @@ public class Game {
 
         spaceShipFactory = new SpaceShipFactory(representableFactory);
         projectileFactory = new ProjectileFactory(representableFactory);
+        projectileHandler.setProjectileFactory(projectileFactory);
 
         playerShip = (PlayerShip) spaceShipFactory.createObject(GameObjectType.PLAYERSHIP, playerStartingPosX, playerStartingPosY);
-        playerShip.setCollisionDetector(collisionDetector);
-        playerShip.setFactory(projectileFactory);
         playerShip.setProjectileHandler(projectileHandler);
 
         enemyShips = new ArrayList<>();
         for (int i = 0; i < STARTING_ENEMY_SHIPS; i++) {
 
             EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
-            enemyShip.setCollisionDetector(collisionDetector);
-            enemyShip.setFactory(projectileFactory);
             enemyShip.setProjectileHandler(projectileHandler);
             enemyShips.add(enemyShip);
         }
@@ -89,8 +86,6 @@ public class Game {
             if (enemySpawnCounter == 500) {
 
                 EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
-                enemyShip.setCollisionDetector(collisionDetector);
-                enemyShip.setFactory(projectileFactory);
                 enemyShip.setProjectileHandler(projectileHandler);
                 enemyShips.add(enemyShip);
                 enemySpawnCounter = 0;

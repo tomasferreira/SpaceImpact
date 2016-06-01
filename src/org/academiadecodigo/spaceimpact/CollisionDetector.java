@@ -39,12 +39,20 @@ public class CollisionDetector {
 
     private void deleteTrash() {
         projectileHandler.deleteDestroyedBullets();
+
+        Iterator<EnemyShip> it = enemyList.iterator();
+
+        while (it.hasNext()) {
+            if (it.next().isDestroyed()) {
+                it.remove();
+            }
+        }
     }
 
     private void checkProjectileAndProjectileCollision() {
-        for (Projectile playerProjectile : playerProjectiles){
-            for (Projectile enemyProjectile : enemyProjectiles){
-                if (playerProjectile.objectSamePosition(enemyProjectile)){
+        for (Projectile playerProjectile : playerProjectiles) {
+            for (Projectile enemyProjectile : enemyProjectiles) {
+                if (playerProjectile.objectSamePosition(enemyProjectile)) {
                     playerProjectile.destroy();
                     enemyProjectile.destroy();
                 }
@@ -53,9 +61,9 @@ public class CollisionDetector {
     }
 
     private void checkProjectileAndEnemyCollision() {
-        for (Projectile projectile : playerProjectiles){
-            for (EnemyShip enemy : enemyList){
-                if (projectile.objectSamePosition(enemy)){
+        for (Projectile projectile : playerProjectiles) {
+            for (EnemyShip enemy : enemyList) {
+                if (projectile.objectSamePosition(enemy)) {
                     projectile.destroy();
                     enemy.destroy();
                 }
@@ -64,8 +72,8 @@ public class CollisionDetector {
     }
 
     private void checkPlayerAndProjectileCollision() {
-        for (Projectile projectile : enemyProjectiles){
-            if (player.objectSamePosition(projectile)){
+        for (Projectile projectile : enemyProjectiles) {
+            if (player.objectSamePosition(projectile)) {
                 player.destroy();
                 projectile.destroy();
             }
@@ -74,7 +82,7 @@ public class CollisionDetector {
 
     private void checkPlayerAndEnemyCollision() {
         for (EnemyShip enemy : enemyList) {
-            if (player.objectSamePosition(enemy)){
+            if (player.objectSamePosition(enemy)) {
                 player.destroy();
                 enemy.destroy();
             }

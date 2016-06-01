@@ -28,9 +28,7 @@ public class EnemyShip extends Spaceship {
 
         if (shootCounter == 250) {
 
-            Projectile p = (Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
-            p.setEnemy(true);
-            getProjectileHandler().addProjectileToEnemyProjectileList(p);
+            getProjectileHandler().getNewEnemyProjectile(getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
             shootCounter = 0;
         } else {
 
