@@ -1,9 +1,8 @@
 package org.academiadecodigo.spaceimpact.gameobjects;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Direction;
 
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,14 +19,8 @@ public class KeyToDirectionMapper{
 
     }
 
-    /**
-     * Get a Lanterna Terminal getColor from a grid getColor
-     *
-     * @param
-     * @return the lanterna terminal getColor
-     */
-    public static Direction getDirection(KeyboardEvent kbEvent) {
-        return KeyToDirection.get(kbEvent.getKey());
+   public static Direction getDirection(Integer key) {
+        return KeyToDirection.get(key);
     }
 
 }

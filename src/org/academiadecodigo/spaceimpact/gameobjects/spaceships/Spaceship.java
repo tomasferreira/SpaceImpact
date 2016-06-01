@@ -1,7 +1,6 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
 import org.academiadecodigo.spaceimpact.gameobjects.Destroyable;
-import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
@@ -52,12 +51,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
     public void accelerate(Direction direction) {
 
-        // Crashed cars can not accelerate
         if (isDestroyed()) {
-            return;
-        }
-
-        if(getSpeed() == 0){
             return;
         }
 

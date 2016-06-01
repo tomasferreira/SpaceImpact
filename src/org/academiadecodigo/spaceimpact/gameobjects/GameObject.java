@@ -16,6 +16,11 @@ public abstract class GameObject {
         return representation.isOutOfBounds();
     }
 
+    public boolean isOnVerticalLimits(){
+        return representation.isOnVerticalLimits();
+    }
+
+
     public ProjectileHandler getProjectileHandler() {
         return projectileHandler;
     }

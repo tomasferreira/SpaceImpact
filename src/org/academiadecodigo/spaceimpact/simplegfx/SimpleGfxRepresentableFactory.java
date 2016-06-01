@@ -1,6 +1,5 @@
 package org.academiadecodigo.spaceimpact.simplegfx;
 
-import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
 import org.academiadecodigo.spaceimpact.representable.Background;

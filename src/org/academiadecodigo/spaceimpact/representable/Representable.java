@@ -23,4 +23,6 @@ public interface Representable {
     boolean isMoveOutOfBounds(int dx, int dy);
 
     boolean isOutOfBounds();
+    boolean isOnVerticalLimits();
+
 }
