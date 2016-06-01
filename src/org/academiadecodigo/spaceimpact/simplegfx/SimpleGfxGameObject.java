@@ -14,6 +14,7 @@ public abstract class SimpleGfxGameObject implements Representable {
     private int y;
     private Background background;
     private boolean isOutOfBounds;
+    private boolean isOnVerticalLimits;
 
     public SimpleGfxGameObject(int x, int y, Background background) {
         this.x = x;
@@ -89,9 +90,14 @@ public abstract class SimpleGfxGameObject implements Representable {
     }
 
     @Override
+    public boolean isOnVerticalLimits() {
+        return isOnVerticalLimits;
+    }
+
+    @Override
     public boolean isMoveOutOfBounds(int dx, int dy) {
 
-        int padding = SimpleGfxBackground.PADDING;
+        int padding = background.getPadding();
 
         //if x is out of bounds
         if (x + dx < padding || dx + picture.getMaxX() > padding + background.getWidth()) {
@@ -101,6 +107,7 @@ public abstract class SimpleGfxGameObject implements Representable {
 
         //if y is out of bounds
         if (y + dy < padding || dy + picture.getMaxY() > padding + background.getHeight()) {
+            isOnVerticalLimits = true;
             return true;
         }
 

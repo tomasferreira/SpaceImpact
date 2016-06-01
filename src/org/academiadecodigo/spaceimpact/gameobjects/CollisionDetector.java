@@ -1,4 +1,4 @@
-package org.academiadecodigo.spaceimpact;
+package org.academiadecodigo.spaceimpact.gameobjects;
 
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileHandler;
@@ -19,6 +19,7 @@ public class CollisionDetector {
     private List<Projectile> playerProjectiles;
     private PlayerShip player;
     private ProjectileHandler projectileHandler;
+    private int destroyedEnemies;
 
     public void setProjectileHandler(ProjectileHandler projectileHandler) {
         this.projectileHandler = projectileHandler;
@@ -45,6 +46,7 @@ public class CollisionDetector {
         while (it.hasNext()) {
             if (it.next().isDestroyed()) {
                 it.remove();
+                destroyedEnemies++;
             }
         }
     }
@@ -87,6 +89,11 @@ public class CollisionDetector {
                 enemy.destroy();
             }
         }
+    }
+
+
+    public int getDestroyedEnemies() {
+        return destroyedEnemies;
     }
 
     public void setEnemyList(List<EnemyShip> enemyList) {

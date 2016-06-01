@@ -13,7 +13,7 @@ public class EnemyShipRepresentation extends SimpleGfxGameObject {
 
     public EnemyShipRepresentation(int x, int y, Background background) {
         super(x, y, background);
-        setPicture(new Picture(x + SimpleGfxBackground.PADDING, y + SimpleGfxBackground.PADDING,
+        setPicture(new Picture(x + background.getPadding(), y + background.getPadding(),
                 "resources/images/enemy_02_30.png"));
         show();
     }

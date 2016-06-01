@@ -11,8 +11,7 @@ public class Main {
 }
 
 
-//TODO: fine tuning at the end
 
-//TODO: do a scoreboard (with rectangle that hides enemyship spawning)
+//TODO: picture background for scoreboard
 
 //TODO: update enemy movement

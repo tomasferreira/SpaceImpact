@@ -1,6 +1,5 @@
 package org.academiadecodigo.spaceimpact.gameobjects;
 
-import org.academiadecodigo.spaceimpact.CollisionDetector;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileHandler;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
@@ -16,6 +15,11 @@ public abstract class GameObject {
     public boolean isOutOfBounds() {
         return representation.isOutOfBounds();
     }
+
+    public boolean isOnVerticalLimits(){
+        return representation.isOnVerticalLimits();
+    }
+
 
     public ProjectileHandler getProjectileHandler() {
         return projectileHandler;
