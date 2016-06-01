@@ -123,7 +123,7 @@ public class Game {
     }
 
     private void updateScores() {
-        if(collisionDetector.getDestroyedEnemies() != score.getPoints()){
+        if(score.getPoints() != collisionDetector.getDestroyedEnemies()){
             score.updateScores(collisionDetector.getDestroyedEnemies());
             scoreBoard.showScore();
         }

@@ -46,6 +46,7 @@ public class CollisionDetector {
         while (it.hasNext()) {
             if (it.next().isDestroyed()) {
                 it.remove();
+                destroyedEnemies++;
             }
         }
     }
@@ -67,7 +68,6 @@ public class CollisionDetector {
                 if (projectile.objectSamePosition(enemy)) {
                     projectile.destroy();
                     enemy.destroy();
-				destroyedEnemies++;
                 }
             }
         }

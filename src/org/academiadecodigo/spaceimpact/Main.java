@@ -11,7 +11,6 @@ public class Main {
 }
 
 
-//TODO: delete objects that go out of bounds -> simplegfx, game, gameObjects
 
 //TODO: picture background for scoreboard
 
