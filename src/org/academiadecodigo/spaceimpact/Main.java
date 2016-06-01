@@ -13,10 +13,6 @@ public class Main {
 
 //TODO: delete objects that go out of bounds -> simplegfx, game, gameObjects
 
+//TODO: do a scoreboard (with rectangle that hides enemyship spawning)
+
 //TODO: update enemy movement
-
-//TODO: update game logic with destroy methods (delete or hide representations)
-
-//TODO: rectangle that hides spawning of ships slows the game, alternatives? relocate scoreboard display?
-
-//TODO: fine tuning at the end

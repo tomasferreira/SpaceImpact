@@ -1,5 +1,7 @@
 package org.academiadecodigo.spaceimpact.gameobjects;
 
+import org.academiadecodigo.spaceimpact.CollisionDetector;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileHandler;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -9,7 +11,19 @@ public abstract class GameObject {
 
     private Representable representation;
     private CollisionDetector collisionDetector;
+    private ProjectileHandler projectileHandler;
 
+    public boolean isOutOfBounds() {
+        return representation.isOutOfBounds();
+    }
+
+    public ProjectileHandler getProjectileHandler() {
+        return projectileHandler;
+    }
+
+    public void setProjectileHandler(ProjectileHandler projectileHandler) {
+        this.projectileHandler = projectileHandler;
+    }
 
     public GameObject(Representable representation) {
         this.representation = representation;
