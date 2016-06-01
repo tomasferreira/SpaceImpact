@@ -18,8 +18,27 @@ public class CollisionDetector {
     private List<Projectile> enemyProjectiles;
     private List<Projectile> playerProjectiles;
     private PlayerShip player;
-    private ProjectileHandler projectileHandler;
+<<<<<<< HEAD:src/org/academiadecodigo/spaceimpact/gameobjects/CollisionDetector.java
+    private LinkedList<GameObject> objects;
     private int destroyedEnemies;
+
+    public CollisionDetector() {
+
+//        objects = new LinkedList<>();
+//
+//        objects.addAll(enemyList);
+//        //objects.addAll(projectiles);
+//        //objects.add(player);
+//
+//
+//        for (Projectile p : projectiles) {
+//
+//            p.getRepresentation().samePosition()
+//
+//        }
+=======
+    private ProjectileHandler projectileHandler;
+>>>>>>> master:src/org/academiadecodigo/spaceimpact/CollisionDetector.java
 
     public void setProjectileHandler(ProjectileHandler projectileHandler) {
         this.projectileHandler = projectileHandler;
@@ -67,17 +86,32 @@ public class CollisionDetector {
                 if (projectile.objectSamePosition(enemy)) {
                     projectile.destroy();
                     enemy.destroy();
-				destroyedEnemies++;
                 }
             }
         }
     }
 
+<<<<<<< HEAD:src/org/academiadecodigo/spaceimpact/gameobjects/CollisionDetector.java
+    private void checkPlayerCollision(GameObject gameObject) {
+
+        Iterator<EnemyShip> enemyIterator = enemyList.iterator();
+        Iterator<Projectile> projectilesIterator;
+
+        while (enemyIterator.hasNext()) {
+
+            EnemyShip e = enemyIterator.next();
+
+            if (gameObject.objectSamePosition(e)) {
+                ((PlayerShip) gameObject).destroy();
+                e.destroy();
+                destroyedEnemies++;
+=======
     private void checkPlayerAndProjectileCollision() {
         for (Projectile projectile : enemyProjectiles) {
             if (player.objectSamePosition(projectile)) {
                 player.destroy();
                 projectile.destroy();
+>>>>>>> master:src/org/academiadecodigo/spaceimpact/CollisionDetector.java
             }
         }
     }
@@ -91,12 +125,16 @@ public class CollisionDetector {
         }
     }
 
+<<<<<<< HEAD:src/org/academiadecodigo/spaceimpact/gameobjects/CollisionDetector.java
 
     public int getDestroyedEnemies() {
         return destroyedEnemies;
     }
 
+    public void setEnemyList(LinkedList<EnemyShip> enemyList) {
+=======
     public void setEnemyList(List<EnemyShip> enemyList) {
+>>>>>>> master:src/org/academiadecodigo/spaceimpact/CollisionDetector.java
         this.enemyList = enemyList;
     }
 

@@ -43,8 +43,11 @@ public class Game {
     private PlayerShip playerShip;
     private List<EnemyShip> enemyShips;
     private CollisionDetector collisionDetector = new CollisionDetector();
-    private ProjectileHandler projectileHandler = new ProjectileHandler();
+<<<<<<< HEAD
     private Score score = new Score();
+=======
+    private ProjectileHandler projectileHandler = new ProjectileHandler();
+>>>>>>> master
 
 
     public Game() {
@@ -52,13 +55,11 @@ public class Game {
 
     public void init() {
 
-        background = new SimpleGfxBackground();
+        background = new SimpleGfxBackground(score);
         representableFactory.setBackground(background);
 
         background.init();
         scoreBoard = new SimpleGfxScoreBoard(background, score);
-        scoreBoard.showBoard();
-        scoreBoard.showScore();
 
         spaceShipFactory = new SpaceShipFactory(representableFactory);
         projectileFactory = new ProjectileFactory(representableFactory);
@@ -69,10 +70,17 @@ public class Game {
 
         enemyShips = new ArrayList<>();
         for (int i = 0; i < STARTING_ENEMY_SHIPS; i++) {
+<<<<<<< HEAD
+            enemyShips.add((EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY));
+            enemyShips.get(i).setCollisionDetector(collisionDetector);
+            enemyShips.get(i).setFactory(projectileFactory);
+
+=======
 
             EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
             enemyShip.setProjectileHandler(projectileHandler);
             enemyShips.add(enemyShip);
+>>>>>>> master
         }
 
         collisionDetector.setPlayer(playerShip);
@@ -96,14 +104,20 @@ public class Game {
                 enemyShip.setProjectileHandler(projectileHandler);
                 enemyShips.add(enemyShip);
                 enemySpawnCounter = 0;
+<<<<<<< HEAD
+=======
                 collisionDetector.setEnemyList(enemyShips);
 
+>>>>>>> master
             }
 
             enemySpawnCounter++;
             removeTrash();
             collisionDetector.checkCollision();
-            updateScores();
+
+            System.out.println(score.getPoints());
+            background.showScore();
+            scoreBoard.show();
 
         }
 
@@ -122,16 +136,16 @@ public class Game {
 
     }
 
+<<<<<<< HEAD
     private void updateScores() {
-        if(collisionDetector.getDestroyedEnemies() != score.getPoints()){
-            score.updateScores(collisionDetector.getDestroyedEnemies());
-            scoreBoard.showScore();
-        }
-
+        score.updateScores(collisionDetector.getDestroyedEnemies());
     }
 
     private void removeTrash() {
 
+=======
+    private void removeTrash() {
+>>>>>>> master
     }
 
 

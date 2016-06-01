@@ -13,6 +13,6 @@ public class Main {
 
 //TODO: delete objects that go out of bounds -> simplegfx, game, gameObjects
 
-//TODO: do a scoreboard (with rectangle that hides enemyship spawning)
+//TODO: picture background for scoreboard
 
 //TODO: update enemy movement

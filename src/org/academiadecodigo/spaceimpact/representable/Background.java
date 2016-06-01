@@ -6,7 +6,6 @@ package org.academiadecodigo.spaceimpact.representable;
 public interface Background {
 
     void init();
-    void showScore();
 
     int getWidth();
     int getHeight();
