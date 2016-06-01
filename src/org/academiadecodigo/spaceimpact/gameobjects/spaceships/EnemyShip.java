@@ -4,9 +4,7 @@ import org.academiadecodigo.spaceimpact.Game;
 import org.academiadecodigo.spaceimpact.utilities.RandomNumberGen;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
-import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
 import org.academiadecodigo.spaceimpact.representable.Representable;
-import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxBackground;
 
 /**
  * Created by codecadet on 23/05/16.
@@ -45,16 +43,16 @@ public class EnemyShip extends Spaceship {
     @Override
     public void move() {
 
+        setCurrentDirection(chooseDirection());
+
         if (getSpeed() != getCounter()) {
 
             setCounter(getCounter() + 1);
             return;
         }
 
-        setCurrentDirection(chooseDirection());
 
         if (isGoingDiagonal) {
-
 
             accelerate(getCurrentDirection());
             accelerate(Direction.WEST);
@@ -72,15 +70,15 @@ public class EnemyShip extends Spaceship {
 
     private Direction chooseDirection() {
 
+        isGoingDiagonal = true;
+
         if(isOnVerticalLimits()){
-            isGoingDiagonal = true;
+
             return Direction.getOpposite(newDirection);
         }
 
         if (getRepresentation().getX() > startXtoChangeDir &&
                 getRepresentation().getX() < endXtoChangDir) {
-
-            isGoingDiagonal = true;
 
             return newDirection;
         }

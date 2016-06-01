@@ -19,14 +19,8 @@ public class KeyToDirectionMapper{
 
     }
 
-    /**
-     * Get a Lanterna Terminal getColor from a grid getColor
-     *
-     * @param
-     * @return the lanterna terminal getColor
-     */
-    public static Direction getDirection(KeyboardEvent kbEvent) {
-        return KeyToDirection.get(kbEvent.getKey());
+   public static Direction getDirection(Integer key) {
+        return KeyToDirection.get(key);
     }
 
 }
