@@ -32,7 +32,7 @@ public class EnemyShip extends Spaceship {
 
         if (shootCounter == 250) {
 
-            //getProjectileHandler().getNewEnemyProjectile(getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
+            getProjectileHandler().getNewEnemyProjectile(getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
             shootCounter = 0;
         } else {
 
