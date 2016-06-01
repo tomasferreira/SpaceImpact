@@ -1,9 +1,8 @@
 package org.academiadecodigo.spaceimpact.gameobjects;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Direction;
 
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 

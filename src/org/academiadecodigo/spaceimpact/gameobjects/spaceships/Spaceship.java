@@ -1,7 +1,6 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
 import org.academiadecodigo.spaceimpact.gameobjects.Destroyable;
-import org.academiadecodigo.spaceimpact.gameobjects.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;

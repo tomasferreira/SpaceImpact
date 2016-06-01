@@ -1,8 +1,6 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
-import org.academiadecodigo.spaceimpact.gameobjects.Direction;
-import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
-import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
+import org.academiadecodigo.spaceimpact.representable.Background;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 import org.academiadecodigo.spaceimpact.utilities.RandomNumberGen;
 
@@ -24,7 +22,6 @@ public class EnemyShip extends Spaceship {
         setCurrentDirection(Direction.WEST);
 
         endXtoChangDir = RandomNumberGen.generate(getRepresentation().getMaxX());
-
         startXtoChangeDir = RandomNumberGen.generate(endXtoChangDir);
     }
 
@@ -60,13 +57,16 @@ public class EnemyShip extends Spaceship {
 
         setCurrentDirection(chooseDirection());
 
-        if(isGoingDiagonal){
+        if (isGoingDiagonal) {
+
+
             accelerate(getCurrentDirection());
             accelerate(Direction.WEST);
+
         } else {
+
             accelerate(getCurrentDirection());
         }
-
 
         getCollisionDetector().checkCollision(this);
 
@@ -74,15 +74,17 @@ public class EnemyShip extends Spaceship {
     }
 
 
-    public Direction chooseDirection() {
+    private Direction chooseDirection() {
 
-        System.out.println(newDirection.toString());
+        if (getRepresentation().getY() == getRepresentation().getMaxY()
+                || getRepresentation().getY()  == 0) {
+            newDirection = Direction.getOpposite(newDirection);
+        }
 
-        if(getRepresentation().getX() > startXtoChangeDir &&
-            getRepresentation().getX() < endXtoChangDir){
+        if (getRepresentation().getX() > startXtoChangeDir &&
+                getRepresentation().getX() < endXtoChangDir) {
 
             isGoingDiagonal = true;
-
 
             return newDirection;
         }
