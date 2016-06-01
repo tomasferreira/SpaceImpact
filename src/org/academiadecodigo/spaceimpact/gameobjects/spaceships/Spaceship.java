@@ -41,6 +41,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     }
 
     public void destroy() {
+        getRepresentation().hide();
         setDestroyed(true);
     }
 
