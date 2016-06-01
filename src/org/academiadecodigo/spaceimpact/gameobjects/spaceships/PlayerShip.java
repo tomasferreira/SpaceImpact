@@ -4,6 +4,7 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.KeyToDirectionMapper;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
@@ -27,9 +28,9 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     private boolean shooting;
 
 
-    public PlayerShip(Representable representation, int speed) {
+    public PlayerShip(Representable representation, int maxSpeed) {
 
-        super(representation, speed);
+        super(representation, maxSpeed);
         keyEvents();
         setCurrentDirection(Direction.WEST);
         eventQueue = new LinkedList<>();
@@ -38,8 +39,8 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void shoot() {
 
-        getProjectilelist().add((Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX() + getRepresentation().getWidth(), getRepresentation().getY() + (getRepresentation().getHeight() / 2)));
-        setShooting(false);
+        getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getY() + ((getRepresentation().getMaxY() - getRepresentation().getY()) / 2));
+
     }
 
     @Override
@@ -47,18 +48,12 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         accelerate(getCurrentDirection());
 
-        getCollisionDetector().checkCollision(this);
+
 
         setCounter(0);
     }
 
     public void queueHandler() {
-
-        for (int i = 0; i < getProjectilelist().size(); i++) {
-
-            getProjectilelist().get(i).move();
-        }
-
         if (isShooting()) {
 
             shoot();
@@ -92,6 +87,11 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     @Override
     public void keyReleased(KeyboardEvent e) {
+
+        if (e.getKey() == KeyboardEvent.KEY_SPACE) {
+            setShooting(false);
+            return;
+        }
 
         for (KeyboardEvent keyboardEvent : eventQueue) {
             if (keyboardEvent.getKey() == e.getKey()) {

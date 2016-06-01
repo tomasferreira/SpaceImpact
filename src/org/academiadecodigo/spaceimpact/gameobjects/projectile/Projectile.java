@@ -11,27 +11,32 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
 public class Projectile extends GameObject implements Destroyable {
 
     private boolean isEnemy;
+    private boolean destroyed;
 
     public void setEnemy(boolean enemy) {
         isEnemy = enemy;
     }
 
     public boolean isEnemy() {
-
         return isEnemy;
     }
 
     @Override
     public void move() {
+//        if (destroyed){
+//            return;
+//        }
         //fazer as representaçoes mexerem-se de acordo com a lógica deste objecto;
-        //checar colisoes com metodo
-        //getCollisionDetector().isUnSafe(this);
 
         if (isEnemy){
             getRepresentation().move(-1, 0);
-            return;
+        } else {
+            getRepresentation().move(1, 0);
         }
-        getRepresentation().move(1, 0);
+
+        if (isOutOfBounds()){
+            destroy();
+        }
     }
 
     public Projectile(Representable representation) {
@@ -40,11 +45,12 @@ public class Projectile extends GameObject implements Destroyable {
 
     @Override
     public boolean isDestroyed() {
-        return false;
+        return destroyed;
     }
 
     @Override
     public void destroy() {
-
+        destroyed = true;
+        getRepresentation().hide();
     }
 }

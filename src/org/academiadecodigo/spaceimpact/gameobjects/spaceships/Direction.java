@@ -24,7 +24,6 @@ public enum Direction {
                 break;
             case NORTH:
                 oppositeDir = SOUTH;
-
                 break;
             case SOUTH:
                 oppositeDir = NORTH;

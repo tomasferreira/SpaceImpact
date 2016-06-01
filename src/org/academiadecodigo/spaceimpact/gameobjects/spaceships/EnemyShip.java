@@ -1,8 +1,12 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
-import org.academiadecodigo.spaceimpact.representable.Background;
-import org.academiadecodigo.spaceimpact.representable.Representable;
+import org.academiadecodigo.spaceimpact.Game;
 import org.academiadecodigo.spaceimpact.utilities.RandomNumberGen;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Direction;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
+import org.academiadecodigo.spaceimpact.representable.Representable;
+import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxBackground;
 
 /**
  * Created by codecadet on 23/05/16.
@@ -28,26 +32,18 @@ public class EnemyShip extends Spaceship {
     @Override
     public void shoot() {
 
-        /*if (shootCounter == 250) {
+        if (shootCounter == 250) {
 
-            Projectile p = (Projectile) getFactory().createProjectile(ShootingDirection.WEST, getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
-            p.setEnemy(true);
-            getProjectilelist().add(p);
-            getCollisionDetector().addProjectileToList(p);
+            //getProjectileHandler().getNewEnemyProjectile(getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
             shootCounter = 0;
         } else {
 
             shootCounter++;
-        }*/
+        }
     }
 
     @Override
     public void move() {
-
-        for (int i = 0; i < getProjectilelist().size(); i++) {
-
-            getProjectilelist().get(i).move();
-        }
 
         if (getSpeed() != getCounter()) {
 
@@ -68,7 +64,7 @@ public class EnemyShip extends Spaceship {
             accelerate(getCurrentDirection());
         }
 
-        getCollisionDetector().checkCollision(this);
+       // getCollisionDetector().checkCollision(this);
 
         setCounter(0);
     }
@@ -76,9 +72,9 @@ public class EnemyShip extends Spaceship {
 
     private Direction chooseDirection() {
 
-        if (getRepresentation().getY() == getRepresentation().getMaxY()
-                || getRepresentation().getY()  == 0) {
-            newDirection = Direction.getOpposite(newDirection);
+        if(isOnVerticalLimits()){
+            isGoingDiagonal = true;
+            return Direction.getOpposite(newDirection);
         }
 
         if (getRepresentation().getX() > startXtoChangeDir &&
@@ -93,6 +89,5 @@ public class EnemyShip extends Spaceship {
 
         return Direction.WEST;
     }
-
 
 }

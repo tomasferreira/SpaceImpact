@@ -13,6 +13,8 @@ public abstract class SimpleGfxGameObject implements Representable {
     private int x;
     private int y;
     private Background background;
+    private boolean isOutOfBounds;
+    private boolean isOnVerticalLimits;
 
     public SimpleGfxGameObject(int x, int y, Background background) {
         this.x = x;
@@ -59,7 +61,7 @@ public abstract class SimpleGfxGameObject implements Representable {
 
     @Override
     public void move(int dx, int dy) {
-        if (isOutOfBounds(dx, dy)) {
+        if (isMoveOutOfBounds(dx, dy)) {
             return;
         }
         picture.translate(dx, dy);
@@ -69,28 +71,43 @@ public abstract class SimpleGfxGameObject implements Representable {
 
     @Override
     public boolean samePosition(Representable representable) {
-        if (representable.getX() > x && representable.getMaxX() < picture.getMaxX()) {
 
-            if (representable.getY() > y && representable.getMaxY() < picture.getMaxY()) {
+
+        if ((getX() > representable.getX() && getX() < representable.getMaxX()) || (getMaxX() > representable.getX() && getMaxX() < representable.getMaxX())) {
+
+            if ((getY() > representable.getY() && getY() < representable.getMaxY()) || (getMaxY() > representable.getY() && getMaxY() < representable.getMaxY())) {
+
                 return true;
             }
-
         }
+
         return false;
     }
 
     @Override
-    public boolean isOutOfBounds(int dx, int dy) {
+    public boolean isOutOfBounds() {
+        return isOutOfBounds;
+    }
+
+    @Override
+    public boolean isOnVerticalLimits() {
+        return isOnVerticalLimits;
+    }
+
+    @Override
+    public boolean isMoveOutOfBounds(int dx, int dy) {
 
         int padding = SimpleGfxBackground.PADDING;
 
         //if x is out of bounds
         if (x + dx < padding || dx + picture.getMaxX() > padding + background.getWidth()) {
+            isOutOfBounds = true;
             return true;
         }
 
         //if y is out of bounds
         if (y + dy < padding || dy + picture.getMaxY() > padding + background.getHeight()) {
+            isOnVerticalLimits = true;
             return true;
         }
 
