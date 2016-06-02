@@ -1,4 +1,4 @@
-package org.academiadecodigo.spaceimpact;
+package org.academiadecodigo.spaceimpact.gameobjects;
 
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 
@@ -30,7 +30,7 @@ public class KeyToIsPressedMapper {
     }
 
 
-    public static LinkedList<Integer> getPressedKeys(){
+    public static LinkedList<Integer> getPressedKeys() {
 
         Set<Integer> set = KeyToIsPressed.keySet();
 
@@ -38,27 +38,27 @@ public class KeyToIsPressedMapper {
 
         LinkedList<Integer> returnList = new LinkedList<>();
 
-        for (Integer key: set){
+        for (Integer key : set) {
 
-            if(KeyToIsPressed.get(key).booleanValue()){
+            if (KeyToIsPressed.get(key).booleanValue()) {
 
                 returnList.add(key);
 
             }
         }
 
+        System.out.println(returnList);
         return returnList;
     }
-
 
     public static void setKeyPressed(KeyboardEvent kbEvent){
 
         System.out.println("KeyPressed " + kbEvent.getKey());
 
         KeyToIsPressed.put(kbEvent.getKey(), true);
+
+        System.out.println(KeyToIsPressed.containsValue(true));
     }
-
-
 
     public static void setKeyReleased(KeyboardEvent kbEvent){
 
@@ -71,6 +71,5 @@ public class KeyToIsPressedMapper {
 
         return KeyToIsPressed.get(kbEvent);
     }
-
 }
 
