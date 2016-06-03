@@ -13,7 +13,6 @@ public class EnemyShip extends Spaceship {
     private int startXtoChangeDir;
     private int endXtoChangDir;
     private Direction newDirection = Direction.values()[RandomNumberGen.generate(2, 4)];
-    private boolean isGoingDiagonal;
 
 
     public EnemyShip(Representable representation, int speed) {
@@ -51,15 +50,12 @@ public class EnemyShip extends Spaceship {
 
         accelerate(directions);
 
-        // getCollisionDetector().checkCollision(this);
-
         setCounter(0);
     }
 
 
     private Direction[] chooseDirection() {
 
-        isGoingDiagonal = true;
         Direction directions[] = new Direction[2];
 
         if (isOnVerticalLimits()) {
@@ -79,8 +75,6 @@ public class EnemyShip extends Spaceship {
 
             return directions;
         }
-
-        isGoingDiagonal = false;
 
         directions[0] = Direction.WEST;
 

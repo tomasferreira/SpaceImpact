@@ -19,7 +19,6 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     private Keyboard k;
     private Direction[] directions;
     private Map<Integer, Boolean> keysPressed = new HashMap<>(5);
-    private Queue<KeyboardEvent> eventQueue;
     private int lives = 3;
 
 
@@ -32,11 +31,6 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         lives--;
     }
 
-    private Projectile p;
-
-
-    private boolean shooting;
-
 
     public PlayerShip(Representable representation, int maxSpeed) {
 
@@ -47,10 +41,8 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void shoot() {
 
-        getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getY() + ((getRepresentation().getMaxY() - getRepresentation().getY()) / 2));
         getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getY());
         getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getMaxY());
-        shooting = false;
     }
 
     @Override
@@ -96,14 +88,8 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent e) {
 
-        /*for( git: KeyToIsPressedMapper.getPressedKeys() ){
-
-        }
-
-            KeyToIsPressedMapper.setKeyReleased(e);
-        */
         if (e.getKey() == KeyboardEvent.KEY_SPACE) {
-            setShooting(false);
+            keysPressed.put(e.getKey(), false);
             return;
         }
 
@@ -201,7 +187,4 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     }
 
-    public void setShooting(boolean shooting) {
-        this.shooting = shooting;
-    }
 }

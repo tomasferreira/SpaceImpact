@@ -10,12 +10,12 @@ public class Main {
     }
 }
 
-
-
-//TODO: update player movement with hashmaps
-
 //TODO: improve overall objects hitbox
+
+//TODO: full pressed key space shooting mechanism
 
 //TODO: tune objects speed
 
 //TODO: implement projectile speed based on enum
+
+//TODO: implement playerbullet

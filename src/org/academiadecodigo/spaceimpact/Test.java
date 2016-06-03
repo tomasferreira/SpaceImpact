@@ -20,17 +20,5 @@ public class Test {
         g.init();
         g.start();
 
-        /*
-        KeyboardEvent keyboardEvent = new KeyboardEvent();
-        keyboardEvent.setKey(KeyboardEvent.KEY_DOWN);
-        System.out.println(KeyToDirectionMapper.getDirection(keyboardEvent));
-        keyboardEvent.setKey(KeyboardEvent.KEY_RIGHT);
-        System.out.println(KeyToDirectionMapper.getDirection(keyboardEvent));
-        keyboardEvent.setKey(KeyboardEvent.KEY_LEFT);
-        System.out.println(KeyToDirectionMapper.getDirection(keyboardEvent));
-
-        keyboardEvent.setKey(KeyboardEvent.KEY_1);
-        System.out.println(KeyToDirectionMapper.getDirection(keyboardEvent));
-        */
-    }
+   }
 }
