@@ -12,27 +12,30 @@ public class Projectile extends GameObject implements Destroyable {
     private boolean isEnemy;
     private boolean destroyed;
 
-
     @Override
     public void move() {
-//        if (destroyed){
-//            return;
-//        }
-        //fazer as representaçoes mexerem-se de acordo com a lógica deste objecto;
 
-        if (isEnemy){
+        if (!canMove()) {
+
+            setCounter(getCounter() + 1);
+            return;
+        }
+
+        if (isEnemy) {
             getRepresentation().move(-1, 0);
         } else {
             getRepresentation().move(1, 0);
         }
 
-        if (isOutOfBounds()){
+        if (isOutOfBounds()) {
             destroy();
         }
+
+        setCounter(0);
     }
 
-    public Projectile(Representable representation) {
-        super(representation);
+    public Projectile(Representable representation, int speed) {
+        super(representation, speed);
     }
 
     @Override

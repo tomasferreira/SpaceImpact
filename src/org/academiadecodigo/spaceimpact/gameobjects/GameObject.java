@@ -11,12 +11,26 @@ public abstract class GameObject {
     private Representable representation;
     private CollisionDetector collisionDetector;
     private ProjectileHandler projectileHandler;
+    private int speed;
+    private int counter;
+
+
+    public GameObject(Representable representation, int speed) {
+        this.representation = representation;
+        this.speed = speed;
+    }
+
+    public abstract void move();
+
+    public boolean objectSamePosition(GameObject object) {
+        return representation.samePosition(object.getRepresentation());
+    }
 
     public boolean isOutOfBounds() {
         return representation.isOutOfBounds();
     }
 
-    public boolean isOnVerticalLimits(){
+    public boolean isOnVerticalLimits() {
         return representation.isOnVerticalLimits();
     }
 
@@ -29,15 +43,9 @@ public abstract class GameObject {
         this.projectileHandler = projectileHandler;
     }
 
-    public GameObject(Representable representation) {
-        this.representation = representation;
-    }
-
     public Representable getRepresentation() {
         return representation;
     }
-
-    public abstract void move();
 
     public CollisionDetector getCollisionDetector() {
         return collisionDetector;
@@ -47,7 +55,19 @@ public abstract class GameObject {
         this.collisionDetector = collisionDetector;
     }
 
-    public boolean objectSamePosition(GameObject object){
-        return representation.samePosition(object.getRepresentation());
+    public boolean canMove() {
+        return getCounter() == getSpeed();
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }

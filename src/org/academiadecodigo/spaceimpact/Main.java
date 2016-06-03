@@ -16,8 +16,6 @@ public class Main {
 
 //TODO: tune objects speed
 
-//TODO: implement projectile speed based on enum - ROBERTO
-
 //TODO: implement playerbullet - ANA
 
 //TODO: fix collisionDetector on start of the game not detecting - TOMAS

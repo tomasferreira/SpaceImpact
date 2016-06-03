@@ -15,30 +15,25 @@ import java.util.List;
  */
 public abstract class Spaceship extends GameObject implements Destroyable {
 
-    private int counter;
-    private int speed;
     private boolean isDestroyed;
+    private int shootCounter;
+    private int shootPeriodicity;
 
 
-    public Spaceship(Representable representation, int speed) {
-        super(representation);
-        this.speed = speed;
+    public Spaceship(Representable representation, int speed, int shootPeriodicity) {
+        super(representation, speed);
+        this.shootPeriodicity = shootPeriodicity;
     }
 
     public abstract void shoot();
 
+    @Override
+    public abstract void move();
 
     public void destroy() {
         getRepresentation().hide();
         setDestroyed(true);
     }
-
-    public boolean canMove() {
-        return getCounter() == getSpeed();
-    }
-
-    @Override
-    public abstract void move();
 
 
     public void accelerate(Direction[] directions) {
@@ -53,7 +48,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
         for (Direction direction : directions) {
 
-            if(direction == null){
+            if (direction == null) {
                 continue;
             }
 
@@ -80,9 +75,8 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
     }
 
-
-    public int getSpeed() {
-        return speed;
+    public boolean canShoot(){
+        return  getShootPeriodicity() == getShootCounter();
     }
 
     @Override
@@ -94,11 +88,16 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         isDestroyed = destroyed;
     }
 
-    public int getCounter() {
-        return counter;
+
+    public int getShootCounter() {
+        return shootCounter;
     }
 
-    public void setCounter(int counter) {
-        this.counter = counter;
+    public void setShootCounter(int shootCounter) {
+        this.shootCounter = shootCounter;
+    }
+
+    public int getShootPeriodicity() {
+        return shootPeriodicity;
     }
 }

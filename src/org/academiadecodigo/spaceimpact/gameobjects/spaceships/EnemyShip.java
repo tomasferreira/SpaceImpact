@@ -1,7 +1,6 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
 import org.academiadecodigo.spaceimpact.utilities.RandomNumberGen;
-import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
@@ -9,15 +8,16 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
  */
 public class EnemyShip extends Spaceship {
 
-    private int shootCounter = RandomNumberGen.generate(0, 200);
     private int startXtoChangeDir;
     private int endXtoChangDir;
     private Direction newDirection = Direction.values()[RandomNumberGen.generate(2, 4)];
 
 
-    public EnemyShip(Representable representation, int speed) {
+    public EnemyShip(Representable representation, int speed, int shootPeriodicity) {
 
-        super(representation, speed);
+        super(representation, speed, shootPeriodicity);
+
+        setShootCounter(RandomNumberGen.generate(0, getShootPeriodicity()));
 
         endXtoChangDir = RandomNumberGen.generate(getRepresentation().getMaxX());
         startXtoChangeDir = RandomNumberGen.generate(endXtoChangDir);
@@ -26,14 +26,15 @@ public class EnemyShip extends Spaceship {
     @Override
     public void shoot() {
 
-        if (shootCounter == 500) {
+        if (!canShoot()) {
 
-            getProjectileHandler().getNewEnemyProjectile(getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
-            shootCounter = 0;
-        } else {
-
-            shootCounter++;
+            setShootCounter(getShootCounter() + 1);
+            return;
         }
+
+        getProjectileHandler().getNewEnemyProjectile(getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
+
+        setShootCounter(0);
     }
 
     @Override

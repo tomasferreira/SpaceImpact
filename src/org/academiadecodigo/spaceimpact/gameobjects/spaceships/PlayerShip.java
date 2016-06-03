@@ -5,7 +5,6 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.spaceimpact.gameobjects.KeyToDirectionMapper;
-import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 import java.util.*;
@@ -21,6 +20,11 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     private Map<Integer, Boolean> keysPressed = new HashMap<>(5);
     private int lives = 3;
 
+    public PlayerShip(Representable representation, int speed, int shootPeriodicity) {
+
+        super(representation, speed, shootPeriodicity);
+        keyEvents();
+    }
 
     @Override
     public void destroy() {
@@ -31,18 +35,19 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         lives--;
     }
 
-
-    public PlayerShip(Representable representation, int maxSpeed) {
-
-        super(representation, maxSpeed);
-        keyEvents();
-    }
-
     @Override
     public void shoot() {
 
+
+        if(!canShoot()) {
+            setShootCounter(getShootCounter() + 1);
+            return;
+        }
+
         getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getY());
         getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getMaxY());
+
+        setShootCounter(0);
     }
 
     @Override
@@ -72,10 +77,8 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
             if (key == KeyboardEvent.KEY_SPACE) {
                 shoot();
-                keysPressed.put(key, false);
                 continue;
             }
-
 
             directions[n] = KeyToDirectionMapper.getDirection(key);
             n++;
@@ -94,10 +97,6 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         }
 
         keysPressed.put(e.getKey(), false);
-    }
-
-    public int getLives() {
-        return lives;
     }
 
     @Override
@@ -154,7 +153,6 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         k.addEventListener(keyUpR);
 
-
         KeyboardEvent keyDownR = new KeyboardEvent();
         keyDownR.setKey(KeyboardEvent.KEY_DOWN);
         keyDownR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
@@ -185,6 +183,10 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         keysPressed.put(KeyboardEvent.KEY_DOWN, false);
         keysPressed.put(KeyboardEvent.KEY_SPACE, false);
 
+    }
+
+    public int getLives() {
+        return lives;
     }
 
 }
