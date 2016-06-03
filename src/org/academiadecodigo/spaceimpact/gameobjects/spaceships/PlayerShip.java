@@ -51,7 +51,8 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void shoot() {
 
-        getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getY() + ((getRepresentation().getMaxY() - getRepresentation().getY()) / 2));
+        getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getY());
+        getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getMaxY());
         shooting = false;
     }
 
