@@ -5,7 +5,7 @@ package org.academiadecodigo.spaceimpact.gameobjects;
  */
 public enum GameObjectType {
     ENEMYSHIP(10, 1000),
-    PLAYERSHIP(3, 200),
+    PLAYERSHIP(3, 150),
     PROJECTILE(2, 0);
 
     private int speed;

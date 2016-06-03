@@ -21,9 +21,10 @@ public class SpaceShipFactory {
         GameObject gameObject = null;
 
         switch (type) {
+
             case ENEMYSHIP:
                 gameObject = new EnemyShip(factory.createRepresentation(type, factory.getBackground().getWidth() - SHIP_SIZE,
-                        RandomNumberGen.generate(factory.getBackground().getHeight() - SHIP_SIZE)), type.getSpeed(), type.getShootPeriodicity());
+                        factory.getBackground().getPadding() + RandomNumberGen.generate(factory.getBackground().getHeight() - SHIP_SIZE)), type.getSpeed(), type.getShootPeriodicity());
                 break;
             case PLAYERSHIP:
                 gameObject = new PlayerShip(factory.createRepresentation(type, posX, posY), type.getSpeed(), type.getShootPeriodicity());

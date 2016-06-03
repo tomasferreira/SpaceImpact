@@ -10,12 +10,16 @@ public class Main {
     }
 }
 
-//TODO: improve overall objects hitbox - ANA
 
-//TODO: full pressed key space shooting mechanism - RODRIGO
 
-//TODO: tune objects speed
+//TODO: Fix score being incremented when enemyship is out of bounds - RORDRIGUEZ
 
-//TODO: implement playerbullet - ANA
+//TODO: fix enemyships getting stuck at y = 0 - ROBERTO
+
+//TODO: Pause and exit button - TOMAS
+
+//TODO: Starting the design and implementation of highscore mechanics
+
+//TODO: Starting the design and implementation of the 1st special unit based on current score - ANA
 
 //TODO: fix collisionDetector on start of the game not detecting - TOMAS
