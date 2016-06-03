@@ -22,9 +22,19 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     private Keyboard k;
     private Queue<KeyboardEvent> eventQueue;
+    private int lives = 3;
+
+
+    @Override
+    public void destroy() {
+
+        if (lives == 0) {
+            super.destroy();
+        }
+        lives--;
+    }
 
     private Projectile p;
-
 
 
     private boolean shooting;
@@ -48,7 +58,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void move() {
 
-        if(getCounter() != getSpeed()){
+        if (getCounter() != getSpeed()) {
             setCounter(getCounter() + 1);
             return;
         }
@@ -107,6 +117,10 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         return shooting;
     }
 
+    public int getLives() {
+        return lives;
+    }
+
     public void setShooting(boolean shooting) {
         this.shooting = shooting;
     }
@@ -124,7 +138,6 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
             setShooting(false);
             return;
         }
-
 
 
         for (KeyboardEvent keyboardEvent : eventQueue) {

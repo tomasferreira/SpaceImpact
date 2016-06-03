@@ -12,8 +12,6 @@ public class Main {
 
 
 
-//TODO: picture background for scoreboard (done?)
-
 //TODO: update player movement with hashmaps
 
 //TODO: improve overall objects hitbox

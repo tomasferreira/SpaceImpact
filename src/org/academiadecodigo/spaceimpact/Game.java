@@ -44,7 +44,7 @@ public class Game {
     private List<EnemyShip> enemyShips;
     private CollisionDetector collisionDetector = new CollisionDetector();
     private ProjectileHandler projectileHandler = new ProjectileHandler();
-    private Score score = new Score();
+    private Score score;
 
 
     public Game() {
@@ -56,9 +56,6 @@ public class Game {
         representableFactory.setBackground(background);
 
         background.init();
-        scoreBoard = new SimpleGfxScoreBoard(background, score);
-        scoreBoard.showBoard();
-        scoreBoard.showScore();
 
         spaceShipFactory = new SpaceShipFactory(representableFactory);
         projectileFactory = new ProjectileFactory(representableFactory);
@@ -66,6 +63,11 @@ public class Game {
 
         playerShip = (PlayerShip) spaceShipFactory.createObject(GameObjectType.PLAYERSHIP, playerStartingPosX, playerStartingPosY);
         playerShip.setProjectileHandler(projectileHandler);
+
+        score = new Score(playerShip.getLives());
+        scoreBoard = new SimpleGfxScoreBoard(background, score);
+        scoreBoard.showBoard();
+        scoreBoard.showScore();
 
         enemyShips = new ArrayList<>();
         for (int i = 0; i < STARTING_ENEMY_SHIPS; i++) {
@@ -85,7 +87,7 @@ public class Game {
 
         int enemySpawnCounter = 0;
 
-        while (!playerShip.isDestroyed()) {
+        while (playerShip.getLives() > 0) {
 
             Thread.sleep(DELAY);
             move();
@@ -123,8 +125,12 @@ public class Game {
     }
 
     private void updateScores() {
-        if(score.getPoints() != collisionDetector.getDestroyedEnemies()){
-            score.updateScores(collisionDetector.getDestroyedEnemies());
+        if (score.getPoints() != collisionDetector.getDestroyedEnemies()) {
+            score.updateScores(collisionDetector.getDestroyedEnemies(), playerShip.getLives());
+            scoreBoard.showScore();
+        }
+        if (score.getLives() != playerShip.getLives()) {
+            score.updateScores(collisionDetector.getDestroyedEnemies(), playerShip.getLives());
             scoreBoard.showScore();
         }
 

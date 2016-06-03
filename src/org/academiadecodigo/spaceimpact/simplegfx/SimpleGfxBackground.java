@@ -13,10 +13,7 @@ import org.academiadecodigo.spaceimpact.representable.Background;
 public class SimpleGfxBackground implements Background {
 
     private int padding = 10;
-    private int width;
-    private int height;
     private Picture background;
-    private Text points;
 
     @Override
     public void init() {

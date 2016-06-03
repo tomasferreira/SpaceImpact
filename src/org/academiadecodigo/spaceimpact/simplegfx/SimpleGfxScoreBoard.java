@@ -1,7 +1,5 @@
 package org.academiadecodigo.spaceimpact.simplegfx;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.spaceimpact.gameobjects.Score;
@@ -18,30 +16,39 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
     private int y;
     private Background background;
     private Score score;
-    private Text textScore;
-    private int textScoreX;
-    private int textScoreY;
+    private Text textPoints;
+    private int textPointsX;
+    private int textPointsY;
+    private Text textLives;
+    private int textLivesX;
+    private int textLivesY;
 
     public SimpleGfxScoreBoard(Background background, Score score) {
         this.background = background;
         this.score = score;
         x = background.getPadding();
         y = background.getPadding() + background.getHeight();
-        textScoreX = background.getWidth() - 90;
-        textScoreY = y + 15;
+        textPointsX = background.getWidth() - 90;
+        textPointsY = y + 15;
+        textLivesX = background.getPadding() + 85;
+        textLivesY = y + 37;
     }
 
     @Override
     public void showBoard() {
-        board = new Picture(x, y, "resources/images/scoreboard_02.png");
+        board = new Picture(x, y, "resources/images/scoreboard_03.png");
         board.draw();
-        textScore = new Text(textScoreX, textScoreY, "");
-        textScore.grow(4, 8);
-        textScore.draw();
+        textPoints = new Text(textPointsX, textPointsY, "");
+        textPoints.grow(4, 8);
+        textPoints.draw();
+        textLives = new Text(textLivesX, textLivesY, "");
+        textLives.grow(4, 8);
+        textLives.draw();
     }
 
     @Override
     public void showScore() {
-        textScore.setText("" + score.getPoints());
+        textPoints.setText("" + score.getPoints());
+        textLives.setText("" + score.getLives());
     }
 }
