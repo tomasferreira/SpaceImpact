@@ -10,12 +10,14 @@ public class Main {
     }
 }
 
-//TODO: improve overall objects hitbox
+//TODO: improve overall objects hitbox - ANA
 
-//TODO: full pressed key space shooting mechanism
+//TODO: full pressed key space shooting mechanism - RODRIGO
 
 //TODO: tune objects speed
 
-//TODO: implement projectile speed based on enum
+//TODO: implement projectile speed based on enum - ROBERTO
 
-//TODO: implement playerbullet
+//TODO: implement playerbullet - ANA
+
+//TODO: fix collisionDetector on start of the game not detecting - TOMAS
