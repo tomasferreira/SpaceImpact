@@ -51,12 +51,12 @@ public abstract class SimpleGfxGameObject implements Representable {
 
     @Override
     public int getMaxX() {
-        return picture.getMaxX();
+        return (picture.getWidth() + picture.getX());
     }
 
     @Override
     public int getMaxY() {
-        return picture.getMaxY();
+        return (picture.getHeight() + picture.getMaxY());
     }
 
     @Override

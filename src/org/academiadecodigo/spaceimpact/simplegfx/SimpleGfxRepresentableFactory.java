@@ -1,6 +1,7 @@
 package org.academiadecodigo.spaceimpact.simplegfx;
 
 import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileType;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
 import org.academiadecodigo.spaceimpact.representable.Background;
 import org.academiadecodigo.spaceimpact.representable.Representable;
@@ -12,10 +13,6 @@ import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
 public class SimpleGfxRepresentableFactory implements RepresentableFactory {
 
     private Background background;
-
-    public void setBackground(Background background) {
-        this.background = background;
-    }
 
     @Override
     public Background getBackground() {
@@ -39,7 +36,12 @@ public class SimpleGfxRepresentableFactory implements RepresentableFactory {
     }
 
     @Override
-    public Representable createRepresentation(GameObjectType type, int posX, int posY, ShootingDirection direction) {
-        return new ProjectileRepresentation(posX, posY, background);
+    public Representable createRepresentation(GameObjectType type, ProjectileType projectileType, int posX, int posY, ShootingDirection direction) {
+        //add projectile type
+        return new ProjectileRepresentation(posX, posY, background, projectileType);
+    }
+
+    public void setBackground(Background background) {
+        this.background = background;
     }
 }
