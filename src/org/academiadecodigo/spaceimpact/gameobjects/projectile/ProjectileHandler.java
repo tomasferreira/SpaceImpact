@@ -66,14 +66,14 @@ public class ProjectileHandler {
     }
 
     public void getNewEnemyProjectile(int posX, int posY) {
-        Projectile p = (Projectile) projectileFactory.createProjectile(ShootingDirection.WEST, posX, posY);
+        Projectile p = (Projectile) projectileFactory.createProjectile( ProjectileType.ENEMY, ShootingDirection.WEST, posX, posY);
         p.setEnemy(true);
         addProjectileToEnemyProjectileList(p);
 
     }
 
     public void getNewPlayerProjectile(int posX, int posY) {
-        Projectile p = (Projectile) projectileFactory.createProjectile(ShootingDirection.WEST, posX, posY);
+        Projectile p = (Projectile) projectileFactory.createProjectile(ProjectileType.PLAYER, ShootingDirection.WEST, posX, posY);
         addProjectileToPlayerProjectileList(p);
 
     }

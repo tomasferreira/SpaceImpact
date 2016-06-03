@@ -5,6 +5,8 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.spaceimpact.gameobjects.KeyToDirectionMapper;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileType;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 import java.util.*;
@@ -45,9 +47,9 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         }
 
         getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getY());
-        getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getMaxY());
-
+        getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getMaxY() - ProjectileType.PLAYER.getProjectileHeight());
         setShootCounter(0);
+
     }
 
     @Override

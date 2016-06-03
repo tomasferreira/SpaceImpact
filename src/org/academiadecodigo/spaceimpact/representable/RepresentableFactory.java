@@ -1,6 +1,7 @@
 package org.academiadecodigo.spaceimpact.representable;
 
 import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
+import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileType;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ShootingDirection;
 
 /**
@@ -13,6 +14,6 @@ public interface RepresentableFactory {
     Background getBackground();
     Representable createRepresentation(GameObjectType type, int posX, int posY);
 
-    Representable createRepresentation(GameObjectType type, int posX, int posY, ShootingDirection direction);
+    Representable createRepresentation(GameObjectType type, ProjectileType projectileType, int posX, int posY, ShootingDirection direction);
 
 }
