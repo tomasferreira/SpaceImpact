@@ -4,14 +4,11 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
-import org.academiadecodigo.spaceimpact.KeyToIsPressedMapper;
-import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Direction;
 import org.academiadecodigo.spaceimpact.gameobjects.KeyToDirectionMapper;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 
 /**
@@ -19,8 +16,9 @@ import java.util.Queue;
  */
 public class PlayerShip extends Spaceship implements KeyboardHandler {
 
-
     private Keyboard k;
+    private Direction[] directions;
+    private Map<Integer, Boolean> keysPressed = new HashMap<>(5);
     private Queue<KeyboardEvent> eventQueue;
     private int lives = 3;
 
@@ -44,13 +42,12 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         super(representation, maxSpeed);
         keyEvents();
-        setCurrentDirection(Direction.WEST);
-        eventQueue = new LinkedList<>();
     }
 
     @Override
     public void shoot() {
 
+        getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getY() + ((getRepresentation().getMaxY() - getRepresentation().getY()) / 2));
         getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getY());
         getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getMaxY());
         shooting = false;
@@ -59,71 +56,41 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void move() {
 
-        if (getCounter() != getSpeed()) {
+        if (!canMove()) {
             setCounter(getCounter() + 1);
             return;
         }
 
-        accelerate(getCurrentDirection());
-
+        accelerate(directions);
         setCounter(0);
     }
 
-    public void queueHandler() {
+    public void keyMapHandler() {
 
-        /*LinkedList<Integer> pressedKeys = KeyToIsPressedMapper.getPressedKeys();
+        List<Integer> keys = new ArrayList<>(keysPressed.keySet());
 
-        pressedKeys.iterator();
+        directions = new Direction[keys.size()];
+        int n = 0;
 
-        for(Integer key : pressedKeys){
+        for (Integer key : keys) {
 
-            if(key == 32){
-                shooting = true;
+            if (!keysPressed.get(key)) {
+                continue;
+            }
+
+            if (key == KeyboardEvent.KEY_SPACE) {
                 shoot();
-                return;
+                keysPressed.put(key, false);
+                continue;
             }
 
 
-            if(canMove()){
-                setCurrentDirection(KeyToDirectionMapper.getDirection(key));
-                move();
-
-            }
-
-        }*/
-
-        if (isShooting()) {
-
-            shoot();
-        }
-
-        for (KeyboardEvent keyboardEvent : eventQueue) {
-
-            setCounter(getCounter() + 1);
-
-            if (canMove()) {
-
-                setCurrentDirection(KeyToDirectionMapper.getDirection(keyboardEvent));
-                move();
-            }
+            directions[n] = KeyToDirectionMapper.getDirection(key);
+            n++;
 
         }
-    }
+        move();
 
-    public boolean canMove() {
-        return getCounter() == getSpeed();
-    }
-
-    public boolean isShooting() {
-        return shooting;
-    }
-
-    public int getLives() {
-        return lives;
-    }
-
-    public void setShooting(boolean shooting) {
-        this.shooting = shooting;
     }
 
     @Override
@@ -140,36 +107,20 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
             return;
         }
 
+        keysPressed.put(e.getKey(), false);
+    }
 
-        for (KeyboardEvent keyboardEvent : eventQueue) {
-            if (keyboardEvent.getKey() == e.getKey()) {
-                eventQueue.remove(keyboardEvent);
-            }
-        }
-
+    public int getLives() {
+        return lives;
     }
 
     @Override
     public void keyPressed(KeyboardEvent e) {
 
-
-        //KeyToIsPressedMapper.setKeyPressed(e);
-
-
-        if (e.getKey() == KeyboardEvent.KEY_SPACE) {
-            setShooting(true);
+        if (!keysPressed.containsKey(e.getKey())) {
             return;
         }
-
-
-        for (KeyboardEvent keyboardEvent : eventQueue) {
-            if (keyboardEvent.getKey() == e.getKey()) {
-                return;
-            }
-        }
-
-        eventQueue.add(e);
-
+        keysPressed.put(e.getKey(), true);
     }
 
     public void keyEvents() {
@@ -242,5 +193,15 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         k.addEventListener(keySpaceR);
 
+        keysPressed.put(KeyboardEvent.KEY_LEFT, false);
+        keysPressed.put(KeyboardEvent.KEY_RIGHT, false);
+        keysPressed.put(KeyboardEvent.KEY_UP, false);
+        keysPressed.put(KeyboardEvent.KEY_DOWN, false);
+        keysPressed.put(KeyboardEvent.KEY_SPACE, false);
+
+    }
+
+    public void setShooting(boolean shooting) {
+        this.shooting = shooting;
     }
 }

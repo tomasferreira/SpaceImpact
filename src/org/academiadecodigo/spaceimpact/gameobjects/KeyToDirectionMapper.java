@@ -19,8 +19,8 @@ public class KeyToDirectionMapper{
 
     }
 
-   public static Direction getDirection(KeyboardEvent kbEvent) {
-        return KeyToDirection.get(kbEvent.getKey());
+   public static Direction getDirection(Integer key) {
+        return KeyToDirection.get(key);
     }
 
 }

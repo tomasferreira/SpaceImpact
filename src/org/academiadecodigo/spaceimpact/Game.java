@@ -3,7 +3,6 @@ package org.academiadecodigo.spaceimpact;
 import org.academiadecodigo.spaceimpact.gameobjects.CollisionDetector;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
 import org.academiadecodigo.spaceimpact.gameobjects.Score;
-import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileHandler;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
@@ -119,7 +118,7 @@ public class Game {
 
         }
 
-        playerShip.queueHandler();
+        playerShip.keyMapHandler();
         projectileHandler.moveProjectiles();
 
     }
