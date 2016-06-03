@@ -51,6 +51,10 @@ public class EnemyShip extends Spaceship {
         accelerate(directions);
 
         setCounter(0);
+
+        if (isOutOfBounds()) {
+            destroy();
+        }
     }
 
 

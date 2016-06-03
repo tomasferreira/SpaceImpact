@@ -24,5 +24,6 @@ public interface Representable {
 
     boolean isOutOfBounds();
     boolean isOnVerticalLimits();
+    
 
 }
