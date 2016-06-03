@@ -1,6 +1,5 @@
 package org.academiadecodigo.spaceimpact.gameobjects;
 
-import org.academiadecodigo.spaceimpact.CollisionDetector;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileHandler;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 

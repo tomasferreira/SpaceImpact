@@ -1,6 +1,5 @@
 package org.academiadecodigo.spaceimpact.gameobjects.projectile;
 
-import org.academiadecodigo.spaceimpact.CollisionDetector;
 import org.academiadecodigo.spaceimpact.gameobjects.Destroyable;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
 import org.academiadecodigo.spaceimpact.representable.Representable;
@@ -13,13 +12,6 @@ public class Projectile extends GameObject implements Destroyable {
     private boolean isEnemy;
     private boolean destroyed;
 
-    public void setEnemy(boolean enemy) {
-        isEnemy = enemy;
-    }
-
-    public boolean isEnemy() {
-        return isEnemy;
-    }
 
     @Override
     public void move() {
@@ -46,6 +38,14 @@ public class Projectile extends GameObject implements Destroyable {
     @Override
     public boolean isDestroyed() {
         return destroyed;
+    }
+
+    public void setEnemy(boolean enemy) {
+        isEnemy = enemy;
+    }
+
+    public boolean isEnemy() {
+        return isEnemy;
     }
 
     @Override

@@ -4,11 +4,10 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
-import org.academiadecodigo.spaceimpact.gameobjects.KeyToIsPressedMapper;
 import org.academiadecodigo.spaceimpact.gameobjects.KeyToDirectionMapper;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
-import java.util.LinkedList;
+import java.util.*;
 
 
 /**
@@ -16,130 +15,80 @@ import java.util.LinkedList;
  */
 public class PlayerShip extends Spaceship implements KeyboardHandler {
 
-
     private Keyboard k;
-    //private Queue<KeyboardEvent> eventQueue;
-    private boolean shooting;
+    private Direction[] directions;
+    private Map<Integer, Boolean> keysPressed = new HashMap<>(5);
 
 
     public PlayerShip(Representable representation, int maxSpeed) {
 
         super(representation, maxSpeed);
         keyEvents();
-        setCurrentDirection(Direction.WEST);
-      //  eventQueue = new LinkedList<>();
     }
 
     @Override
     public void shoot() {
 
         getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getY() + ((getRepresentation().getMaxY() - getRepresentation().getY()) / 2));
-        shooting = false;
     }
 
     @Override
     public void move() {
 
-        if(getCounter() != getSpeed()){
+        if (!canMove()) {
             setCounter(getCounter() + 1);
             return;
         }
 
-        accelerate(getCurrentDirection());
-
+        accelerate(directions);
         setCounter(0);
     }
 
-    public void queueHandler() {
+    public void keyMapHandler() {
 
-        LinkedList<Integer> pressedKeys = KeyToIsPressedMapper.getPressedKeys();
+        List<Integer> keys = new ArrayList<>(keysPressed.keySet());
 
-        for(Integer key : pressedKeys){
+        directions = new Direction[keys.size()];
+        int n = 0;
 
-            if (pressedKeys.contains(key)) {
-                return;
+        for (Integer key : keys) {
+
+            if (!keysPressed.get(key)) {
+                continue;
             }
 
-            /*if(key == 32){
-                shooting = true;
+            if (key == KeyboardEvent.KEY_SPACE) {
                 shoot();
-                return;
-            }*/
-
-            if(canMove()){
-
-                setCurrentDirection(KeyToDirectionMapper.getDirection(key));
-                move();
-
+                keysPressed.put(key, false);
+                continue;
             }
 
+
+            directions[n] = KeyToDirectionMapper.getDirection(key);
+            n++;
+
         }
+        move();
 
-        /*if (isShooting()) {
-
-            shoot();
-        }
-
-        for (KeyboardEvent keyboardEvent : eventQueue) {
-
-            setCounter(getCounter() + 1);
-
-            if (canMove()) {
-
-                setCurrentDirection(KeyToDirectionMapper.getDirection(keyboardEvent));
-                move();
-            }
-
-        }*/
-    }
-
-    public boolean canMove() {
-        return getCounter() == getSpeed();
     }
 
     @Override
     public void keyReleased(KeyboardEvent e) {
 
-
-        KeyToIsPressedMapper.setKeyReleased(e);
-
-        /*if (e.getKey() == KeyboardEvent.KEY_SPACE) {
-            setShooting(false);
+        if (!keysPressed.containsKey(e.getKey())) {
             return;
         }
 
-
-
-        for (KeyboardEvent keyboardEvent : eventQueue) {
-            if (keyboardEvent.getKey() == e.getKey()) {
-                eventQueue.remove(keyboardEvent);
-            }
-        }*/
-
+        keysPressed.put(e.getKey(), false);
     }
 
     @Override
     public void keyPressed(KeyboardEvent e) {
 
-
-        KeyToIsPressedMapper.setKeyPressed(e);
-
-
-
-        /*if (e.getKey() == KeyboardEvent.KEY_SPACE) {
-            setShooting(true);
+        if (!keysPressed.containsKey(e.getKey())) {
             return;
         }
-
-
-        for (KeyboardEvent keyboardEvent : eventQueue) {
-            if (keyboardEvent.getKey() == e.getKey()) {
-                return;
-            }
-        }
-
-        eventQueue.add(e);*/
-
+        keysPressed.put(e.getKey(), true);
     }
 
     public void keyEvents() {
@@ -211,6 +160,12 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         keySpaceR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
 
         k.addEventListener(keySpaceR);
+
+        keysPressed.put(KeyboardEvent.KEY_LEFT, false);
+        keysPressed.put(KeyboardEvent.KEY_RIGHT, false);
+        keysPressed.put(KeyboardEvent.KEY_UP, false);
+        keysPressed.put(KeyboardEvent.KEY_DOWN, false);
+        keysPressed.put(KeyboardEvent.KEY_SPACE, false);
 
     }
 }

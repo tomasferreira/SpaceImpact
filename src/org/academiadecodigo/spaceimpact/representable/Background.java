@@ -9,5 +9,6 @@ public interface Background {
 
     int getWidth();
     int getHeight();
+    int getPadding();
 
 }

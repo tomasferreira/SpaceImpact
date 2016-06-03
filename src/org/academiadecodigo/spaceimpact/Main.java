@@ -11,8 +11,13 @@ public class Main {
 }
 
 
-//TODO: fine tuning at the end
 
-//TODO: do a scoreboard (with rectangle that hides enemyship spawning)
+//TODO: picture background for scoreboard (done?)
 
-//TODO: update enemy movement
+//TODO: update player movement with hashmaps
+
+//TODO: improve overall objects hitbox
+
+//TODO: tune objects speed
+
+//TODO: implement projectile speed based on enum

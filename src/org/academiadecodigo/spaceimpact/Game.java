@@ -1,7 +1,8 @@
 package org.academiadecodigo.spaceimpact;
 
+import org.academiadecodigo.spaceimpact.gameobjects.CollisionDetector;
 import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
-import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
+import org.academiadecodigo.spaceimpact.gameobjects.Score;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileHandler;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
@@ -42,6 +43,7 @@ public class Game {
     private List<EnemyShip> enemyShips;
     private CollisionDetector collisionDetector = new CollisionDetector();
     private ProjectileHandler projectileHandler = new ProjectileHandler();
+    private Score score = new Score();
 
 
     public Game() {
@@ -53,6 +55,9 @@ public class Game {
         representableFactory.setBackground(background);
 
         background.init();
+        scoreBoard = new SimpleGfxScoreBoard(background, score);
+        scoreBoard.showBoard();
+        scoreBoard.showScore();
 
         spaceShipFactory = new SpaceShipFactory(representableFactory);
         projectileFactory = new ProjectileFactory(representableFactory);
@@ -76,6 +81,7 @@ public class Game {
 
     public void start() throws InterruptedException {
 
+
         int enemySpawnCounter = 0;
 
         while (!playerShip.isDestroyed()) {
@@ -96,10 +102,10 @@ public class Game {
             enemySpawnCounter++;
             removeTrash();
             collisionDetector.checkCollision();
+            updateScores();
 
         }
 
-        scoreBoard = new SimpleGfxScoreBoard();
 
     }
 
@@ -110,12 +116,21 @@ public class Game {
 
         }
 
-        playerShip.queueHandler();
+        playerShip.keyMapHandler();
         projectileHandler.moveProjectiles();
 
     }
 
+    private void updateScores() {
+        if(score.getPoints() != collisionDetector.getDestroyedEnemies()){
+            score.updateScores(collisionDetector.getDestroyedEnemies());
+            scoreBoard.showScore();
+        }
+
+    }
+
     private void removeTrash() {
+
     }
 
 
