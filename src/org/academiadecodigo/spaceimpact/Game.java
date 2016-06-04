@@ -8,6 +8,7 @@ import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileHandler
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.PlayerShip;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.SpaceShipFactory;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.SpiderShip;
 import org.academiadecodigo.spaceimpact.representable.Background;
 import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
 import org.academiadecodigo.spaceimpact.representable.ScoreBoard;
@@ -91,14 +92,20 @@ public class Game {
             Thread.sleep(DELAY);
             move();
 
-            if (enemySpawnCounter == 500) {
+        //when score is X, stop creating enemyShips and create spiderShip
 
+            if (score.getTotal() == 10){
+                SpiderShip spiderShip = (SpiderShip) spaceShipFactory.createObject(GameObjectType.SPIDERSHIP, enemyStartingPosX, enemyStartingPosY);
+                spiderShip.setProjectileHandler(projectileHandler);
+                enemyShips.add(spiderShip);
+                enemySpawnCounter = 0;
+                collisionDetector.setEnemyList(enemyShips);
+            }else if (enemySpawnCounter == 500){
                 EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
                 enemyShip.setProjectileHandler(projectileHandler);
                 enemyShips.add(enemyShip);
                 enemySpawnCounter = 0;
                 collisionDetector.setEnemyList(enemyShips);
-
             }
 
             enemySpawnCounter++;

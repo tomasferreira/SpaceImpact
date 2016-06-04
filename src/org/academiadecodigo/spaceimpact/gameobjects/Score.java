@@ -7,8 +7,9 @@ public class Score {
 
 
     private int total = 0;
-    private int destroyedEnemyShips = 0;
     private int lives;
+    private int destroyedEnemyShips = 0;
+    private int spiderShipLife;
 
     public Score(int lives) {
         this.lives = lives;
