@@ -124,7 +124,7 @@ public class Game {
     }
 
     private void updateScores() {
-        if (score.getPoints() != collisionDetector.getDestroyedEnemies()) {
+        if (score.getDestroyedEnemyShips() != collisionDetector.getDestroyedEnemies()) {
             score.updateScores(collisionDetector.getDestroyedEnemies(), playerShip.getLives());
             scoreBoard.showScore();
         }

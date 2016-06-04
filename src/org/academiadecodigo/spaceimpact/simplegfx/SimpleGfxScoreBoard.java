@@ -48,7 +48,7 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
 
     @Override
     public void showScore() {
-        textPoints.setText("" + score.getPoints());
+        textPoints.setText("" + score.getDestroyedEnemyShips());
         textLives.setText("" + score.getLives());
     }
 }
