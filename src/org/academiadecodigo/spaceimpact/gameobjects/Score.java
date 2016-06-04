@@ -11,6 +11,8 @@ public class Score {
     private int destroyedEnemyShips = 0;
     private int spiderShipLife;
 
+    //increase score when spider is destroyed <-probably on Game
+
     public Score(int lives) {
         this.lives = lives;
     }
@@ -33,4 +35,7 @@ public class Score {
         return destroyedEnemyShips;
     }
 
+    public int getSpiderShipLife() {
+        return spiderShipLife;
+    }
 }

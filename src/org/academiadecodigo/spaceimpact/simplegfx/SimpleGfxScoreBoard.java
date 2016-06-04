@@ -36,6 +36,12 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
     private int destroyedEnemyShipsX;
     private int destroyedEnemyShipsY;
 
+    //text that displays the number of lives left
+    private Text spiderShipLifeLevel;
+    //placement of the text that displays the number of lives left
+    private int spiderShipLifeLevelX;
+    private int spiderShipLifeLevelY;
+
     public SimpleGfxScoreBoard(Background background, Score score) {
         //Constructor that receives the background and score and attributes a position to the text that is relative to the background
         this.background = background;
@@ -57,6 +63,9 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
     @Override
     public void showBoard() {
         //method that draws the scoreboard and the text it contains with the desired font size
+
+
+        //if scoreboard score == x, picture is boss_01 & corresponding text spiderLife level
 
         board = new Picture(x, y, "resources/images/scoreboard_04_enemyShip.png");
         board.draw();
