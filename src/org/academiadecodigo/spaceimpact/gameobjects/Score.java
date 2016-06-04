@@ -23,6 +23,11 @@ public class Score {
         return lives;
     }
 
+    public int getTotal() {
+        total = destroyedEnemyShips;
+        return total;
+    }
+
     public int getDestroyedEnemyShips() {
         return destroyedEnemyShips;
     }
