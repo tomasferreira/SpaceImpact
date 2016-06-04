@@ -47,11 +47,11 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
         textLivesX = background.getPadding() + 85;
         textLivesY = y + 37;
 
-        textScoreX = background.getWidth() - 63;
-        textScoreY =  y + 37;
+        textScoreX = background.getWidth() - 75;
+        textScoreY = y + 45;
 
         destroyedEnemyShipsX = background.getWidth() - 210;
-        destroyedEnemyShipsY = y + 15;
+        destroyedEnemyShipsY = y + 20;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
         textLives.draw();
 
         textScore = new Text(textScoreX, textScoreY, "");
-        textScore.grow( 4, 8);
+        textScore.grow(20, 20);
         textScore.draw();
 
         destroyedEnemyShips = new Text(destroyedEnemyShipsX, destroyedEnemyShipsY, "");
@@ -78,8 +78,34 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
     public void showScore() {
         //method that updates the scores that are being displayed
 
-        textScore.setText("" + score.getTotal());
-        destroyedEnemyShips.setText("" + score.getDestroyedEnemyShips());
+        //number of lives left
         textLives.setText("" + score.getLives());
+
+        //total score
+        if (score.getTotal() == 0) {
+            textScore.setText("00000");
+        } else if (score.getTotal() < 10) {
+            textScore.setText("0000" + score.getTotal());
+        } else if (score.getTotal() < 100) {
+            textScore.setText("000" + score.getTotal());
+        } else if (score.getTotal() < 1000) {
+            textScore.setText("00" + score.getTotal());
+        } else if (score.getTotal() < 10000) {
+            textScore.setText("0" + score.getTotal());
+        }
+
+
+        //number of destroyed EnemyShips
+        if (score.getDestroyedEnemyShips() == 0) {
+            destroyedEnemyShips.setText("0000");
+        } else if (score.getDestroyedEnemyShips() < 10) {
+            destroyedEnemyShips.setText("000" + score.getDestroyedEnemyShips());
+        } else if (score.getDestroyedEnemyShips() < 100) {
+            destroyedEnemyShips.setText("00" + score.getDestroyedEnemyShips());
+        } else if (score.getTotal() < 100) {
+            destroyedEnemyShips.setText("0" + score.getDestroyedEnemyShips());
+        }
+
+
     }
 }
