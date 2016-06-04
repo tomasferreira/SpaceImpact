@@ -11,8 +11,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by codecadet on 23/05/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
+
+
 public abstract class Spaceship extends GameObject implements Destroyable {
 
     private boolean isDestroyed;
@@ -35,6 +39,12 @@ public abstract class Spaceship extends GameObject implements Destroyable {
         setDestroyed(true);
     }
 
+    /**
+     * Method that given an array of Direction will move the representation to the new position
+     * If spaceship is destroyed returns without changes
+     *
+     * @param directions - array of Direction
+     */
 
     public void accelerate(Direction[] directions) {
 
@@ -75,8 +85,8 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
     }
 
-    public boolean canShoot(){
-        return  getShootPeriodicity() == getShootCounter();
+    public boolean canShoot() {
+        return getShootPeriodicity() == getShootCounter();
     }
 
     @Override

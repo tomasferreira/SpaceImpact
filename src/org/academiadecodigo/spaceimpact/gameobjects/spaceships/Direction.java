@@ -1,13 +1,26 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
 /**
- * Created by codecadet on 23/05/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
+
+
 public enum Direction {
-    WEST(),
-    EAST(),
-    NORTH(),
-    SOUTH();
+    WEST,
+    EAST,
+    NORTH,
+    SOUTH;
+
+
+    /**
+     * Given a Direction, method returns it's opposite Direction
+     * E.g: SOUTH is the opposite of NORTH
+     *
+     * @param dir - Direction
+     * @return the opposite Direction
+     */
 
 
     static Direction getOpposite(Direction dir) {

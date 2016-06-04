@@ -12,20 +12,37 @@ import java.util.*;
 
 
 /**
- * Created by codecadet on 23/05/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
+
 public class PlayerShip extends Spaceship implements KeyboardHandler {
+
 
     private Keyboard k;
     private Direction[] directions;
     private Map<Integer, Boolean> keysPressed = new HashMap<>(5);
     private int lives = 3;
 
+    /**
+     * Constructor that calls the keyEvents method, method that initializes keyboard input
+     *
+     * @param representation   - his representation
+     * @param speed            - speed of the spaceship
+     * @param shootPeriodicity - frequency of shooting
+     */
+
     public PlayerShip(Representable representation, int speed, int shootPeriodicity) {
 
         super(representation, speed, shootPeriodicity);
         keyEvents();
     }
+
+
+    /**
+     * Method that changes the state of the spaceship to destroyed based on it's current life
+     */
 
     @Override
     public void destroy() {
@@ -36,11 +53,14 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         lives--;
     }
 
+    /**
+     * Method that shoots two projectiles, can only shoot is canShoot() returns true
+     */
+
     @Override
     public void shoot() {
 
-
-        if(!canShoot()) {
+        if (!canShoot()) {
             setShootCounter(getShootCounter() + 1);
             return;
         }
@@ -48,8 +68,11 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getY());
         getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getMaxY() - ProjectileType.PLAYER.getProjectileHeight());
         setShootCounter(0);
-
     }
+
+    /**
+     * Method that moves the spaceship, can only move if canMove() returns true
+     */
 
     @Override
     public void move() {
@@ -62,6 +85,10 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         accelerate(directions);
         setCounter(0);
     }
+
+    /**
+     * Method that handles the pressed keys based on the user input
+     */
 
     public void keyMapHandler() {
 
@@ -88,6 +115,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         move();
 
     }
+
 
     @Override
     public void keyReleased(KeyboardEvent e) {
@@ -185,6 +213,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         keysPressed.put(KeyboardEvent.KEY_SPACE, false);
 
     }
+
 
     public int getLives() {
         return lives;

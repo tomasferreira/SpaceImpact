@@ -2,11 +2,14 @@ package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
 import org.academiadecodigo.spaceimpact.utilities.RandomNumberGen;
 import org.academiadecodigo.spaceimpact.representable.Representable;
-
 /**
- * Created by codecadet on 23/05/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
+
 public class EnemyShip extends Spaceship {
+
 
     private int startXtoChangeDir;
     private int endXtoChangDir;
@@ -19,9 +22,17 @@ public class EnemyShip extends Spaceship {
 
         setShootCounter(RandomNumberGen.generate(0, getShootPeriodicity()));
 
+        /**
+         * Generates an random interval that changes the spaceship direction to either SOUTH or NORTH
+         */
+
         endXtoChangDir = RandomNumberGen.generate(getRepresentation().getMaxX());
         startXtoChangeDir = RandomNumberGen.generate(endXtoChangDir);
     }
+
+    /**
+     * Method that creates a new projectile, will only create if canShoot() returns true
+     */
 
     @Override
     public void shoot() {
@@ -36,6 +47,10 @@ public class EnemyShip extends Spaceship {
 
         setShootCounter(0);
     }
+
+    /**
+     * Method that moves given the directions by the method chooseDirection(), will only move if canMove() returns true
+     */
 
     @Override
     public void move() {
@@ -58,6 +73,12 @@ public class EnemyShip extends Spaceship {
         }
     }
 
+
+    /**
+     * Chooses the direction to the enemy ship based on his position and a random interval
+     *
+     * @return an array of Directions
+     */
 
     private Direction[] chooseDirection() {
 

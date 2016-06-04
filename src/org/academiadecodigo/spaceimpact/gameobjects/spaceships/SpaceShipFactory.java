@@ -6,8 +6,11 @@ import org.academiadecodigo.spaceimpact.gameobjects.GameObjectType;
 import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
 
 /**
- * Created by codecadet on 23/05/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
+
 public class SpaceShipFactory {
 
     private RepresentableFactory factory;
@@ -16,6 +19,17 @@ public class SpaceShipFactory {
     public SpaceShipFactory(RepresentableFactory factory) {
         this.factory = factory;
     }
+
+    /**
+     *
+     * Method that instantiates a new spaceship given it's type and position X and position Y
+     *
+     * @param type - spaceship type
+     * @param posX - spawn position X
+     * @param posY - spawn position Y
+     * @return returns the reference to the GameObject
+     */
+
 
     public GameObject createObject(GameObjectType type, int posX, int posY){
         GameObject gameObject = null;

@@ -1,11 +1,5 @@
 package org.academiadecodigo.spaceimpact;
 
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
-import org.academiadecodigo.spaceimpact.gameobjects.KeyToDirectionMapper;
-import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
-import org.academiadecodigo.spaceimpact.representable.Background;
-import org.academiadecodigo.spaceimpact.simplegfx.ProjectileRepresentation;
-import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxBackground;
 
 /**
  * Created by codecadet on 25/05/16.
