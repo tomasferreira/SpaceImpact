@@ -20,6 +20,11 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     private Direction[] directions;
     private Map<Integer, Boolean> keysPressed = new HashMap<>(5);
     private int lives = 3;
+    private boolean isPaused;
+
+    public boolean isPaused() {
+        return isPaused;
+    }
 
     public PlayerShip(Representable representation, int speed, int shootPeriodicity) {
 
@@ -40,7 +45,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     public void shoot() {
 
 
-        if(!canShoot()) {
+        if (!canShoot()) {
             setShootCounter(getShootCounter() + 1);
             return;
         }
@@ -73,6 +78,15 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         for (Integer key : keys) {
 
             if (!keysPressed.get(key)) {
+                continue;
+            }
+
+            if (key == KeyboardEvent.KEY_P){
+                if (!isPaused){
+                    isPaused = true;
+                } else {
+                    isPaused = false;
+                }
                 continue;
             }
 
@@ -146,6 +160,12 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         k.addEventListener(keySpace);
 
+        KeyboardEvent keyP = new KeyboardEvent();
+        keyP.setKey(KeyboardEvent.KEY_P);
+        keyP.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        k.addEventListener(keyP);
+
         //KEY RELEASED EVENT
 
         KeyboardEvent keyUpR = new KeyboardEvent();
@@ -183,6 +203,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         keysPressed.put(KeyboardEvent.KEY_UP, false);
         keysPressed.put(KeyboardEvent.KEY_DOWN, false);
         keysPressed.put(KeyboardEvent.KEY_SPACE, false);
+        keysPressed.put(KeyboardEvent.KEY_P, false);
 
     }
 

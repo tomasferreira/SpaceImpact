@@ -83,10 +83,13 @@ public class Game {
 
     public void start() throws InterruptedException {
 
-
         int enemySpawnCounter = 0;
 
         while (playerShip.getLives() > 0) {
+
+            if (playerShip.isPaused()){
+                continue;
+            }
 
             Thread.sleep(DELAY);
             move();
@@ -102,7 +105,6 @@ public class Game {
             }
 
             enemySpawnCounter++;
-            removeTrash();
             collisionDetector.checkCollision();
             updateScores();
 
@@ -117,9 +119,9 @@ public class Game {
             enemyShips.get(i).shoot();
 
         }
+        projectileHandler.moveProjectiles();
 
         playerShip.keyMapHandler();
-        projectileHandler.moveProjectiles();
 
     }
 
@@ -132,12 +134,5 @@ public class Game {
             score.updateScores(collisionDetector.getDestroyedEnemies(), playerShip.getLives());
             scoreBoard.showScore();
         }
-
     }
-
-    private void removeTrash() {
-
-    }
-
-
 }
