@@ -10,7 +10,15 @@ public class Score {
     private int lives;
     private int destroyedEnemyShips = 0;
     private int spiderShipLife;
+    private boolean spiderShip;
 
+    public void setSpiderShip(boolean spiderShip) {
+        this.spiderShip = spiderShip;
+    }
+
+    public boolean hasSpiderShip() {
+        return spiderShip;
+    }
     //increase score when spider is destroyed <-probably on Game
 
     public Score(int lives) {
@@ -19,6 +27,12 @@ public class Score {
 
     public void updateScores(int destroyedEnemies, int lives) {
         this.destroyedEnemyShips = destroyedEnemies;
+        this.lives = lives;
+    }
+
+    public void updateScoresSpiderShip(int spiderShipLife, int destroyedEnemyShips, int lives){
+        this.spiderShipLife = spiderShipLife;
+        this.destroyedEnemyShips = destroyedEnemyShips;
         this.lives = lives;
     }
 
