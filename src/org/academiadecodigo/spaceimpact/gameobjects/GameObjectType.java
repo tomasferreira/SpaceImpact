@@ -7,7 +7,7 @@ public enum GameObjectType {
     ENEMYSHIP(10, 1000, 1),
     PLAYERSHIP(3, 150, 3),
     PROJECTILE(1, 0, 0),
-    SPIDERSHIP(10, 1000, 4);
+    SPIDERSHIP(10, 1000, 50);
 
     private int speed;
     private int shootPeriodicity;

@@ -10,10 +10,9 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
  */
 public class EnemyShip extends Spaceship {
 
-
-    private int startXtoChangeDir;
-    private int endXtoChangDir;
-    private Direction newDirection;
+    private int startChangeDirAtX;
+    private int endChangeDirAtX;
+    private Direction verticalDirection;
 
     public EnemyShip(Representable representation, int speed, int shootPeriodicity, int lives) {
 
@@ -21,15 +20,13 @@ public class EnemyShip extends Spaceship {
 
         setShootCounter(RandomNumberGen.generate(0, getShootPeriodicity()));
 
-        newDirection = Direction.getNorthOrSouth();
-
-
         /**
          * Generates an random interval that changes the spaceship direction to either SOUTH or NORTH
          */
 
-        endXtoChangDir = RandomNumberGen.generate(getRepresentation().getMaxX());
-        startXtoChangeDir = RandomNumberGen.generate(endXtoChangDir);
+        startChangeDirAtX = RandomNumberGen.generate(getRepresentation().getMaxX(), getRepresentation().getMaxX() / 2);
+        endChangeDirAtX = RandomNumberGen.generate(startChangeDirAtX, 0);
+        verticalDirection = Direction.getNorthOrSouth();
     }
 
     /**
@@ -110,27 +107,23 @@ public class EnemyShip extends Spaceship {
 
         Direction directions[] = new Direction[2];
 
-        if (isOnVerticalLimits()) {
-
-
-            directions[0] = Direction.getOpposite(newDirection);
-            directions[1] = Direction.WEST;
-
-            return directions;
-        }
-
-        if (getRepresentation().getX() > startXtoChangeDir &&
-                getRepresentation().getX() < endXtoChangDir) {
-
-            directions[0] = newDirection;
-            directions[1] = Direction.WEST;
-
-            return directions;
-        }
-
         directions[0] = Direction.WEST;
 
+        if (isOnVerticalLimits()) {
+
+            verticalDirection = Direction.getOpposite(verticalDirection);
+        }
+
+        if (getRepresentation().getX() <= startChangeDirAtX && getRepresentation().getX() >= endChangeDirAtX) {
+
+            directions[1] = verticalDirection;
+        }
+
+        setIsOnVerticalLimits(false);
+
         return directions;
+
     }
+
 
 }

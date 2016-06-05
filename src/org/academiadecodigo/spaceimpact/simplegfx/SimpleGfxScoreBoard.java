@@ -122,7 +122,7 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
         textLives.setText("" + score.getLives());
 
         //total score
-        if (score.getTotal() == 0) {
+        if (score.getTotal() <= 0) {
             textScore.setText("00000");
         } else if (score.getTotal() < 10) {
             textScore.setText("0000" + score.getTotal());
@@ -138,7 +138,7 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
 
 
         //number of destroyed EnemyShips
-        if (score.getDestroyedEnemyShips() == 0) {
+        if (score.getDestroyedEnemyShips() <= 0) {
             destroyedEnemyShips.setText("0000");
         } else if (score.getDestroyedEnemyShips() < 10) {
             destroyedEnemyShips.setText("000" + score.getDestroyedEnemyShips());
@@ -150,9 +150,14 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
             destroyedEnemyShips.setText("" + score.getDestroyedEnemyShips());
         }
 
-        //spiderShip life level
+
         if (score.hasSpiderShip()) {
-            if (score.getSpiderShipLife() == 0) {
+            spiderShipLifeLevel.setText("" + score.getSpiderShipLife());
+        }
+        //spiderShip life level
+        /*
+        if (score.hasSpiderShip()) {
+            if (score.getSpiderShipLife() <= 0) {
                 spiderShipLifeLevel.setText("00");
             } else if (score.getSpiderShipLife() < 10) {
                 spiderShipLifeLevel.setText("0" + score.getSpiderShipLife());
@@ -160,6 +165,6 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
                 spiderShipLifeLevel.setText("" + score.getSpiderShipLife());
             }
 
-        }
+        }*/
     }
 }

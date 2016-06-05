@@ -20,6 +20,7 @@ public class CollisionDetector {
     private PlayerShip player;
     private ProjectileHandler projectileHandler;
     private int destroyedEnemies;
+    private int destroyedSpiderShips;
 
     public void setProjectileHandler(ProjectileHandler projectileHandler) {
         this.projectileHandler = projectileHandler;
@@ -49,6 +50,9 @@ public class CollisionDetector {
         while (it.hasNext()) {
             EnemyShip enemyShip = it.next();
             if (enemyShip.getLives() <= 0) {
+                if (enemyShip instanceof SpiderShip){
+                    destroyedSpiderShips++;
+                }
                 destroyedEnemies++;
             }
 
@@ -105,6 +109,9 @@ public class CollisionDetector {
         return destroyedEnemies;
     }
 
+    public int getDestroyedSpiderShips() {
+        return destroyedSpiderShips;
+    }
 
     public void setEnemyList(List<EnemyShip> enemyList) {
         this.enemyList = enemyList;

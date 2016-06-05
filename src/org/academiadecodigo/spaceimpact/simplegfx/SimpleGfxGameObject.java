@@ -112,6 +112,10 @@ public abstract class SimpleGfxGameObject implements Representable {
         return false;
     }
 
+    public void setIsOnVerticalLimits(boolean isOnVerticalLimits){
+        this.isOnVerticalLimits = isOnVerticalLimits;
+    }
+
     public void setPicture(Picture picture) {
         this.picture = picture;
     }
