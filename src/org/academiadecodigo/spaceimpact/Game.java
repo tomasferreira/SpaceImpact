@@ -106,7 +106,7 @@ public class Game {
 
                 }
 
-                if (enemySpawnCounter == 2000) {
+                if (enemySpawnCounter == 750) {
                     EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
                     enemyShip.setProjectileHandler(projectileHandler);
                     enemyShips.add(enemyShip);

@@ -10,8 +10,6 @@ public class Main {
     }
 }
 
-//TODO: fix score not being incremented when playership is at X = 0 - TOMAS
-
 //TODO: Starting the design and implementation of highscore mechanics
 
 //TODO: Starting the design and implementation of the 1st special unit based on current score - ANA

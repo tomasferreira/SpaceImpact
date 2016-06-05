@@ -46,12 +46,9 @@ public class CollisionDetector {
 
         while (it.hasNext()) {
             EnemyShip enemyShip = it.next();
-            if (enemyShip.getLives() == 0) {
-                destroyedEnemies++;
-            }
-
 
             if (enemyShip.isDestroyed()) {
+                destroyedEnemies++;
                 it.remove();
             }
 
