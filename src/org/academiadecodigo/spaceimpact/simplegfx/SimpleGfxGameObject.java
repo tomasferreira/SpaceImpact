@@ -72,12 +72,11 @@ public abstract class SimpleGfxGameObject implements Representable {
     @Override
     public boolean samePosition(Representable representable) {
 
-        if ((x > representable.getX() && x < representable.getMaxX()) || (getMaxX() > representable.getX() && getMaxX() < representable.getMaxX())) {
-
-            if ((y > representable.getY() && y < representable.getMaxY()) || (getMaxY() > representable.getY() && getMaxY() < representable.getMaxY())) {
-
-                return true;
-            }
+        if (x < representable.getMaxX() &&
+                getMaxX() > representable.getX() &&
+                y < representable.getMaxY() &&
+                getMaxY() > representable.getY()) {
+            return true;
         }
 
         return false;
@@ -124,6 +123,5 @@ public abstract class SimpleGfxGameObject implements Representable {
     public int getHeight() {
         return picture.getHeight();
     }
-
 
 }

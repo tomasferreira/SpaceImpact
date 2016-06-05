@@ -14,7 +14,10 @@ import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
 public class SpaceShipFactory {
 
     private RepresentableFactory factory;
-    private final int SHIP_SIZE = 100;
+    private final int ENEMYSHIP_WIDTH = 90;
+    private final int ENEMYSHIP_HEIGHT = 35;
+    private final int SPIDERSHIP_WIDTH = 155;
+    private final int SPIDERSHIP_HEIGHT = 125;
 
     public SpaceShipFactory(RepresentableFactory factory) {
         this.factory = factory;
@@ -36,12 +39,16 @@ public class SpaceShipFactory {
 
         switch (type) {
 
-            case ENEMYSHIP:
-                gameObject = new EnemyShip(factory.createRepresentation(type, factory.getBackground().getWidth() - SHIP_SIZE,
-                        factory.getBackground().getPadding() + RandomNumberGen.generate(factory.getBackground().getHeight() - SHIP_SIZE)), type.getSpeed(), type.getShootPeriodicity(), type.getLives());
-                break;
             case PLAYERSHIP:
                 gameObject = new PlayerShip(factory.createRepresentation(type, posX, posY), type.getSpeed(), type.getShootPeriodicity(), type.getLives());
+                break;
+            case ENEMYSHIP:
+                gameObject = new EnemyShip(factory.createRepresentation(type, factory.getBackground().getWidth() - ENEMYSHIP_WIDTH,
+                        factory.getBackground().getPadding() + RandomNumberGen.generate(factory.getBackground().getHeight() - ENEMYSHIP_HEIGHT)), type.getSpeed(), type.getShootPeriodicity(), type.getLives());
+                break;
+            case SPIDERSHIP:
+                gameObject = new SpiderShip(factory.createRepresentation(type,factory.getBackground().getWidth() - SPIDERSHIP_WIDTH,
+                        factory.getBackground().getPadding() + RandomNumberGen.generate(factory.getBackground().getHeight() - SPIDERSHIP_HEIGHT)), type.getSpeed(), type.getShootPeriodicity(), type.getLives());
                 break;
         }
         return gameObject;

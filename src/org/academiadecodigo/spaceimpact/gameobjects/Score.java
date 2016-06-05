@@ -1,22 +1,24 @@
 package org.academiadecodigo.spaceimpact.gameobjects;
 
-import org.academiadecodigo.spaceimpact.gameobjects.spaceships.PlayerShip;
-
 /**
  * Created by codecadet on 31/05/16.
  */
 public class Score {
 
 
-    private int points = 0;
+    private int total = 0;
     private int lives;
+    private int destroyedEnemyShips = 0;
+    private int spiderShipLife;
+
+    //increase score when spider is destroyed <-probably on Game
 
     public Score(int lives) {
         this.lives = lives;
     }
 
     public void updateScores(int destroyedEnemies, int lives) {
-        this.points = destroyedEnemies;
+        this.destroyedEnemyShips = destroyedEnemies;
         this.lives = lives;
     }
 
@@ -24,8 +26,16 @@ public class Score {
         return lives;
     }
 
-    public int getPoints() {
-        return points;
+    public int getTotal() {
+        total = destroyedEnemyShips;
+        return total;
     }
 
+    public int getDestroyedEnemyShips() {
+        return destroyedEnemyShips;
+    }
+
+    public int getSpiderShipLife() {
+        return spiderShipLife;
+    }
 }

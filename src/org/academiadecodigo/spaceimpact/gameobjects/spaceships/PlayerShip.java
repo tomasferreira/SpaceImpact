@@ -23,6 +23,11 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     private Keyboard k;
     private Direction[] directions;
     private Map<Integer, Boolean> keysPressed = new HashMap<>(5);
+    private boolean isPaused = true;
+
+    public boolean isPaused() {
+        return isPaused;
+    }
 
     /**
      * Constructor that calls the keyEvents method, method that initializes keyboard input
@@ -46,6 +51,10 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     @Override
     public void shoot() {
 
+        if (isPaused){
+            return;
+        }
+
         if (!canShoot()) {
             setShootCounter(getShootCounter() + 1);
             return;
@@ -62,6 +71,10 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
     @Override
     public void move() {
+
+        if (isPaused){
+            return;
+        }
 
         if (!canMove()) {
             setCounter(getCounter() + 1);
@@ -87,6 +100,20 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
             if (!keysPressed.get(key)) {
                 continue;
+            }
+
+            if (key == KeyboardEvent.KEY_P){
+                if (!isPaused){
+                    isPaused = true;
+                    continue;
+                }
+            }
+
+            if (key == KeyboardEvent.KEY_S){
+                if(isPaused){
+                    isPaused = false;
+                    continue;
+                }
             }
 
             if (key == KeyboardEvent.KEY_SPACE) {
@@ -160,6 +187,18 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         k.addEventListener(keySpace);
 
+        KeyboardEvent keyP = new KeyboardEvent();
+        keyP.setKey(KeyboardEvent.KEY_P);
+        keyP.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        k.addEventListener(keyP);
+
+        KeyboardEvent keyS = new KeyboardEvent();
+        keyS.setKey(KeyboardEvent.KEY_S);
+        keyS.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        k.addEventListener(keyS);
+
         //KEY RELEASED EVENT
 
         KeyboardEvent keyUpR = new KeyboardEvent();
@@ -192,11 +231,25 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         k.addEventListener(keySpaceR);
 
+        KeyboardEvent keyPR = new KeyboardEvent();
+        keyPR.setKey(KeyboardEvent.KEY_P);
+        keyPR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        k.addEventListener(keyPR);
+
+        KeyboardEvent keySR = new KeyboardEvent();
+        keySR.setKey(KeyboardEvent.KEY_S);
+        keySR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        k.addEventListener(keySR);
+
         keysPressed.put(KeyboardEvent.KEY_LEFT, false);
         keysPressed.put(KeyboardEvent.KEY_RIGHT, false);
         keysPressed.put(KeyboardEvent.KEY_UP, false);
         keysPressed.put(KeyboardEvent.KEY_DOWN, false);
         keysPressed.put(KeyboardEvent.KEY_SPACE, false);
+        keysPressed.put(KeyboardEvent.KEY_P, false);
+        keysPressed.put(KeyboardEvent.KEY_S, false);
 
     }
 

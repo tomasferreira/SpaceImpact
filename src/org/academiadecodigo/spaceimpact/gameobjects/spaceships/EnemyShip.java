@@ -8,7 +8,6 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
  * @author Ana Tomás
  * @author Rodolfo Matos
  */
-
 public class EnemyShip extends Spaceship {
 
 
@@ -78,6 +77,7 @@ public class EnemyShip extends Spaceship {
     @Override
     public void move() {
 
+
         Direction[] directions = chooseDirection();
 
         if (!canMove()) {
@@ -111,6 +111,7 @@ public class EnemyShip extends Spaceship {
         Direction directions[] = new Direction[2];
 
         if (isOnVerticalLimits()) {
+
 
             directions[0] = Direction.getOpposite(newDirection);
             directions[1] = Direction.WEST;

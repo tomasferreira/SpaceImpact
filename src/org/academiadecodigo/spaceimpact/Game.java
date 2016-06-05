@@ -8,6 +8,7 @@ import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileHandler
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.PlayerShip;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.SpaceShipFactory;
+import org.academiadecodigo.spaceimpact.gameobjects.spaceships.SpiderShip;
 import org.academiadecodigo.spaceimpact.representable.Background;
 import org.academiadecodigo.spaceimpact.representable.RepresentableFactory;
 import org.academiadecodigo.spaceimpact.representable.ScoreBoard;
@@ -23,7 +24,7 @@ import java.util.List;
  */
 public class Game {
 
-    private final int STARTING_ENEMY_SHIPS = 2;
+    private final int STARTING_ENEMY_SHIPS = 0;
     private final int DELAY = 1;
 
     private int enemyStartingPosX; //por todos na mesma posiçao X mas variar a posiçao Y
@@ -69,6 +70,7 @@ public class Game {
         scoreBoard.showScore();
 
         enemyShips = new ArrayList<>();
+
         for (int i = 0; i < STARTING_ENEMY_SHIPS; i++) {
 
             EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
@@ -83,48 +85,64 @@ public class Game {
 
     public void start() throws InterruptedException {
 
-
         int enemySpawnCounter = 0;
+        int bossSpawnCounter = 0;
 
         while (playerShip.getLives() > 0) {
 
             Thread.sleep(DELAY);
             move();
 
-            if (enemySpawnCounter == 500) {
+            //when score is X, stop creating enemyShips and create spiderShip
+            if (!playerShip.isPaused()) {
+                if (score.getTotal() == 10 && bossSpawnCounter == 0) {
+                    EnemyShip spiderShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.SPIDERSHIP, enemyStartingPosX, enemyStartingPosY);
+                    spiderShip.setProjectileHandler(projectileHandler);
+                    enemyShips.add(spiderShip);
+                    bossSpawnCounter++;
+                    enemySpawnCounter = 501;
+                    collisionDetector.setEnemyList(enemyShips);
+                    scoreBoard.showBoard();
 
-                EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
-                enemyShip.setProjectileHandler(projectileHandler);
-                enemyShips.add(enemyShip);
-                enemySpawnCounter = 0;
-                collisionDetector.setEnemyList(enemyShips);
+                }
+
+                if (enemySpawnCounter == 500) {
+                    EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
+                    enemyShip.setProjectileHandler(projectileHandler);
+                    enemyShips.add(enemyShip);
+                    enemySpawnCounter = 0;
+                    collisionDetector.setEnemyList(enemyShips);
+                }
+
+
+                enemySpawnCounter++;
+                collisionDetector.checkCollision();
+                updateScores();
 
             }
-
-            enemySpawnCounter++;
-            removeTrash();
-            collisionDetector.checkCollision();
-            updateScores();
-
+        }
         }
 
 
-    }
+
 
     private void move() {
-        for (int i = 0; i < enemyShips.size(); i++) {
-            enemyShips.get(i).move();
-            enemyShips.get(i).shoot();
+        if (!playerShip.isPaused()) {
 
+            for (int i = 0; i < enemyShips.size(); i++) {
+                enemyShips.get(i).move();
+                enemyShips.get(i).shoot();
+
+            }
+            projectileHandler.moveProjectiles();
         }
 
         playerShip.keyMapHandler();
-        projectileHandler.moveProjectiles();
 
     }
 
     private void updateScores() {
-        if (score.getPoints() != collisionDetector.getDestroyedEnemies()) {
+        if (score.getDestroyedEnemyShips() != collisionDetector.getDestroyedEnemies()) {
             score.updateScores(collisionDetector.getDestroyedEnemies(), playerShip.getLives());
             scoreBoard.showScore();
         }
@@ -134,10 +152,4 @@ public class Game {
         }
 
     }
-
-    private void removeTrash() {
-
-    }
-
-
 }
