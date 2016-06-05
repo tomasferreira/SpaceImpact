@@ -10,7 +10,7 @@ public class Main {
     }
 }
 
-//TODO: fix enemyships getting stuck at y = 0 - ROBERTO
+//TODO: fix enemyships getting stuck at y = 0 - ROBERTO - SOLVED
 //TODO: fix score not being incremented when playership is at X = 0;
 
 //TODO: exit button - TOMAS

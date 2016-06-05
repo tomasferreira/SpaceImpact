@@ -34,6 +34,10 @@ public abstract class GameObject {
         return representation.isOnVerticalLimits();
     }
 
+    public void setIsOnVerticalLimits(boolean isOnVerticalLimits) {
+        representation.setIsOnVerticalLimits(isOnVerticalLimits);
+    }
+
 
     public ProjectileHandler getProjectileHandler() {
         return projectileHandler;
