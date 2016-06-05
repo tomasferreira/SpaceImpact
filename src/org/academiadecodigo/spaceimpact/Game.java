@@ -26,6 +26,7 @@ public class Game {
 
     private final int STARTING_ENEMY_SHIPS = 0;
     private final int DELAY = 1;
+    private final int BOSS_SPAWN_TIME = 50;
 
     private int enemyStartingPosX; //por todos na mesma posiçao X mas variar a posiçao Y
     private int enemyStartingPosY;
@@ -95,7 +96,7 @@ public class Game {
 
             //when score is X, stop creating enemyShips and create spiderShip
             if (!playerShip.isPaused()) {
-                if (score.getTotal() == 50 && bossSpawnCounter == 0) {
+                if (score.getTotal() == BOSS_SPAWN_TIME && bossSpawnCounter == 0) {
                     EnemyShip spiderShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.SPIDERSHIP, enemyStartingPosX, enemyStartingPosY);
                     spiderShip.setProjectileHandler(projectileHandler);
                     enemyShips.add(spiderShip);
