@@ -21,6 +21,7 @@ public class SimpleGfxRepresentableFactory implements RepresentableFactory {
 
     @Override
     public Representable createRepresentation(GameObjectType type, int posX, int posY) {
+
         Representable representable = null;
 
         switch (type){
@@ -29,6 +30,9 @@ public class SimpleGfxRepresentableFactory implements RepresentableFactory {
                 break;
             case PLAYERSHIP:
                 representable = new PlayerShipRepresentation(posX, posY, background);
+                break;
+            case SPIDERSHIP:
+                representable = new SpiderShipRepresentation(posX, posY, background);
                 break;
         }
 

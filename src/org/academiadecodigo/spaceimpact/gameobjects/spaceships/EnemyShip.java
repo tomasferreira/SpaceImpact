@@ -19,8 +19,8 @@ public class EnemyShip extends Spaceship {
 
         setShootCounter(RandomNumberGen.generate(0, getShootPeriodicity()));
 
-        endXtoChangDir = RandomNumberGen.generate(getRepresentation().getMaxX());
-        startXtoChangeDir = RandomNumberGen.generate(endXtoChangDir);
+//        endXtoChangDir = RandomNumberGen.generate(getRepresentation().getMaxX());
+//        startXtoChangeDir = RandomNumberGen.generate(endXtoChangDir);
     }
 
     @Override

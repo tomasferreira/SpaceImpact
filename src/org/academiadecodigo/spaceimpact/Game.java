@@ -17,6 +17,7 @@ import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxRepresentableFactory;
 import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxScoreBoard;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ import java.util.List;
  */
 public class Game {
 
-    private final int STARTING_ENEMY_SHIPS = 2;
+    private final int STARTING_ENEMY_SHIPS = 0;
     private final int DELAY = 1;
 
     private int enemyStartingPosX; //por todos na mesma posiçao X mas variar a posiçao Y
@@ -70,6 +71,7 @@ public class Game {
         scoreBoard.showScore();
 
         enemyShips = new ArrayList<>();
+
         for (int i = 0; i < STARTING_ENEMY_SHIPS; i++) {
 
             EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
@@ -86,6 +88,7 @@ public class Game {
 
 
         int enemySpawnCounter = 0;
+        int bossSpawnCounter = 0;
 
         while (playerShip.getLives() > 0) {
 
@@ -94,13 +97,18 @@ public class Game {
 
         //when score is X, stop creating enemyShips and create spiderShip
 
-            if (score.getTotal() == 10){
-                SpiderShip spiderShip = (SpiderShip) spaceShipFactory.createObject(GameObjectType.SPIDERSHIP, enemyStartingPosX, enemyStartingPosY);
+            if (score.getTotal() == 10 && bossSpawnCounter == 0){
+                EnemyShip spiderShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.SPIDERSHIP, enemyStartingPosX, enemyStartingPosY);
                 spiderShip.setProjectileHandler(projectileHandler);
                 enemyShips.add(spiderShip);
-                enemySpawnCounter = 0;
+                bossSpawnCounter++;
+                enemySpawnCounter = 501;
                 collisionDetector.setEnemyList(enemyShips);
-            }else if (enemySpawnCounter == 500){
+                scoreBoard.showBoard();
+
+            }
+
+            if (enemySpawnCounter == 500){
                 EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
                 enemyShip.setProjectileHandler(projectileHandler);
                 enemyShips.add(enemyShip);

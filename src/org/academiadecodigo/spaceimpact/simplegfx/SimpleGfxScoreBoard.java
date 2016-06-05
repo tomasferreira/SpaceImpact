@@ -67,8 +67,33 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
 
         //if scoreboard score == x, picture is boss_01 & corresponding text spiderLife level
 
+
+        if (score.getTotal() == 10) {
+            board.delete();
+            board= new Picture(x, y, "resources/images/scoreboard_05_boss_01.png");
+            board.draw();
+
+            textLives.delete();
+            textLives = new Text(textLivesX, textLivesY, "");
+            textLives.grow(4, 8);
+            textLives.draw();
+
+            textScore.delete();
+            textScore = new Text(textScoreX, textScoreY, "");
+            textScore.grow(20, 20);
+            textScore.draw();
+
+            destroyedEnemyShips.delete();
+            destroyedEnemyShips = new Text(destroyedEnemyShipsX, destroyedEnemyShipsY, "");
+            destroyedEnemyShips.grow(4, 8);
+            destroyedEnemyShips.draw();
+
+
+        }
+        if (score.getTotal() < 10){
+
         board = new Picture(x, y, "resources/images/scoreboard_04_enemyShip.png");
-        board.draw();
+            board.draw();
 
         textLives = new Text(textLivesX, textLivesY, "");
         textLives.grow(4, 8);
@@ -81,6 +106,8 @@ public class SimpleGfxScoreBoard implements ScoreBoard {
         destroyedEnemyShips = new Text(destroyedEnemyShipsX, destroyedEnemyShipsY, "");
         destroyedEnemyShips.grow(4, 8);
         destroyedEnemyShips.draw();
+        }
+
     }
 
     @Override
