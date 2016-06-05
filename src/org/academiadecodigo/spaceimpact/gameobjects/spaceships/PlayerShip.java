@@ -90,7 +90,6 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
             if (key == KeyboardEvent.KEY_P){
                 if (!isPaused){
-                    System.out.println("im here");
                     isPaused = true;
                     continue;
                 }

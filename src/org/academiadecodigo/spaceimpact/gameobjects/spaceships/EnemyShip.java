@@ -8,8 +8,8 @@ import org.academiadecodigo.spaceimpact.representable.Representable;
  */
 public class EnemyShip extends Spaceship {
 
-    private int startXtoChangeDir;
-    private int endXtoChangDir;
+    protected int startXtoChangeDir;
+    protected int endXtoChangDir;
     private Direction newDirection = Direction.values()[RandomNumberGen.generate(2, 4)];
 
 
@@ -19,8 +19,8 @@ public class EnemyShip extends Spaceship {
 
         setShootCounter(RandomNumberGen.generate(0, getShootPeriodicity()));
 
-        endXtoChangDir = RandomNumberGen.generate(getRepresentation().getMaxX());
-        startXtoChangeDir = RandomNumberGen.generate(endXtoChangDir);
+//        endXtoChangDir = RandomNumberGen.generate(getRepresentation().getMaxX());
+//        startXtoChangeDir = RandomNumberGen.generate(endXtoChangDir);
     }
 
     @Override

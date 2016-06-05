@@ -20,6 +20,7 @@ public class Main {
 
 //TODO: Starting the design and implementation of highscore mechanics
 
-//TODO: Starting the design and implementation of the 1st special unit based on current score - ANA
-
 //TODO: fix collisionDetector on start of the game not detecting - TOMAS
+
+//TODO: Starting the design and implementation of the 1st special unit based on current score - ANA
+//TODO:1 - fix scoreboard: based on total score, add boss and change scoreboard image accordingly
