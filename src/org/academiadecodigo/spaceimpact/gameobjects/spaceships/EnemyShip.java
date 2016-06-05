@@ -24,7 +24,7 @@ public class EnemyShip extends Spaceship {
          * Generates an random interval that changes the spaceship direction to either SOUTH or NORTH
          */
 
-        startChangeDirAtX = RandomNumberGen.generate(getRepresentation().getMaxX(), 0);
+        startChangeDirAtX = RandomNumberGen.generate(getRepresentation().getMaxX(), getRepresentation().getMaxX() / 2);
         endChangeDirAtX = RandomNumberGen.generate(startChangeDirAtX, 0);
         verticalDirection = Direction.getNorthOrSouth();
     }
@@ -62,7 +62,7 @@ public class EnemyShip extends Spaceship {
             return;
         }
 
-        // getProjectileHandler().getNewEnemyProjectile(getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
+        getProjectileHandler().getNewEnemyProjectile(getRepresentation().getX(), getRepresentation().getY() + (getRepresentation().getHeight() / 2));
 
         setShootCounter(0);
     }
