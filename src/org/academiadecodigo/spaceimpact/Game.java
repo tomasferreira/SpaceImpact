@@ -15,6 +15,7 @@ import org.academiadecodigo.spaceimpact.representable.ScoreBoard;
 import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxBackground;
 import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxRepresentableFactory;
 import org.academiadecodigo.spaceimpact.simplegfx.SimpleGfxScoreBoard;
+import org.academiadecodigo.spaceimpact.utilities.SoundHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,8 @@ public class Game {
 
     public void start() throws InterruptedException {
 
+        SoundHandler.playGameSound();
+
         int enemySpawnCounter = 0;
         score.setSpiderShip(spiderShip != null);
 
@@ -130,6 +133,7 @@ public class Game {
                 if (spiderShip.isDestroyed()) {
                     spiderShip = null;
                     score.setSpiderShip(spiderShip != null);
+                    SoundHandler.playSpiderDeathSound();
                     scoreBoard.showBoard();
                     scoreBoard.showScore();
                 }
@@ -164,10 +168,12 @@ public class Game {
         if (score.getDestroyedEnemyShips() != collisionDetector.getDestroyedEnemies()) {
             score.updateScores(collisionDetector.getDestroyedEnemies(), playerShip.getLives());
             scoreBoard.showScore();
+            SoundHandler.playDestroyEnemyShipSound();
         }
         if (score.getLives() != playerShip.getLives()) {
             score.updateScores(collisionDetector.getDestroyedEnemies(), playerShip.getLives());
             scoreBoard.showScore();
+            SoundHandler.playPlayerHitSound();
         }
 
     }
