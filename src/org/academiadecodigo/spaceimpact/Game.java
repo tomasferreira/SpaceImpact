@@ -95,7 +95,7 @@ public class Game {
 
             //when score is X, stop creating enemyShips and create spiderShip
             if (!playerShip.isPaused()) {
-                if (score.getTotal() == 10 && bossSpawnCounter == 0) {
+                if (score.getTotal() == 50 && bossSpawnCounter == 0) {
                     EnemyShip spiderShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.SPIDERSHIP, enemyStartingPosX, enemyStartingPosY);
                     spiderShip.setProjectileHandler(projectileHandler);
                     enemyShips.add(spiderShip);
