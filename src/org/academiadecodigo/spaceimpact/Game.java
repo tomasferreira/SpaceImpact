@@ -101,44 +101,44 @@ public class Game {
             //when score is X, stop creating enemyShips and create spiderShip
             if (!playerShip.isPaused()) {
 
-            }
-            if (spiderShip == null && (score.getTotal() != 0 && score.getTotal() % BOSS_SPAWN_TIME == 0 || score.getTotal() == 100)) {
 
-                spiderShip = (SpiderShip) spaceShipFactory.createObject(GameObjectType.SPIDERSHIP, enemyStartingPosX, enemyStartingPosY);
-                spiderShip.setProjectileHandler(projectileHandler);
-                enemyShips.add(spiderShip);
+                if (spiderShip == null && (score.getTotal() != 0 && score.getTotal() % BOSS_SPAWN_TIME == 10 || score.getTotal() == 100)) {
 
-                collisionDetector.setEnemyList(enemyShips);
+                    spiderShip = (SpiderShip) spaceShipFactory.createObject(GameObjectType.SPIDERSHIP, enemyStartingPosX, enemyStartingPosY);
+                    spiderShip.setProjectileHandler(projectileHandler);
+                    enemyShips.add(spiderShip);
 
-                score.setSpiderShip(spiderShip != null);
-                scoreBoard.showBoard();
-                scoreBoard.showScore();
+                    collisionDetector.setEnemyList(enemyShips);
 
-            }
-
-            if (enemySpawnCounter == 500) {
-                EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
-                enemyShip.setProjectileHandler(projectileHandler);
-                enemyShips.add(enemyShip);
-                enemySpawnCounter = 0;
-                collisionDetector.setEnemyList(enemyShips);
-            }
-
-            enemySpawnCounter++;
-            collisionDetector.checkCollision();
-            updateScores();
-
-            if (spiderShip != null) {
-
-                if (spiderShip.isDestroyed()) {
-                    spiderShip = null;
                     score.setSpiderShip(spiderShip != null);
-                    SoundHandler.playSpiderDeathSound();
                     scoreBoard.showBoard();
                     scoreBoard.showScore();
+
+                }
+
+                if (enemySpawnCounter == 500) {
+                    EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
+                    enemyShip.setProjectileHandler(projectileHandler);
+                    enemyShips.add(enemyShip);
+                    enemySpawnCounter = 0;
+                    collisionDetector.setEnemyList(enemyShips);
+                }
+
+                enemySpawnCounter++;
+                collisionDetector.checkCollision();
+                updateScores();
+
+                if (spiderShip != null) {
+
+                    if (spiderShip.isDestroyed()) {
+                        spiderShip = null;
+                        score.setSpiderShip(spiderShip != null);
+                        SoundHandler.playSpiderDeathSound();
+                        scoreBoard.showBoard();
+                        scoreBoard.showScore();
+                    }
                 }
             }
-
 
         }
     }
