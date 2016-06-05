@@ -102,6 +102,10 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
                 continue;
             }
 
+            if (key == KeyboardEvent.KEY_E) {
+                System.exit(0);
+            }
+
             if (key == KeyboardEvent.KEY_P){
                 if (!isPaused){
                     isPaused = true;
@@ -199,6 +203,12 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         k.addEventListener(keyS);
 
+        KeyboardEvent keyE = new KeyboardEvent();
+        keyE.setKey(KeyboardEvent.KEY_E);
+        keyE.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        k.addEventListener(keyE);
+
         //KEY RELEASED EVENT
 
         KeyboardEvent keyUpR = new KeyboardEvent();
@@ -250,6 +260,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         keysPressed.put(KeyboardEvent.KEY_SPACE, false);
         keysPressed.put(KeyboardEvent.KEY_P, false);
         keysPressed.put(KeyboardEvent.KEY_S, false);
+        keysPressed.put(KeyboardEvent.KEY_E, false);
 
     }
 
