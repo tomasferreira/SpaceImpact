@@ -7,6 +7,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.spaceimpact.gameobjects.KeyToDirectionMapper;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileType;
 import org.academiadecodigo.spaceimpact.representable.Representable;
+import org.academiadecodigo.spaceimpact.utilities.SoundHandler;
 
 import java.util.*;
 
@@ -24,6 +25,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     private Direction[] directions;
     private Map<Integer, Boolean> keysPressed = new HashMap<>(5);
     private boolean isPaused = true;
+    private boolean shootPressed;
 
     public boolean isPaused() {
         return isPaused;
@@ -55,6 +57,10 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
             return;
         }
 
+        if(!shootPressed){
+            return;
+        }
+
         if (!canShoot()) {
             setShootCounter(getShootCounter() + 1);
             return;
@@ -63,6 +69,8 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getY());
         getProjectileHandler().getNewPlayerProjectile(getRepresentation().getMaxX(), getRepresentation().getMaxY() - ProjectileType.PLAYER.getProjectileHeight());
         setShootCounter(0);
+        SoundHandler.playShootingSound();
+        shootPressed = false;
     }
 
     /**
@@ -121,7 +129,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
             }
 
             if (key == KeyboardEvent.KEY_SPACE) {
-                shoot();
+                shootPressed = true;
                 continue;
             }
 
@@ -130,6 +138,7 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
 
         }
         move();
+        shoot();
 
     }
 
