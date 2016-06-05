@@ -5,13 +5,15 @@ package org.academiadecodigo.spaceimpact;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
+        Game g = new Game();
+
+        g.init();
+        g.start();
     }
 }
 
 //TODO: Starting the design and implementation of highscore mechanics
-
-//TODO: Starting the design and implementation of the 1st special unit based on current score - ANA
-//TODO:1 - fix scoreboard: based on total score, add boss and change scoreboard image accordingly
-//TODO:2 - fix scoreboard add text for boss life
+//TODO: finish comments
+//TODO: update boss movement - RODRIGUEZ

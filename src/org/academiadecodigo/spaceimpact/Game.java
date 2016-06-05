@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class Game {
 
-    private final int STARTING_ENEMY_SHIPS = 0;
+    private final int STARTING_ENEMY_SHIPS = 5;
     private final int DELAY = 1;
     private final int BOSS_SPAWN_TIME = 50;
 
@@ -46,6 +46,7 @@ public class Game {
     private CollisionDetector collisionDetector = new CollisionDetector();
     private ProjectileHandler projectileHandler = new ProjectileHandler();
     private Score score;
+    private SpiderShip spiderShip;
 
 
     public Game() {
@@ -87,7 +88,7 @@ public class Game {
     public void start() throws InterruptedException {
 
         int enemySpawnCounter = 0;
-        int bossSpawnCounter = 0;
+        score.setSpiderShip(spiderShip != null);
 
         while (playerShip.getLives() > 0) {
 
@@ -96,18 +97,23 @@ public class Game {
 
             //when score is X, stop creating enemyShips and create spiderShip
             if (!playerShip.isPaused()) {
-                if (score.getTotal() == BOSS_SPAWN_TIME && bossSpawnCounter == 0) {
-                    EnemyShip spiderShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.SPIDERSHIP, enemyStartingPosX, enemyStartingPosY);
+
+            }
+                if (spiderShip == null && (score.getTotal() != 0 && score.getTotal() % BOSS_SPAWN_TIME == 0 || score.getTotal() == 50)) {
+
+                    spiderShip = (SpiderShip) spaceShipFactory.createObject(GameObjectType.SPIDERSHIP, enemyStartingPosX, enemyStartingPosY);
                     spiderShip.setProjectileHandler(projectileHandler);
                     enemyShips.add(spiderShip);
-                    bossSpawnCounter++;
+
                     collisionDetector.setEnemyList(enemyShips);
+
+                    score.setSpiderShip(spiderShip != null);
                     scoreBoard.showBoard();
                     scoreBoard.showScore();
 
                 }
 
-                if (enemySpawnCounter == 750) {
+                if (enemySpawnCounter == 500) {
                     EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
                     enemyShip.setProjectileHandler(projectileHandler);
                     enemyShips.add(enemyShip);
@@ -115,13 +121,24 @@ public class Game {
                     collisionDetector.setEnemyList(enemyShips);
                 }
 
-
                 enemySpawnCounter++;
                 collisionDetector.checkCollision();
                 updateScores();
 
+                if (spiderShip != null) {
+
+                    if (spiderShip.isDestroyed()) {
+                        spiderShip = null;
+                        score.setSpiderShip(spiderShip != null);
+                        scoreBoard.showBoard();
+                        scoreBoard.showScore();
+                    }
+                }
+
+
             }
         }
+
     }
 
 
@@ -131,7 +148,6 @@ public class Game {
             for (int i = 0; i < enemyShips.size(); i++) {
                 enemyShips.get(i).move();
                 enemyShips.get(i).shoot();
-
             }
             projectileHandler.moveProjectiles();
         }
@@ -141,6 +157,12 @@ public class Game {
     }
 
     private void updateScores() {
+
+        if (score.hasSpiderShip()) {
+            score.updateScoresSpiderShip(spiderShip.getLives(), collisionDetector.getDestroyedSpiderShips(), collisionDetector.getDestroyedEnemies(), playerShip.getLives());
+            scoreBoard.showScore();
+        }
+
         if (score.getDestroyedEnemyShips() != collisionDetector.getDestroyedEnemies()) {
             score.updateScores(collisionDetector.getDestroyedEnemies(), playerShip.getLives());
             scoreBoard.showScore();
@@ -151,4 +173,5 @@ public class Game {
         }
 
     }
+
 }
