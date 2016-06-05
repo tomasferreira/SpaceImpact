@@ -127,7 +127,6 @@ public class Game {
                 if (spiderShip != null) {
 
                     if (spiderShip.isDestroyed()) {
-                        System.out.println("!asd");
                         spiderShip = null;
                         score.setSpiderShip(spiderShip != null);
                         scoreBoard.showBoard();
