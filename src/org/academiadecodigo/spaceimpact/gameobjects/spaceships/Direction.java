@@ -1,5 +1,7 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
+import org.academiadecodigo.spaceimpact.utilities.RandomNumberGen;
+
 /**
  * @author Tomás Ferreira
  * @author Ana Tomás
@@ -45,5 +47,17 @@ public enum Direction {
 
 
         return oppositeDir;
+    }
+
+    /**
+     * Method that returns a direction being NORTH or SOUTH based on the current order of the enum
+     *
+     * @return Direction.NORTH or Direction.SOUTH
+     */
+
+
+    static Direction getNorthOrSouth() {
+
+        return Direction.values()[RandomNumberGen.generate(2, 4)];
     }
 }

@@ -22,7 +22,7 @@ public class EnemyShip extends Spaceship {
 
         setShootCounter(RandomNumberGen.generate(0, getShootPeriodicity()));
 
-        newDirection = Direction.values()[RandomNumberGen.generate(2, 4)];
+        newDirection = Direction.getNorthOrSouth();
 
 
         /**
@@ -33,20 +33,28 @@ public class EnemyShip extends Spaceship {
         startXtoChangeDir = RandomNumberGen.generate(endXtoChangDir);
     }
 
+    /**
+     * Method overridden for its super class, if the ship is in x = 0, hides his representation and sets isDestroyed to true
+     */
+
     @Override
-    public void destroy() {
+    public void hit() {
 
         if (isOutOfBounds()) {
+
             getRepresentation().hide();
             setDestroyed(true);
             return;
+
         }
 
-        super.destroy();
+        super.hit();
+
     }
 
     /**
-     * Method that creates a new projectile, will only create if canShoot() returns true
+     * Method that creates a new projectile, will only create if canShoot() returns true, shootCounter increments one
+     * when shoot() is called.
      */
 
     @Override
@@ -70,7 +78,6 @@ public class EnemyShip extends Spaceship {
     @Override
     public void move() {
 
-
         Direction[] directions = chooseDirection();
 
         if (!canMove()) {
@@ -81,11 +88,15 @@ public class EnemyShip extends Spaceship {
 
         accelerate(directions);
 
-        setCounter(0);
-
         if (isOutOfBounds()) {
-            destroy();
+
+            getRepresentation().hide();
+            setDestroyed(true);
+            return;
         }
+
+
+        setCounter(0);
     }
 
 

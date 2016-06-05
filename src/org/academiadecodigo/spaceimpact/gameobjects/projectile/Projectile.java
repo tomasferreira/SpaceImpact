@@ -28,7 +28,7 @@ public class Projectile extends GameObject implements Destroyable {
         }
 
         if (isOutOfBounds()) {
-            destroy();
+            hit();
         }
 
         setCounter(0);
@@ -52,7 +52,7 @@ public class Projectile extends GameObject implements Destroyable {
     }
 
     @Override
-    public void destroy() {
+    public void hit() {
         destroyed = true;
         getRepresentation().hide();
     }

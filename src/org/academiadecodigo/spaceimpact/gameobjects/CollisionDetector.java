@@ -5,7 +5,6 @@ import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileHandler
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.EnemyShip;
 import org.academiadecodigo.spaceimpact.gameobjects.spaceships.PlayerShip;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,7 +37,6 @@ public class CollisionDetector {
         deleteTrash();
     }
 
-    //METHOD THAT NEEDS WORKING FOR ENEMY SCORE COUNT
     private void deleteTrash() {
 
         projectileHandler.deleteDestroyedBullets();
@@ -48,12 +46,13 @@ public class CollisionDetector {
 
         while (it.hasNext()) {
             EnemyShip enemyShip = it.next();
+            if (enemyShip.getLives() == 0) {
+                destroyedEnemies++;
+            }
+
 
             if (enemyShip.isDestroyed()) {
                 it.remove();
-            }
-            if (enemyShip.getLives() == 0) {
-                destroyedEnemies++;
             }
 
         }
@@ -63,8 +62,8 @@ public class CollisionDetector {
         for (Projectile playerProjectile : playerProjectiles) {
             for (Projectile enemyProjectile : enemyProjectiles) {
                 if (playerProjectile.objectSamePosition(enemyProjectile)) {
-                    playerProjectile.destroy();
-                    enemyProjectile.destroy();
+                    playerProjectile.hit();
+                    enemyProjectile.hit();
                 }
             }
         }
@@ -74,8 +73,8 @@ public class CollisionDetector {
         for (Projectile projectile : playerProjectiles) {
             for (EnemyShip enemy : enemyList) {
                 if (projectile.objectSamePosition(enemy)) {
-                    projectile.destroy();
-                    enemy.destroy();
+                    projectile.hit();
+                    enemy.hit();
                 }
             }
         }
@@ -84,8 +83,8 @@ public class CollisionDetector {
     private void checkPlayerAndProjectileCollision() {
         for (Projectile projectile : enemyProjectiles) {
             if (player.objectSamePosition(projectile)) {
-                player.destroy();
-                projectile.destroy();
+                player.hit();
+                projectile.hit();
             }
         }
     }
@@ -93,8 +92,8 @@ public class CollisionDetector {
     private void checkPlayerAndEnemyCollision() {
         for (EnemyShip enemy : enemyList) {
             if (player.objectSamePosition(enemy)) {
-                player.destroy();
-                enemy.destroy();
+                player.hit();
+                enemy.hit();
             }
         }
     }

@@ -10,10 +10,6 @@ public class Main {
     }
 }
 
-
-
-//TODO: Fix score being incremented when enemyship is out of bounds - RORDRIGUEZ
-
 //TODO: fix enemyships getting stuck at y = 0 - ROBERTO
 
 //TODO: Pause and exit button - TOMAS

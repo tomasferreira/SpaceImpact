@@ -7,6 +7,6 @@ public interface Destroyable {
 
     boolean isDestroyed();
 
-    void destroy();
+    void hit();
 
 }
