@@ -37,19 +37,19 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     public abstract void move();
 
 
+    /**
+     * Method that destroys and hides the spaceship representation based on its current lives,
+     * if lives == 0, isDestroyed() returns true.
+     */
+
     public void destroy() {
 
-        if(isOutOfBounds()){
-            getRepresentation().hide();
-            setDestroyed(true);
-            return;
-        }
+        lives--;
 
         if (lives == 0) {
             getRepresentation().hide();
             setDestroyed(true);
         }
-        lives--;
     }
 
 

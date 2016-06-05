@@ -33,6 +33,18 @@ public class EnemyShip extends Spaceship {
         startXtoChangeDir = RandomNumberGen.generate(endXtoChangDir);
     }
 
+    @Override
+    public void destroy() {
+
+        if (isOutOfBounds()) {
+            getRepresentation().hide();
+            setDestroyed(true);
+            return;
+        }
+
+        super.destroy();
+    }
+
     /**
      * Method that creates a new projectile, will only create if canShoot() returns true
      */
