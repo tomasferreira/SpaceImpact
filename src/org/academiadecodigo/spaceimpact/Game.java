@@ -100,13 +100,13 @@ public class Game {
                     spiderShip.setProjectileHandler(projectileHandler);
                     enemyShips.add(spiderShip);
                     bossSpawnCounter++;
-                    enemySpawnCounter = 501;
                     collisionDetector.setEnemyList(enemyShips);
                     scoreBoard.showBoard();
+                    scoreBoard.showScore();
 
                 }
 
-                if (enemySpawnCounter == 500) {
+                if (enemySpawnCounter == 750) {
                     EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
                     enemyShip.setProjectileHandler(projectileHandler);
                     enemyShips.add(enemyShip);
@@ -121,9 +121,7 @@ public class Game {
 
             }
         }
-        }
-
-
+    }
 
 
     private void move() {
