@@ -4,16 +4,23 @@ package org.academiadecodigo.spaceimpact.gameobjects;
  * Created by codecadet on 23/05/16.
  */
 public enum GameObjectType {
-    ENEMYSHIP(10, 1000),
-    PLAYERSHIP(3, 150),
-    PROJECTILE(2, 0);
+    ENEMYSHIP(10, 1000, 1),
+    PLAYERSHIP(3, 150, 3),
+    PROJECTILE(2, 0, 0);
 
     private int speed;
     private int shootPeriodicity;
+    private int lives;
 
-    GameObjectType(int speed, int shootPeriodicity){
+
+    GameObjectType(int speed, int shootPeriodicity, int lives){
         this.speed = speed;
         this.shootPeriodicity = shootPeriodicity;
+        this.lives = lives;
+    }
+
+    public int getLives() {
+        return lives;
     }
 
     public int getSpeed() {

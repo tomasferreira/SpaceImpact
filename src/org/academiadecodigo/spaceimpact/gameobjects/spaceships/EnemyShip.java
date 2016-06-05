@@ -2,6 +2,7 @@ package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
 import org.academiadecodigo.spaceimpact.utilities.RandomNumberGen;
 import org.academiadecodigo.spaceimpact.representable.Representable;
+
 /**
  * @author Tomás Ferreira
  * @author Ana Tomás
@@ -13,14 +14,16 @@ public class EnemyShip extends Spaceship {
 
     private int startXtoChangeDir;
     private int endXtoChangDir;
-    private Direction newDirection = Direction.values()[RandomNumberGen.generate(2, 4)];
+    private Direction newDirection;
 
+    public EnemyShip(Representable representation, int speed, int shootPeriodicity, int lives) {
 
-    public EnemyShip(Representable representation, int speed, int shootPeriodicity) {
-
-        super(representation, speed, shootPeriodicity);
+        super(representation, speed, shootPeriodicity, lives);
 
         setShootCounter(RandomNumberGen.generate(0, getShootPeriodicity()));
+
+        newDirection = Direction.values()[RandomNumberGen.generate(2, 4)];
+
 
         /**
          * Generates an random interval that changes the spaceship direction to either SOUTH or NORTH
@@ -85,7 +88,6 @@ public class EnemyShip extends Spaceship {
         Direction directions[] = new Direction[2];
 
         if (isOnVerticalLimits()) {
-
 
             directions[0] = Direction.getOpposite(newDirection);
             directions[1] = Direction.WEST;

@@ -38,16 +38,23 @@ public class CollisionDetector {
         deleteTrash();
     }
 
+    //METHOD THAT NEEDS WORKING FOR ENEMY SCORE COUNT
     private void deleteTrash() {
         projectileHandler.deleteDestroyedBullets();
 
         Iterator<EnemyShip> it = enemyList.iterator();
 
         while (it.hasNext()) {
-            if (it.next().isDestroyed()) {
+            EnemyShip enemyShip = it.next();
+
+            if (enemyShip.isDestroyed()) {
+                if (enemyShip.getLives() == 0) {
+                    destroyedEnemies++;
+                }
+
                 it.remove();
-                destroyedEnemies++;
             }
+
         }
     }
 

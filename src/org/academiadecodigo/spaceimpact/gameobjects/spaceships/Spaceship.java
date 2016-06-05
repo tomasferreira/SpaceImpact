@@ -22,11 +22,13 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     private boolean isDestroyed;
     private int shootCounter;
     private int shootPeriodicity;
+    private int lives;
 
 
-    public Spaceship(Representable representation, int speed, int shootPeriodicity) {
+    public Spaceship(Representable representation, int speed, int shootPeriodicity, int lives) {
         super(representation, speed);
         this.shootPeriodicity = shootPeriodicity;
+        this.lives = lives;
     }
 
     public abstract void shoot();
@@ -34,10 +36,22 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     @Override
     public abstract void move();
 
+
     public void destroy() {
-        getRepresentation().hide();
-        setDestroyed(true);
+
+        if(isOutOfBounds()){
+            getRepresentation().hide();
+            setDestroyed(true);
+            return;
+        }
+
+        if (lives == 0) {
+            getRepresentation().hide();
+            setDestroyed(true);
+        }
+        lives--;
     }
+
 
     /**
      * Method that given an array of Direction will move the representation to the new position
@@ -108,6 +122,12 @@ public abstract class Spaceship extends GameObject implements Destroyable {
     }
 
     public int getShootPeriodicity() {
+
         return shootPeriodicity;
     }
+
+    public int getLives() {
+        return lives;
+    }
+
 }

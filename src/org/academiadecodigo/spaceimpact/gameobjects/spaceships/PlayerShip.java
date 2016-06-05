@@ -23,7 +23,6 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     private Keyboard k;
     private Direction[] directions;
     private Map<Integer, Boolean> keysPressed = new HashMap<>(5);
-    private int lives = 3;
 
     /**
      * Constructor that calls the keyEvents method, method that initializes keyboard input
@@ -33,25 +32,12 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
      * @param shootPeriodicity - frequency of shooting
      */
 
-    public PlayerShip(Representable representation, int speed, int shootPeriodicity) {
+    public PlayerShip(Representable representation, int speed, int shootPeriodicity, int lives) {
 
-        super(representation, speed, shootPeriodicity);
+        super(representation, speed, shootPeriodicity, lives);
         keyEvents();
     }
 
-
-    /**
-     * Method that changes the state of the spaceship to destroyed based on it's current life
-     */
-
-    @Override
-    public void destroy() {
-
-        if (lives == 0) {
-            super.destroy();
-        }
-        lives--;
-    }
 
     /**
      * Method that shoots two projectiles, can only shoot is canShoot() returns true
@@ -215,8 +201,5 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
     }
 
 
-    public int getLives() {
-        return lives;
-    }
 
 }
