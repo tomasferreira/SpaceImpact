@@ -87,39 +87,39 @@ public class Game {
 
         while (playerShip.getLives() > 0) {
 
-            if (playerShip.isPaused()){
-                continue;
-            }
-
             Thread.sleep(DELAY);
             move();
+            if (!playerShip.isPaused()) {
+                if (enemySpawnCounter == 500) {
 
-            if (enemySpawnCounter == 500) {
+                    EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
+                    enemyShip.setProjectileHandler(projectileHandler);
+                    enemyShips.add(enemyShip);
+                    enemySpawnCounter = 0;
+                    collisionDetector.setEnemyList(enemyShips);
 
-                EnemyShip enemyShip = (EnemyShip) spaceShipFactory.createObject(GameObjectType.ENEMYSHIP, enemyStartingPosX, enemyStartingPosY);
-                enemyShip.setProjectileHandler(projectileHandler);
-                enemyShips.add(enemyShip);
-                enemySpawnCounter = 0;
-                collisionDetector.setEnemyList(enemyShips);
+                }
+
+                enemySpawnCounter++;
+                collisionDetector.checkCollision();
+                updateScores();
 
             }
-
-            enemySpawnCounter++;
-            collisionDetector.checkCollision();
-            updateScores();
-
         }
 
 
     }
 
     private void move() {
-        for (int i = 0; i < enemyShips.size(); i++) {
-            enemyShips.get(i).move();
-            enemyShips.get(i).shoot();
+        if (!playerShip.isPaused()) {
 
+            for (int i = 0; i < enemyShips.size(); i++) {
+                enemyShips.get(i).move();
+                enemyShips.get(i).shoot();
+
+            }
+            projectileHandler.moveProjectiles();
         }
-        projectileHandler.moveProjectiles();
 
         playerShip.keyMapHandler();
 
