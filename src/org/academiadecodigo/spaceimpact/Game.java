@@ -99,7 +99,7 @@ public class Game {
             if (!playerShip.isPaused()) {
 
             }
-            if (spiderShip == null && (score.getTotal() != 0 && score.getTotal() % BOSS_SPAWN_TIME == 0 || score.getTotal() == 50)) {
+            if (spiderShip == null && (score.getTotal() != 0 && score.getTotal() % BOSS_SPAWN_TIME == 0 || score.getTotal() == 100)) {
 
                 spiderShip = (SpiderShip) spaceShipFactory.createObject(GameObjectType.SPIDERSHIP, enemyStartingPosX, enemyStartingPosY);
                 spiderShip.setProjectileHandler(projectileHandler);
