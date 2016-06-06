@@ -18,6 +18,8 @@ public class SpaceShipFactory {
     private final int ENEMYSHIP_HEIGHT = 35;
     private final int SPIDERSHIP_WIDTH = 155;
     private final int SPIDERSHIP_HEIGHT = 125;
+    private final int PLAYERSHIP_STARTING_POS_X = 10;
+    private final int PLAYERSHIP_STARTING_POS_Y = 250;
 
     public SpaceShipFactory(RepresentableFactory factory) {
         this.factory = factory;
@@ -28,19 +30,17 @@ public class SpaceShipFactory {
      * Method that instantiates a new spaceship given it's type and position X and position Y
      *
      * @param type - spaceship type
-     * @param posX - spawn position X
-     * @param posY - spawn position Y
      * @return returns the reference to the GameObject
      */
 
 
-    public GameObject createObject(GameObjectType type, int posX, int posY){
+    public GameObject createObject(GameObjectType type){
         GameObject gameObject = null;
 
         switch (type) {
 
             case PLAYERSHIP:
-                gameObject = new PlayerShip(factory.createRepresentation(type, posX, posY), type.getSpeed(), type.getShootPeriodicity(), type.getLives());
+                gameObject = new PlayerShip(factory.createRepresentation(type, PLAYERSHIP_STARTING_POS_X, PLAYERSHIP_STARTING_POS_Y), type.getSpeed(), type.getShootPeriodicity(), type.getLives());
                 break;
             case ENEMYSHIP:
                 gameObject = new EnemyShip(factory.createRepresentation(type, factory.getBackground().getWidth() - ENEMYSHIP_WIDTH,

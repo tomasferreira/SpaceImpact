@@ -12,17 +12,17 @@ import org.academiadecodigo.spaceimpact.representable.Background;
  */
 public class SimpleGfxBackground implements Background {
 
-    private int padding = 10;
+    private final int PADDING = 10;
     private Picture background;
 
     @Override
     public void init() {
-        background = new Picture(padding, padding,"resources/images/background_01.jpg");
+        background = new Picture(PADDING, PADDING, "resources/images/background_01.jpg");
         background.draw();
     }
 
     public int getPadding() {
-        return padding;
+        return PADDING;
     }
 
     public int getWidth() {

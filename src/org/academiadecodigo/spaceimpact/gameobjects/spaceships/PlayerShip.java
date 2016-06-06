@@ -93,6 +93,13 @@ public class PlayerShip extends Spaceship implements KeyboardHandler {
         setCounter(0);
     }
 
+    @Override
+    public void hit() {
+
+        SoundHandler.playPlayerHitSound();
+        super.hit();
+    }
+
     /**
      * Method that handles the pressed keys based on the user input
      */

@@ -5,6 +5,7 @@ import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.Projectile;
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileFactory;
 import org.academiadecodigo.spaceimpact.representable.Representable;
+import org.academiadecodigo.spaceimpact.utilities.SoundHandler;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -110,6 +111,7 @@ public abstract class Spaceship extends GameObject implements Destroyable {
 
     public void setDestroyed(boolean destroyed) {
         isDestroyed = destroyed;
+        SoundHandler.playDestroyEnemyShipSound();
     }
 
 

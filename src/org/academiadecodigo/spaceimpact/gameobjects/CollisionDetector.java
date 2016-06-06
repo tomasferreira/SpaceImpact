@@ -51,7 +51,7 @@ public class CollisionDetector {
             EnemyShip enemyShip = it.next();
 
             if (enemyShip.getLives() <= 0) {
-                if (enemyShip instanceof SpiderShip){
+                if (enemyShip instanceof SpiderShip) {
                     destroyedSpiderShips++;
                 }
                 destroyedEnemies++;
