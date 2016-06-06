@@ -1,12 +1,13 @@
 package org.academiadecodigo.spaceimpact.gameobjects.spaceships;
 
-import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileType;
 import org.academiadecodigo.spaceimpact.representable.Representable;
-import org.academiadecodigo.spaceimpact.utilities.RandomNumberGen;
 
 /**
- * Created by codecadet on 04/06/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
+
 public class SpiderShip extends EnemyShip {
 
     private final int FIRST_SHOOTING_POS_X = 25;
@@ -24,6 +25,13 @@ public class SpiderShip extends EnemyShip {
         verticalDirection = Direction.getNorthOrSouth();
     }
 
+    /**
+     *
+     * Method that has the shoot behaviour, can only shoot if canShoot() returns true.
+     * Creates 3 new projectiles.
+     *
+     */
+
     @Override
     public void shoot() {
         if (!canShoot()) {
@@ -36,6 +44,13 @@ public class SpiderShip extends EnemyShip {
         getProjectileHandler().getNewEnemyProjectile(getRepresentation().getX() + SHOOTING_POS_Y, getRepresentation().getY() + THIRD_SHOOTING_POS_X);
         setShootCounter(0);
     }
+
+    /**
+     *
+     * Method that controls the moving behaviour of the objecting. Can only move if canMove() returns true.
+     * If your position is x = 0, your spaceship will be destroyed and its representation hidden.
+     *
+     */
 
     @Override
     public void move() {
@@ -61,6 +76,15 @@ public class SpiderShip extends EnemyShip {
 
     }
 
+
+    /**
+     *
+     * Suporting method of move that returns an array of Direction.
+     * If the spaceship is on y = 0 or y = max height it will give you the opposite vertical direction.
+     *
+     *
+     * @return an array of Direction
+     */
 
     private Direction[] chooseDirection() {
 

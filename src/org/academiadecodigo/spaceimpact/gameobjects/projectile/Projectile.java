@@ -5,12 +5,20 @@ import org.academiadecodigo.spaceimpact.gameobjects.GameObject;
 import org.academiadecodigo.spaceimpact.representable.Representable;
 
 /**
- * Created by codecadet on 23/05/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
+
 public class Projectile extends GameObject implements Destroyable {
 
     private boolean isEnemy;
     private boolean destroyed;
+
+    /**
+     * Method moves the projectile regarding is isEnemy state, if the projectile belongs to an enemy it moves west, vice-versa
+     * Can only move if canMove() returns true.
+     */
 
     @Override
     public void move() {
@@ -50,6 +58,11 @@ public class Projectile extends GameObject implements Destroyable {
     public boolean isEnemy() {
         return isEnemy;
     }
+
+    /**
+     * Method that sets the flag destroyed to true and hides de projectile representation.
+     *
+     */
 
     @Override
     public void hit() {

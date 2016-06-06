@@ -6,8 +6,5 @@ package org.academiadecodigo.spaceimpact.gameobjects.projectile;
 public enum ShootingDirection {
     WEST,
     EAST,
-    NORTHEAST,
-    SOUTHEAST,
-    NORTHWEST,
-    SOUTHWEST
+
 }

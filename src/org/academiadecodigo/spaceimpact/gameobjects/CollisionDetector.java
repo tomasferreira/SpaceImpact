@@ -10,8 +10,11 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by codecadet on 25/05/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
+
 public class CollisionDetector {
 
     private List<EnemyShip> enemyList;
@@ -26,6 +29,11 @@ public class CollisionDetector {
         this.projectileHandler = projectileHandler;
     }
 
+    /**
+     * Method that contains the routine for checking collisions, checks for collisions then deletes them.
+     */
+
+
     public void checkCollision() {
 
         enemyProjectiles = projectileHandler.getEnemyProjectiles();
@@ -39,6 +47,10 @@ public class CollisionDetector {
         deleteTrash();
     }
 
+
+    /**
+     * Removes from the list enemies that have the flag isDestroyed true;
+     */
 
     private void deleteTrash() {
 
@@ -65,6 +77,11 @@ public class CollisionDetector {
         }
     }
 
+    /**
+     * Method that checks if a projectile and a projectile collided, if so calls the method hit() from both objects.
+     *
+     */
+
     private void checkProjectileAndProjectileCollision() {
         for (Projectile playerProjectile : playerProjectiles) {
             for (Projectile enemyProjectile : enemyProjectiles) {
@@ -75,6 +92,11 @@ public class CollisionDetector {
             }
         }
     }
+
+    /**
+     * Method that checks if a projectile and an enemy collided, if so calls the method hit() from both objects.
+     *
+     */
 
     private void checkProjectileAndEnemyCollision() {
         for (Projectile projectile : playerProjectiles) {
@@ -87,6 +109,11 @@ public class CollisionDetector {
         }
     }
 
+    /**
+     *
+     * Method that checks if a player and a projectile collided, if so calls the method hit() from both objects
+     */
+
     private void checkPlayerAndProjectileCollision() {
         for (Projectile projectile : enemyProjectiles) {
             if (player.objectSamePosition(projectile)) {
@@ -95,6 +122,10 @@ public class CollisionDetector {
             }
         }
     }
+
+    /**
+     * Method that checks if and player and an enemy collided, if so calls the method hit() from both objects.
+     */
 
     private void checkPlayerAndEnemyCollision() {
         for (EnemyShip enemy : enemyList) {

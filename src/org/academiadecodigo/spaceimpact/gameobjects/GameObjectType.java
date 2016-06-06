@@ -13,6 +13,14 @@ public enum GameObjectType {
     private int shootPeriodicity;
     private int lives;
 
+    /**
+     *
+     * Constructor that creates a new instance of the object.
+     *
+     * @param speed - how frequently the object moves (0 being the fastest)
+     * @param shootPeriodicity - how frequently the object shoots (0 being the fastest)
+     * @param lives - how many lives the object has
+     */
 
     GameObjectType(int speed, int shootPeriodicity, int lives){
         this.speed = speed;

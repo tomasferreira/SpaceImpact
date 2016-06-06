@@ -5,8 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by codecadet on 31/05/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
+
 public class ProjectileHandler {
 
     private List<Projectile> enemyProjectiles;
@@ -66,7 +69,7 @@ public class ProjectileHandler {
     }
 
     public void getNewEnemyProjectile(int posX, int posY) {
-        Projectile p = (Projectile) projectileFactory.createProjectile( ProjectileType.ENEMY, ShootingDirection.WEST, posX, posY);
+        Projectile p = (Projectile) projectileFactory.createProjectile(ProjectileType.ENEMY, ShootingDirection.WEST, posX, posY);
         p.setEnemy(true);
         addProjectileToEnemyProjectileList(p);
 

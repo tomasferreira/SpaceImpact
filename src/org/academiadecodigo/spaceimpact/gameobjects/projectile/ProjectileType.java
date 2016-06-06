@@ -1,9 +1,12 @@
 package org.academiadecodigo.spaceimpact.gameobjects.projectile;
 
 /**
- * Created by codecadet on 03/06/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
-public enum  ProjectileType {
+
+public enum ProjectileType {
     PLAYER(7),
     ENEMY(7);
 
