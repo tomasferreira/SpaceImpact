@@ -2,10 +2,12 @@ package org.academiadecodigo.spaceimpact.gameobjects;
 
 import org.academiadecodigo.spaceimpact.gameobjects.projectile.ProjectileHandler;
 import org.academiadecodigo.spaceimpact.representable.Representable;
-
 /**
- * Created by codecadet on 23/05/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
+
 public abstract class GameObject {
 
     private Representable representation;

@@ -1,10 +1,11 @@
 package org.academiadecodigo.spaceimpact.gameobjects;
-
 /**
- * Created by codecadet on 31/05/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
-public class Score {
 
+public class Score {
 
     private int total = 0;
     private int lives;

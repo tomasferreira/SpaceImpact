@@ -1,8 +1,11 @@
 package org.academiadecodigo.spaceimpact.gameobjects;
 
 /**
- * Created by codecadet on 23/05/16.
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
  */
+
 public interface Destroyable {
 
     boolean isDestroyed();

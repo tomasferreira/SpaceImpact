@@ -5,12 +5,17 @@ import org.academiadecodigo.spaceimpact.gameobjects.spaceships.Direction;
 
 import java.util.HashMap;
 import java.util.Map;
+/**
+ * @author Tomás Ferreira
+ * @author Ana Tomás
+ * @author Rodolfo Matos
+ */
 
 /**
  * Class that maps a key to a direction
  */
 
-public class KeyToDirectionMapper{
+public class KeyToDirectionMapper {
 
 
     private static final Map<Integer, Direction> KeyToDirection = new HashMap<>(4);
@@ -24,7 +29,7 @@ public class KeyToDirectionMapper{
 
     }
 
-   public static Direction getDirection(Integer key) {
+    public static Direction getDirection(Integer key) {
         return KeyToDirection.get(key);
     }
 
