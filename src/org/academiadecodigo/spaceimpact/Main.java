@@ -17,3 +17,9 @@ public class Main {
 //TODO: Starting the design and implementation of highscore mechanics
 //TODO: finish comments
 //TODO: update boss movement - RODRIGUEZ
+
+/*wishlist:
+
+- remove thread sleep
+
+ */
